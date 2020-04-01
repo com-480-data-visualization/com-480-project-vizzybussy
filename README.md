@@ -40,14 +40,15 @@ This dataset was generated from The Movie Database API. Since the API also provi
 
 ### 3. Exploratory data analysis:
 
-In this subsection, we do some basic preprocessing and we provide some interesting non-interactive plots.
+Having done some basic preprocessing of the data we have produced a few intresting graphs.
 
-To analyse this dataset, we used mainly the ```pandas``` library in Python 3.7, our work can be find in this [notebook](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/data_analysis.ipynb), and we got the following statistics:
+To analyse this dataset, we used ```pandas``` library in Python 3.7, our work can be found in this [notebook](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/data_analysis.ipynb).
+Working with the data we came accross some intresting statistics which include:
 * There is a total of 4803 movies covering the years 1916-2017 even though the year 2017 should be omitted due to the lack of movies since this dataset was released in 2016.
 * There are 54196 different actors that played in these films.
 * There are 20 different genres of movies covered and the most popular are: Drama, Comedy, Thriller, Action, etc...
 
-Figures, most of the times, speak louder than words and therefore, you can find bellow some basic insights that we can obtain very easily from this dataset.
+A pictures is worth a thousand words and therefore, you can find bellow some basic insights that were obtained from the dataset.
 
 ![](./images/number_movies__per_year.png)
 *Number of movies per year*
