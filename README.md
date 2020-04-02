@@ -42,7 +42,7 @@ This dataset was generated from The Movie Database API. Since the API also provi
 
 Having done some basic preprocessing of the data we have produced a few intresting graphs.
 
-To analyse this dataset, we used ```pandas``` library in Python 3.7, our work can be found in this [notebook](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/data_analysis.ipynb).
+To analyse [this dataset](./data/), we used ```pandas``` library in Python 3.7, our work can be found in this [notebook](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/data_analysis.ipynb).
 Working with the data we came accross some intresting statistics which include:
 * There is a total of 4803 movies covering the years 1916-2017 even though the year 2017 should be omitted due to the lack of movies since this dataset was released in 2016.
 * There are 54196 different actors that played in these films.
