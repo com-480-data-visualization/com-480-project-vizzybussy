@@ -25,6 +25,28 @@
             padding-right: 5px;
             padding-top: 5px;
         }
+
+        .tip {
+            background-color: hsla(0, 0%, 100%, .9);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 180px;
+        }
+
+        .tip .year {
+            font-weight: 900;
+            font-size: 1.25em;
+            margin-bottom: 2px;
+        }
+
+        .tip .swatch {
+            width: 11px;
+            height: 11px;
+            float: left;
+            margin-top: 6px;
+            margin-right: 4px;
+        }
     </style>
 </head>
 
@@ -56,12 +78,11 @@
 
             var tooltip = d3.select("body")
                 .append("div")
-                .attr("class", "remove")
+                .attr("class", "tip")
                 .style("position", "absolute")
                 .style("z-index", "20")
                 .style("visibility", "hidden")
-                .style("top", "30px")
-                .style("left", "55px");
+                .style("top", 40 + margin.top + "px");
 
             var x = d3.time.scale()
                 .range([0, width]);
@@ -77,7 +98,7 @@
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("bottom")
-                .ticks(d3.time.year);
+                .ticks(d3.timeYears, 5);
 
             var yAxis = d3.svg.axis()
                 .scale(y);
@@ -152,13 +173,22 @@
                     .attr("opacity", 1)
 
                     .on("mousemove", function (d, i) {
-                        mousex = d3.mouse(this);
-                        mousex = mousex[0];
+                        mouse = d3.mouse(this);
+                        mousex = mouse[0];
                         var invertedx = x.invert(mousex);
                         currentYear = invertedx.getFullYear()
                         d3.select(this)
                             .classed("hover", true)
-                        tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "visible");
+                        //tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "visible");
+                        var color = d3.select(this).style('fill');
+                        var filmsGenreYear = d.values.find(obj => {
+                            return obj.year == currentYear
+                        }).total_films
+                        tooltip
+                            .style("left", tipX(mousex) + "px")
+                            .style("top", tipY(mouse[1]) + "px")
+                            .html("<div class='year'>" + currentYear + "</div><div class='key'><div style='background:" + color + "' class='swatch'>&nbsp;</div>" + d.key + "</div><div class='value'>" + filmsGenreYear + " " + moviePlural((d.total_films)) + "</div>")
+                            .style("visibility", "visible");
                         changeMovieDisplay(d.key)
 
                     })
@@ -169,7 +199,9 @@
                             .attr("opacity", "1");
                         d3.select(this)
                             .classed("hover", false)
-                            .attr("stroke-width", "0px"), tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "hidden");
+                            .attr("stroke-width", "0px"),
+                            tooltip.style("visibility", "hidden");
+                        //tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "hidden");
                     })
             });
 
@@ -196,6 +228,53 @@
             }
         }
 
+        // function to decide whether to pluralize the word "movie" in the tooltip
+        function moviePlural(x) {
+            x == 1 ? y = 'movie' : y = 'movies';
+            return y;
+        }
+
+        // function to ensure the tip doesn't hang off the side
+        function tipX(x) {
+            //var winWidth = $(window).width();
+
+            var margin = { top: 20, right: 40, bottom: 30, left: 30 };
+            var winWidth = document.body.clientWidth - margin.left - margin.right;
+            var tipWidth = $('.tip').width();
+            //x > winWidth - tipWidth - 30 ? y = x - 45 - tipWidth : y = x + 10;
+            //console.log(x)
+            //console.log(winWidth - tipWidth - 30)
+            if (x > winWidth / 2 - tipWidth) {
+                y = x - tipWidth;
+                //console.log("X desno");
+            } else {
+                y = x + tipWidth / 2;
+                //console.log("X levo");
+            };
+            return y;
+        }
+
+        function tipY(y) {
+            //var winWidth = $(window).width();
+
+            var margin = { top: 20, right: 40, bottom: 30, left: 30 };
+            var winHeight = document.body.clientHeight - margin.top - margin.bottom;
+            var tipHeight = $('.tip').height();
+            //x > winWidth - tipWidth - 30 ? y = x - 45 - tipWidth : y = x + 10;
+            //console.log(y)
+            //console.log(winHeight - tipHeight - 30)
+            if (y > winHeight - tipHeight - 30) {
+                x = y - tipHeight
+                //console.log("Y right")
+            } else {
+                x = y + 45;
+                //console.log("Y left")
+            }
+            return y;
+        }
+
+
+
     </script>
     <script>
         $(document).ready(function () {
@@ -214,7 +293,7 @@
                     $.each(data[k], function (index, value) {
                         var movieDiv = document.createElement("div");
                         movieDiv.id = genreDivId + "-movie-" + index;
-                        movieDiv.className ="movieDiv";
+                        movieDiv.className = "movieDiv";
                         //movieDiv.style.display = "inline-block"
                         //movieDiv.style.border = "thick solid #0000FF"
 
