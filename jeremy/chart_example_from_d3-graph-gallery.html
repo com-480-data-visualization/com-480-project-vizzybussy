@@ -1,0 +1,82 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+  <!-- Load d3.js -->
+
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+
+  <select id="continent-select" class="form-control">
+    <option selected value="all">All</option>
+    <option value="europe">Europe</option>
+    <option value="asia">Asia</option>
+    <option value="americas">Americas</option>
+    <option value="africa">Africa</option>
+  </select>
+
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 20, bottom: 30, left: 50},
+    width = 2000- margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+d3.csv("./bubbleData.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLog()
+    .domain([100, 3000000000])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLog()
+    .domain([1, 1000])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+
+  // Add a scale for bubble size
+  var z = d3.scaleSqrt()
+    .domain([7000, 1000000000])
+    .range([ 1, 60]);
+
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data.filter(
+            function(d){return d.realease_year === '2015'}))
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.revenue); } )
+      .attr("cy", function (d) { return y(d.popularity); } )
+      .attr("r", function (d) { return z(d.budget); } )
+      .style("fill", "#69b3a2")
+      .style("opacity", "0.7")
+      .attr("stroke", "black")
+      
+})
+</script>
