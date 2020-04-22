@@ -6,6 +6,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <script src="https://rawgit.com/Kcnarf/d3-distanceLimitedVoronoi/d3v4/distance-limited-voronoi.js"></script>
 
+<!-- Brush imports js-->
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+<script src="https://d3js.org/d3-brush.v1.min.js"></script>
+
 
 <div class='form-group'>
     <select id="year-select" class="form-control">
@@ -39,10 +50,16 @@
 <script>
     //https://observablehq.com/@will-r-chase/scatter-plot
     // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 30, bottom: 50, left: 70 },
+    var margin = { top: 40, right: 30, bottom: 50, left: 70 },
         width = 1500 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
+    var config = {
+        color_hover_data_point: "#55b375",
+        opacity_data_point_hover: "0.9",
+        opacity_data_point_no_hover: "0.6",
+        color_no_hover_data_point: "#69b3a2"
+    }
 
 
     // append the svg object to the body of the page
@@ -50,14 +67,15 @@
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        
-        //background color
-        svg.append("rect")
+
+    //background color
+    svg.append("rect")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .style("fill", "#F5F5F2")
 
-        svg = svg.append("g")
+
+    svg = svg.append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
         .style("font", "20px Montserrat");
@@ -81,6 +99,27 @@
     var z = d3.scaleSqrt()
         .domain([7000, 1000000000])
         .range([1, 60]);
+
+    svg.append("text")
+        .attr("class", "text")
+        .attr("transform", "translate("+(width / 2.5)+",-" + margin.top / 2 + ")")
+        .style("text-anchor", "left")
+        .style("font-size", "25px")
+        .text("Popularity vs Revenue")
+
+    svg.append("text")
+        .attr("class", "text")
+        .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
+        .style("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("Revenue");
+
+    svg.append("text")
+        .attr("class", "text")
+        .attr("transform", "translate(" + (0 - 40) + "," + (height / 2) + ")rotate(-90)")
+        .style("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("Popularity");
 
 
     //Read the data
@@ -123,6 +162,7 @@
                 .style("stroke", "black")
                 .style("stroke-width", "1px")
                 .style("stroke-opacity", 0.7);
+
 
             let guides = d3.select("svg")
                 .append("g")
@@ -175,28 +215,21 @@
 
         }
 
-        svg.append("text")
-            .attr("class", "text")
-            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
-            .style("text-anchor", "middle")
-            .style("font-size", "20px")
-            .text("Revenue");
 
-        svg.append("text")
-            .attr("class", "text")
-            .attr("transform", "translate(" + (0 - 40) + "," + (height / 2) + ")rotate(-90)")
-            .style("text-anchor", "middle")
-            .style("font-size", "20px")
-            .text("Popularity");
-
-        renderData(data, (dat) => { return dat })
+        renderData(data, (dat) => { return dat.filter((d)=> {return d.realease_year == "2000"}) })
     })
 
 
     var renderData = (data, filterFunc) => {
 
         var displayMovieInfo = (d) => {
+            console.log(d)
             if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
+            d3.selectAll(("#data_uid_" + d.uid))
+                .style("fill", config.color_hover_data_point)
+                .style("opacity", config.opacity_data_point_hover)
+                .attr("stroke", "black")
+
             d3.select("#movie_info")
                 .text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
         }
@@ -204,6 +237,11 @@
             if (d.datum != null) { d = d.datum } //can be called from the voronoiIntercationArea or the datapoint
             d3.select("#movie_info")
                 .text("")
+
+            d3.selectAll(("#data_uid_" + d.uid))
+                .style("fill", config.color_no_hover_data_point)
+                .style("opacity", config.opacity_data_point_no_hover)
+                .attr("stroke", "none")
         }
         // Removing previously drawn elements
         d3.selectAll("#dotGroup")
@@ -220,13 +258,14 @@
             .data(filterFunc(data))
             .enter()
             .append("circle")
+            .attr("id", function (d) { return "data_uid_" + d.uid }) //used to change the style of that point when mouse enters and leaves
             .attr("class", function (d) { return d.genres })
             .attr("cx", function (d) { return x(d.revenue); })
             .attr("cy", function (d) { return y(d.popularity); })
             .attr("r", function (d) { return z(d.budget); })
-            .style("fill", "#69b3a2")
-            .style("opacity", "0.7")
-            .attr("stroke", "black")
+            .style("fill", config.color_no_hover_data_point)
+            .style("opacity", config.opacity_data_point_no_hover)
+            //.attr("stroke", "black")
             //.style("fill", function (d) { return color(d.genre) } )
             .on("mouseover", displayMovieInfo)
             .on("mouseleave", removeMovieInfo)
@@ -247,7 +286,8 @@
             .append("path")
             .attr("d", function (d) { return d.path; })
             .style("fill", "none")
-            .style("opacity", "0.1")
+            //.style("stroke", "steelblue")
+            //.style("opacity", "0.1")
             .style("pointer-events", "all")
             .on('mouseenter', displayMovieInfo)
             .on('mouseout', removeMovieInfo);
