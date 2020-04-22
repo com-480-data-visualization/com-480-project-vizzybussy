@@ -4,6 +4,7 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<script src="https://rawgit.com/Kcnarf/d3-distanceLimitedVoronoi/d3v4/distance-limited-voronoi.js"></script>
 
 
 <div class='form-group'>
@@ -49,34 +50,41 @@
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
+        
+        //background color
+        svg.append("rect")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .style("fill", "#F5F5F2")
+
+        svg = svg.append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")")
-        .style("font", "14px Montserrat");
+        .style("font", "20px Montserrat");
+
+    // Add X axis
+    var x = d3.scaleLog()
+        .domain([3000, 3000000000]).nice()
+        .range([0, width]);
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLog()
+        .domain([0.8, 1000]).nice()
+        .range([height, 0]);
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+    // Add a scale for bubble size
+    var z = d3.scaleSqrt()
+        .domain([7000, 1000000000])
+        .range([1, 60]);
+
 
     //Read the data
     d3.csv("bubbleData.csv", function (data) {
-
-        // Add X axis
-        var x = d3.scaleLog()
-            .domain([3000, 3000000000])
-            .range([0, width]);
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
-
-        // Add Y axis
-        var y = d3.scaleLog()
-            .domain([0.8, 1000])
-            .range([height, 0]);
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        // Add a scale for bubble size
-        var z = d3.scaleSqrt()
-            .domain([7000, 1000000000])
-            .range([1, 60]);
-
 
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
@@ -88,91 +96,131 @@
             var f = document.getElementById('year-select')
             selected_genre = f.options[f.selectedIndex].value
             console.log(selected_genre)
-
-            d3.selectAll("#dotGroup")
-                .remove()
-            //.style("fill", "lightgrey")
-            //.style("opacity", "0")
-            //.on("mouseover", displayMovieInfo)
-
-
-            svg.append('g')
-                .attr("id", "dotGroup")
-                .selectAll("dot")
-                .data(data.filter(function (d) { return d.genres === selected_genre }))
-                .enter()
-                .append("circle")
-                .attr("class", function (d) { return d.genres })
-                .attr("id", "myDataPoint")
-                .attr("cx", function (d) { return x(d.revenue); })
-                .attr("cy", function (d) { return y(d.popularity); })
-                .attr("r", function (d) { return z(d.budget); })
-                .style("fill", "#69b3a2")
-                .style("opacity", "0.7")
-                .attr("stroke", "black")
-                //.style("fill", function (d) { return color(d.genre) } )
-                .on("mouseover", displayMovieInfo)
-
-           /* let limVoronoi = d3.distanceLimitedVoronoi()
-                .x(d => xScale(d.revenue))
-                .y(d => yScale(d.popularity))
-                .limit(25)
-
-            svg.append("g")
-                .selectAll("path")
-                .data(limVoronoi(freedom_year))
-                .join("path")
-                .attr("d", (d, i) => d.path)
-                //.datum((d, i) => d.point) //what is this for?
-                .attr("id", (d, i) => "voronoi-" + i)
-                //.style("stroke", "steelblue")
-                .style("fill", "none")
-                .style("pointer-events", "all")
-                .on("mouseover", tooltipMouseOver)
-                .on("mouseout", tooltipMouseOut)*/
-
+            renderData(data, function (dat) { return dat.filter((d) => { return d.genres === selected_genre }) })
         })
 
-        // Highlight the specie that is hovered
-        var highlight = function (d) {
+        function tooltipMouseOver(d, i) {
+            let el = d3.select("body");
 
-            selected_genre = d.genres
+            let div = el
+                .append("g")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
 
-            d3.selectAll("dot")
+            div
+                .html(`Hellow`)
+                .style("opacity", 0.9)
+                .style("left", (d3.event.pageX + 28) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+
+            let el2 = d3.selectAll("circle#point-" + i);
+
+            el2
+                .transition()
+                .duration(100)
+                .style("fill-opacity", 0.9)
+                .style("stroke", "black")
+                .style("stroke-width", "1px")
+                .style("stroke-opacity", 0.7);
+
+            let guides = d3.select("svg")
+                .append("g")
+                .attr("class", "guides")
+                .style("pointer-events", "none");
+
+            guides
+                .append("line")
+                .attr("x1", el2.attr("cx"))
+                .attr("x2", el2.attr("cx"))
+                .attr("y1", el2.attr("cy"))
+                .attr("y2", height - margin.bottom)
+                .style("stroke", el2.attr("fill"))
+                .style("opacity", 0)
                 .transition()
                 .duration(200)
-                .style("fill", "lightgrey")
-                .attr("r", 3)
+                .style("opacity", 0.7);
 
-            d3.selectAll("." + selected_genre)
+            guides
+                .append("line")
+                .attr("x1", el2.attr("cx"))
+                .attr("x2", margin.left)
+                .attr("y1", el2.attr("cy"))
+                .attr("y2", el2.attr("cy"))
+                .style("stroke", el2.attr("fill"))
+                .style("opacity", 0)
                 .transition()
                 .duration(200)
-                //.style("fill", color(selected_genre))
-                .attr("r", 7)
+                .style("opacity", 0.7);
+
+
+
         }
 
-        // Highlight the specie that is hovered
-        var doNotHighlight = function () {
-            d3.selectAll(".dot")
+        function tooltipMouseOut(d, i) {
+            let el = d3.selectAll(".tooltip");
+
+            el.each(function () {
+                el.remove();
+            });
+            let el2 = d3.selectAll("circle#point-" + i);
+
+            el2
                 .transition()
-                .duration(200)
-                .style("fill", "lightgrey")
-                .attr("r", 5)
+                .duration(100)
+                .style("fill-opacity", 0.75)
+                .style("stroke-width", "0px");
+
+            d3.select(".guides").remove();
+
         }
+
+        svg.append("text")
+            .attr("class", "text")
+            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .text("Revenue");
+
+        svg.append("text")
+            .attr("class", "text")
+            .attr("transform", "translate(" + (0 - 40) + "," + (height / 2) + ")rotate(-90)")
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .text("Popularity");
+
+        renderData(data, (dat) => { return dat })
+    })
+
+
+    var renderData = (data, filterFunc) => {
 
         var displayMovieInfo = (d) => {
+            if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
             d3.select("#movie_info")
                 .text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
         }
-        // Add dots
+        var removeMovieInfo = (d) => {
+            if (d.datum != null) { d = d.datum } //can be called from the voronoiIntercationArea or the datapoint
+            d3.select("#movie_info")
+                .text("")
+        }
+        // Removing previously drawn elements
+        d3.selectAll("#dotGroup")
+            .remove()
+
+        d3.selectAll("#dotIntercationRegion")
+            .remove()
+
+
+        //drawing data point
         svg.append('g')
             .attr("id", "dotGroup")
             .selectAll("dot")
-            .data(data)
+            .data(filterFunc(data))
             .enter()
             .append("circle")
             .attr("class", function (d) { return d.genres })
-            .attr("id", "myDataPoint")
             .attr("cx", function (d) { return x(d.revenue); })
             .attr("cy", function (d) { return y(d.popularity); })
             .attr("r", function (d) { return z(d.budget); })
@@ -181,21 +229,27 @@
             .attr("stroke", "black")
             //.style("fill", function (d) { return color(d.genre) } )
             .on("mouseover", displayMovieInfo)
-        //.on("mouseleave", doNotHighlight)
+            .on("mouseleave", removeMovieInfo)
 
-        svg.append("text")
-            .attr("class", "text")
-            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
-            .style("text-anchor", "middle")
-            .style("font-size", "20px")
-            .text("Revenue");
 
-        svg.append("text")
-            .attr("class", "text")
-            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
-            .style("text-anchor", "middle")
-            .style("font-size", "20px")
-            .text("Revenue");
-    })
+        //calculating Voronoi intercation area
+        let limVoronoi = d3.distanceLimitedVoronoi()
+            .x(d => x(d.revenue))
+            .y(d => y(d.popularity))
+            .limit(25)
 
+
+        svg.append("g")
+            .attr("id", "dotIntercationRegion")
+            .selectAll(".interactive-region")
+            .data(limVoronoi(filterFunc(data)))
+            .enter()
+            .append("path")
+            .attr("d", function (d) { return d.path; })
+            .style("fill", "none")
+            .style("opacity", "0.1")
+            .style("pointer-events", "all")
+            .on('mouseenter', displayMovieInfo)
+            .on('mouseout', removeMovieInfo);
+    }
 </script>
