@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+
+<p>Choose the number of common movies between actors:
+	<select id="num-movies">
+		<option value="3">3</option>
+		<option value="4">4</option>
+    <option value="5">5</option>
+    <option selected value="6">6</option selected>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+		<option value="10">10</option>
+	</select>
+
+  <style>
+  .edge{
+    stroke: black;
+    stroke-width: 1;
+  }
+  .graphSVG{
+    background-color: black;
+  }
+
+  div.container {
+    width: 100%;
+    border: 1px solid gray;
+  }
+
+	#tooltip {
+    position: absolute;
+    display: inline-block;
+    color: #555;
+    font-size: 11px;
+    text-align: left;
+    background: #fafafa;
+    box-shadow: 2px 2px 5px rgba(0, 0, 20, 0.25);
+    pointer-events: none;
+    line-height: 200%;
+    max-width: 250px;
+    opacity: 0;
+  }
+
+	#tip-header {
+    padding: 15px 10px;
+    border-bottom: 1px solid #ccc;
+    color: #666;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  #tip-header h1 {
+    margin: 0 0 10px;
+
+  }
+  #tip-header div {
+    margin: 0;
+    line-height: 120%;
+  }
+
+  #tip-body {
+    padding: 10px 10px;
+  }
+
+
+  </style>
+
+
+
+  <body>
+    <div id="graphDiv"></div>
+		<div id="tooltip" style="left: 10px; top: 10px; opacity: 0;">
+			<div id="tip-header">
+				<h1>Test</h1>
+				<div>Forest cover: 49%<br>Forested area: 8,149,300 km<sup>2</sup></div>
+			</div>
+		</div>
+
+  </body>
+<script src="https://d3js.org/d3-force.v1.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="network-actors.js"></script>
