@@ -1,0 +1,167 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<style> 
+        .text {
+          font-family: "Montserrat";
+        }
+        .grid {
+          font-family: "Montserrat";
+        }
+        div.tooltip {	
+          font-family: "Montserrat";
+          position: absolute;			
+          text-align: left;			
+          padding: 0.5em;				
+          font: 0.8em;		
+          background: rgb(255, 255, 255);	
+          border: 1px solid rgba(0, 0, 0, 0.4);		
+          border-radius: 0.5em;			
+          pointer-events: none;	
+        }
+        .bubble {
+          mix-blend-mode: multiply;
+        }
+             
+</style>
+
+<script>
+
+    
+chart = {
+  const svg = this ? d3.select(this) : create_svg();
+
+  function create_svg() {
+    const svg = d3.select(DOM.svg(width, height)).style("font", "14px Montserrat");
+    //background
+    svg
+      .append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .style("fill", "#F5F5F2");
+    svg.append("g");
+    return svg;
+  }
+
+  
+  const t = svg.transition()
+        .duration(1000);
+  
+  const g = svg.select("g");
+  
+  g.selectAll('circle')
+      .data(freedom_year, d => d.countries) //is this right? maybe this is why update doesn't work?
+      .join(
+        enter => enter.append("circle")
+            .attr("class", "bubble")
+            .attr("id", (d, i) => "point-" + i)
+            .attr("fill-opacity", 0)
+            .attr("fill", d => colorScale(d.region_simple))
+            .attr("cx", width/2 - margin.left)
+            .attr("cy", height/2 - margin.bottom)
+            .attr("r", 0)
+            .call(enter => enter.transition(t)
+                  .attr("fill-opacity", 0.75)
+                  .attr("cx", d => xScale(d.population))
+                  .attr("cy", d => yScale(d.gdp_ppp_cap))
+                  .attr("r", d => aScale(d.pf_score))),
+        update => update
+            .call(update => update.transition(t)
+                  .attr("cx", d => xScale(d.population))
+                  .attr("cy", d => yScale(d.gdp_ppp_cap))
+                  .attr("r", d => aScale(d.pf_score))),
+        exit => exit
+            .call(exit => exit.transition(t)
+                  .attr("r", 0)
+                  .style("fill-opacity", 0)
+                  .remove())
+                  
+        );
+  
+  let limVoronoi = d3.distanceLimitedVoronoi()
+      .x(d => xScale(d.population))
+      .y(d => yScale(d.gdp_ppp_cap))
+      .limit(25)
+  
+  svg.append("g")
+      .selectAll("path")
+      .data(limVoronoi(freedom_year))
+      .join("path")
+      .attr("d", (d, i) => d.path)
+      //.datum((d, i) => d.point) //what is this for?
+      .attr("id", (d, i) => "voronoi-" + i)
+      //.style("stroke", "steelblue")
+      .style("fill", "none")
+      .style("pointer-events", "all")
+      .on("mouseover", tooltipMouseOver)
+      .on("mouseout", tooltipMouseOut)
+  
+  //x axis
+  svg.append("g")
+      .call(xAxis);
+  //y axis
+  svg.append("g")
+      .call(yAxis);
+  /*
+  //x grid lines
+  svg.append("g")			
+      .attr("class", "grid")
+      .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+      .attr("stroke-opacity", 0.1)
+      .call(make_x_gridlines()
+          .tickSize(-height+margin.top+margin.bottom)
+          .tickFormat("")
+      )
+  //y grid lines
+  svg.append("g")			
+      .attr("class", "grid")
+      .attr("transform", "translate(" + margin.left + ",0)")
+      .attr("stroke-opacity", 0.1)
+      .call(make_y_gridlines()
+          .tickSize(-width + margin.left + margin.right)
+          .tickFormat("")
+      )
+   */
+  yield svg.node();
+
+  //color legend
+  svg.append("g")
+      .attr("transform", "translate(" + (width - margin.right + 20) + ",100)")
+      .call(legend)
+  
+   //x axis label
+  svg.append("text")
+      .attr("class", "text")
+      .attr("transform", "translate(" + (width/2) + "," + (height - 20) + ")")
+      .style("text-anchor", "middle")
+      .style("font-size", "20px")
+      .text("Population");
+  //y axis label
+  svg.append("text")
+      .attr("class", "text")
+      .attr("transform", "translate(" + (margin.left/4) + "," + (height/2) + ")rotate(-90)")
+      .style("text-anchor", "middle")
+      .style("font-size", "20px")
+      .text("GDP (PPP) per capita");
+  //title
+  svg.append("text")
+      .attr("class", "text")
+      .attr("transform", "translate(0," + margin.top/3 + ")")
+      .style("text-anchor", "left")
+      .style("font-size", "25px")
+      .text("Personal freedom score for world countries")
+  //subtitle
+  svg.append("text")
+      .attr("class", "text")
+      .attr("transform", "translate(0," + margin.top/1.6 + ")")
+      .style("text-anchor", "left")
+      .style("font-size", "20px")
+      .style("font-style", "italic")
+      .text("Bubbles are colored by region and sized by personal freedom score")
+      
+}
+
+
+
+
+
+</script>

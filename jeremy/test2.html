@@ -1,97 +1,201 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<meta charset="utf-8">
 
-<head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-
-</head>
-
-<body>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
 
+<div class='form-group'>
+    <select id="year-select" class="form-control">
+        <option selected value="all">All</option>
+        <option value="Action">Action</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Animation">Animation</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Drama">Drama</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Family">Family</option>
+        <option value="Comedy">Comedy</option>
+        <option value="History">History</option>
+        <option value="War">War</option>
+        <option value="Western">Western</option>
+        <option value="Romance">Romance</option>
+        <option value="Crime">Crime</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Horror">Horror</option>
+        <option value="Music">Music</option>
+        <option value="Documentary">Documentary</option>
+    </select>
+</div>
 
-    <div id="my_dataviz"></div>
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
 
-    <div id="slider"></div>
+<div id="movie_info"></div>
+
+<script>
+    //https://observablehq.com/@will-r-chase/scatter-plot
+    // set the dimensions and margins of the graph
+    var margin = { top: 10, right: 30, bottom: 50, left: 70 },
+        width = 1500 - margin.left - margin.right,
+        height = 1000 - margin.top - margin.bottom;
 
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")")
+        .style("font", "14px Montserrat");
 
-    <script>
+    //Read the data
+    d3.csv("bubbleData.csv", function (data) {
 
-        // set the dimensions and margins of the graph
-        var margin = { top: 10, right: 20, bottom: 30, left: 50 },
-            width = 1000 - margin.left - margin.right,
-            height = 1000 - margin.top - margin.bottom;
+        // Add X axis
+        var x = d3.scaleLog()
+            .domain([3000, 3000000000])
+            .range([0, width]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
 
-        // append the svg object to the body of the page
-        var svg = d3.select("#my_dataviz")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+        // Add Y axis
+        var y = d3.scaleLog()
+            .domain([0.8, 1000])
+            .range([height, 0]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
 
-        //Read the data
-        d3.csv("./bubbleData.csv", function (data) {
+        // Add a scale for bubble size
+        var z = d3.scaleSqrt()
+            .domain([7000, 1000000000])
+            .range([1, 60]);
 
-            // Add X axis
-            var x = d3.scaleLog()
-                .domain([100, 3000000000])
-                .range([0, width]);
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
 
-            // Add Y axis
-            var y = d3.scaleLog()
-                .domain([1, 1000])
-                .range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y));
+        // Color scale: give me a specie name, I return a color
+        var color = d3.scaleOrdinal()
+            .domain(["setosa", "versicolor", "virginica"])
+            .range(["#440154ff", "#21908dff", "#fde725ff"])
 
-            // Add a scale for bubble size
-            var z = d3.scaleSqrt()
-                .domain([7000, 1000000000])
-                .range([1, 100]);
 
-            // Add dots
+        d3.select('#year-select').on('change', function () {
+            var f = document.getElementById('year-select')
+            selected_genre = f.options[f.selectedIndex].value
+            console.log(selected_genre)
+
+            d3.selectAll("#dotGroup")
+                .remove()
+            //.style("fill", "lightgrey")
+            //.style("opacity", "0")
+            //.on("mouseover", displayMovieInfo)
+
+
             svg.append('g')
+                .attr("id", "dotGroup")
                 .selectAll("dot")
-                .data(data)
+                .data(data.filter(function (d) { return d.genres === selected_genre }))
                 .enter()
                 .append("circle")
+                .attr("class", function (d) { return d.genres })
+                .attr("id", "myDataPoint")
                 .attr("cx", function (d) { return x(d.revenue); })
                 .attr("cy", function (d) { return y(d.popularity); })
                 .attr("r", function (d) { return z(d.budget); })
                 .style("fill", "#69b3a2")
                 .style("opacity", "0.7")
                 .attr("stroke", "black")
+                //.style("fill", function (d) { return color(d.genre) } )
+                .on("mouseover", displayMovieInfo)
+
+           /* let limVoronoi = d3.distanceLimitedVoronoi()
+                .x(d => xScale(d.revenue))
+                .y(d => yScale(d.popularity))
+                .limit(25)
+
+            svg.append("g")
+                .selectAll("path")
+                .data(limVoronoi(freedom_year))
+                .join("path")
+                .attr("d", (d, i) => d.path)
+                //.datum((d, i) => d.point) //what is this for?
+                .attr("id", (d, i) => "voronoi-" + i)
+                //.style("stroke", "steelblue")
+                .style("fill", "none")
+                .style("pointer-events", "all")
+                .on("mouseover", tooltipMouseOver)
+                .on("mouseout", tooltipMouseOut)*/
 
         })
-    </script>
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    -->
-</body>
 
-</html>
+        // Highlight the specie that is hovered
+        var highlight = function (d) {
+
+            selected_genre = d.genres
+
+            d3.selectAll("dot")
+                .transition()
+                .duration(200)
+                .style("fill", "lightgrey")
+                .attr("r", 3)
+
+            d3.selectAll("." + selected_genre)
+                .transition()
+                .duration(200)
+                //.style("fill", color(selected_genre))
+                .attr("r", 7)
+        }
+
+        // Highlight the specie that is hovered
+        var doNotHighlight = function () {
+            d3.selectAll(".dot")
+                .transition()
+                .duration(200)
+                .style("fill", "lightgrey")
+                .attr("r", 5)
+        }
+
+        var displayMovieInfo = (d) => {
+            d3.select("#movie_info")
+                .text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
+        }
+        // Add dots
+        svg.append('g')
+            .attr("id", "dotGroup")
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", function (d) { return d.genres })
+            .attr("id", "myDataPoint")
+            .attr("cx", function (d) { return x(d.revenue); })
+            .attr("cy", function (d) { return y(d.popularity); })
+            .attr("r", function (d) { return z(d.budget); })
+            .style("fill", "#69b3a2")
+            .style("opacity", "0.7")
+            .attr("stroke", "black")
+            //.style("fill", function (d) { return color(d.genre) } )
+            .on("mouseover", displayMovieInfo)
+        //.on("mouseleave", doNotHighlight)
+
+        svg.append("text")
+            .attr("class", "text")
+            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .text("Revenue");
+
+        svg.append("text")
+            .attr("class", "text")
+            .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", "20px")
+            .text("Revenue");
+    })
+
+</script>

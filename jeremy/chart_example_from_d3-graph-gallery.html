@@ -7,76 +7,137 @@
 
   <script src="https://d3js.org/d3.v4.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 
+<body>
 
-  <select id="continent-select" class="form-control">
-    <option selected value="all">All</option>
-    <option value="europe">Europe</option>
-    <option value="asia">Asia</option>
-    <option value="americas">Americas</option>
-    <option value="africa">Africa</option>
-  </select>
+  <div class='form-group'>
+    <select id="year-select" class="form-control" onchange='yearChanged()'>
+      <option selected value="all">All</option>
+      <option value="Action">Action</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Fantasy">Fantasy</option>
+      <option value="Animation">Animation</option>
+      <option value="Science Fiction">Science Fiction</option>
+      <option value="Drama">Drama</option>
+      <option value="Thriller">Thriller</option>
+      <option value="Family">Family</option>
+      <option value="Comedy">Comedy</option>
+      <option value="History">History</option>
+      <option value="War">War</option>
+      <option value="Western">Western</option>
+      <option value="Romance">Romance</option>
+      <option value="Crime">Crime</option>
+      <option value="Mystery">Mystery</option>
+      <option value="Horror">Horror</option>
+      <option value="Music">Music</option>
+      <option value="Documentary">Documentary</option>
+    </select>
+  </div>
 
+  <!-- Create a div where the graph will take place -->
 
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
+  <div id="my_dataviz"></div>
 
-
+</body>
 <script>
 
-// set the dimensions and margins of the graph
-var margin = {top: 10, right: 20, bottom: 30, left: 50},
-    width = 2000- margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
+
+  var yearChanged = () => {
+    var f = document.getElementById('year-select')
+    console.log(f.options[f.selectedIndex].value)
+    update()
+  }
+
+
+
+  var isVisible = (d) => {
+    //console.log(d)
+    var f = document.getElementById('year-select')
+    //console.log(f.options[f.selectedIndex].value != 'all')
+    d3.selectAll("dot"+f.options[f.selectedIndex].value)
+    .transition()
+    .duration(200)
+    .style("fill", "lightgrey")
+    .attr("r", 3)
+
+
+    if (f.options[f.selectedIndex].value != 'all') {
+      //console.log(d.genres == f.options[f.selectedIndex].value)
+      var vis = d.genres == f.options[f.selectedIndex].value ? 'visible' : 'hidden'
+      //console.log(vis)
+      return vis
+    } else {
+      return 'visible'
+    }
+  }
+
+  // set the dimensions and margins of the graph
+  var margin = { top: 10, right: 20, bottom: 30, left: 50 },
+    width = 1000 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  var svg = d3.select("#my_dataviz")
+    .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+      "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-d3.csv("./bubbleData.csv", function(data) {
+  //Read the data
+  function render(data) {
 
-  // Add X axis
-  var x = d3.scaleLog()
-    .domain([100, 3000000000])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
 
-  // Add Y axis
-  var y = d3.scaleLog()
-    .domain([1, 1000])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+    // Add X axis
+    var x = d3.scaleLog()
+      .domain([100, 3000000000])
+      .range([0, width]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
 
-  // Add a scale for bubble size
-  var z = d3.scaleSqrt()
-    .domain([7000, 1000000000])
-    .range([ 1, 60]);
+    // Add Y axis
+    var y = d3.scaleLog()
+      .domain([1, 1000])
+      .range([height, 0]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
 
-  // Add dots
-  svg.append('g')
-    .selectAll("dot")
-    .data(data.filter(
-            function(d){return d.realease_year === '2015'}))
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) { return x(d.revenue); } )
-      .attr("cy", function (d) { return y(d.popularity); } )
-      .attr("r", function (d) { return z(d.budget); } )
+    // Add a scale for bubble size
+    var z = d3.scaleSqrt()
+      .domain([7000, 1000000000])
+      .range([1, 60]);
+
+    
+
+    // Add dots
+    var fig = svg.append('g')
+      .selectAll("dot")
+      .data(data)
+      
+
+
+      fig.enter().append("circle")
+      .attr("cx", function (d) { return x(d.revenue); })
+      .attr("cy", function (d) { return y(d.popularity); })
+      .attr("r", function (d) { return z(d.budget); })
+      .attr("class", function(d) { return "dot"+d.genres})
       .style("fill", "#69b3a2")
       .style("opacity", "0.7")
       .attr("stroke", "black")
-      
-})
+      .attr("visibility", isVisible)
+  }
+
+  function update(){
+    
+      d3.selectAll("dot")
+      .attr("visibility", isVisible)
+  }
+
+  d3.csv("./bubbleData.csv", render)
 </script>
