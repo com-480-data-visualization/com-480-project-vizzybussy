@@ -6,6 +6,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <script src="https://rawgit.com/Kcnarf/d3-distanceLimitedVoronoi/d3v4/distance-limited-voronoi.js"></script>
 
+
+
+
+
+<!--Bootstrap CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<!--IOn rangeSlider https://github.com/IonDen/ion.rangeSlider-->
+
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+
 <!-- Brush imports js-->
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
@@ -17,9 +43,10 @@
 <script src="https://d3js.org/d3-drag.v1.min.js"></script>
 <script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
-
-<div class='form-group'>
-    <select id="year-select" class="form-control">
+<div class="row">
+    <div class="col-2"></div>
+<div class='form-group col-8'>
+    <select id="genre-select" class="form-control">
         <option selected value="all">All</option>
         <option value="Action">Action</option>
         <option value="Adventure">Adventure</option>
@@ -41,6 +68,22 @@
         <option value="Documentary">Documentary</option>
     </select>
 </div>
+</div>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div id="year_selector"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div id="my_dataviz"></div>
+        <div id="movie_info"></div>
+    </div>
+</div>
+<div id="year_selector"></div>
+
 
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
@@ -51,16 +94,30 @@
     //https://observablehq.com/@will-r-chase/scatter-plot
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 50, left: 70 },
-        width = 1500 - margin.left - margin.right,
+        width = 1300 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
     var config = {
         color_hover_data_point: "#55b375",
         opacity_data_point_hover: "0.9",
-        opacity_data_point_no_hover: "0.6",
+        opacity_data_point_no_hover: "0.5",
         color_no_hover_data_point: "#69b3a2"
     }
 
+    var $year_sel = $("#year_selector")
+
+    $year_sel.ionRangeSlider({
+        skin: "flat",
+        min: 1916,
+        max: 2016,
+        from: 2005,
+        to: 2007,
+        type: 'int',
+        prefix: "",
+        grid: true,
+        grid_num: 10,
+        prettify_enabled: false
+    });
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -102,7 +159,7 @@
 
     svg.append("text")
         .attr("class", "text")
-        .attr("transform", "translate("+(width / 2.5)+",-" + margin.top / 2 + ")")
+        .attr("transform", "translate(" + (width / 2.5) + ",-" + margin.top / 2 + ")")
         .style("text-anchor", "left")
         .style("font-size", "25px")
         .text("Popularity vs Revenue")
@@ -125,21 +182,34 @@
     //Read the data
     d3.csv("bubbleData.csv", function (data) {
 
+        $("#year_selector").on("change", function () {
+            renderData(data)
+        })
+
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
             .domain(["setosa", "versicolor", "virginica"])
             .range(["#440154ff", "#21908dff", "#fde725ff"])
 
 
-        d3.select('#year-select').on('change', function () {
-            var f = document.getElementById('year-select')
+        d3.select('#genre-select').on('change', function () {
+            var f = document.getElementById('genre-select')
             selected_genre = f.options[f.selectedIndex].value
             console.log(selected_genre)
-            renderData(data, function (dat) { return dat.filter((d) => { return d.genres === selected_genre }) })
+            renderData(data)
         })
 
+
+        renderData(data)
+    })
+
+
+    var renderData = (data) => {
+
+
+
         function tooltipMouseOver(d, i) {
-            let el = d3.select("body");
+            let el = d3.select("my_dataviz");
 
             let div = el
                 .append("g")
@@ -215,15 +285,7 @@
 
         }
 
-
-        renderData(data, (dat) => { return dat.filter((d)=> {return d.realease_year == "2000"}) })
-    })
-
-
-    var renderData = (data, filterFunc) => {
-
         var displayMovieInfo = (d) => {
-            console.log(d)
             if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
             d3.selectAll(("#data_uid_" + d.uid))
                 .style("fill", config.color_hover_data_point)
@@ -243,6 +305,23 @@
                 .style("opacity", config.opacity_data_point_no_hover)
                 .attr("stroke", "none")
         }
+
+
+        var genre_selected = $("select#genre-select").val();
+        var filterFuncGenre = (dat) => { return dat }
+        if (genre_selected != "all") {
+            filterFuncGenre = (dat) => { return dat.filter((d) => { return d.genres === genre_selected }) }
+        }
+        var fromYear = $("#year_selector").data("from")
+        var toYear = $("#year_selector").data("to")
+        var filterFunc = (dat) => { return filterFuncGenre(dat).filter((d) => { return d.realease_year >= fromYear && d.realease_year < toYear }) }
+
+
+        local_config = {
+            action_when_entering_data_point: displayMovieInfo,
+            action_when_leaving_data_point: removeMovieInfo
+        }
+
         // Removing previously drawn elements
         d3.selectAll("#dotGroup")
             .remove()
@@ -250,6 +329,17 @@
         d3.selectAll("#dotIntercationRegion")
             .remove()
 
+        d3.selectAll("#yearText")
+            .remove()
+
+        svg.append("text")
+            .attr("id", "yearText")
+            .attr("class", "text")
+            .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")")
+            .style("text-anchor", "middle")
+            .style("font-size", width / 8)
+            .style("opacity", "0.2")
+            .text(fromYear + " - " + toYear);
 
         //drawing data point
         svg.append('g')
@@ -267,8 +357,8 @@
             .style("opacity", config.opacity_data_point_no_hover)
             //.attr("stroke", "black")
             //.style("fill", function (d) { return color(d.genre) } )
-            .on("mouseover", displayMovieInfo)
-            .on("mouseleave", removeMovieInfo)
+            .on("mouseover", local_config.action_when_entering_data_point)
+            .on("mouseleave", local_config.action_when_leaving_data_point)
 
 
         //calculating Voronoi intercation area
@@ -289,7 +379,7 @@
             //.style("stroke", "steelblue")
             //.style("opacity", "0.1")
             .style("pointer-events", "all")
-            .on('mouseenter', displayMovieInfo)
-            .on('mouseout', removeMovieInfo);
+            .on('mouseenter', local_config.action_when_entering_data_point)
+            .on('mouseout', local_config.action_when_leaving_data_point);
     }
 </script>
