@@ -1,0 +1,12 @@
+#chart {
+  font: 10px sans-serif;
+  margin: 3rem auto;
+  align-content: center;
+}
+
+.chord path {
+  fill-opacity: .67;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
