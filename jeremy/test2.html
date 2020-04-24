@@ -94,7 +94,7 @@
     //https://observablehq.com/@will-r-chase/scatter-plot
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 50, left: 70 },
-        width = 1300 - margin.left - margin.right,
+        width = 1800 - margin.left - margin.right,
         height = 1000 - margin.top - margin.bottom;
 
     var config = {
@@ -108,7 +108,7 @@
 
     $year_sel.ionRangeSlider({
         skin: "flat",
-        min: 1916,
+        min: 1966,
         max: 2016,
         from: 2005,
         to: 2007,
@@ -139,7 +139,7 @@
 
     // Add X axis
     var x = d3.scaleLog()
-        .domain([3000, 3000000000]).nice()
+        .domain([30000, 3000000000]).nice()
         .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -147,7 +147,7 @@
 
     // Add Y axis
     var y = d3.scaleLog()
-        .domain([0.8, 1000]).nice()
+        .domain([10, 1000]).nice()
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
