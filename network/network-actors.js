@@ -41,6 +41,9 @@
       hiddenContext,
       context;
 
+
+
+
   //
   // var div = d3.select("body").append("div")
   //     .attr("class", "tooltip")
@@ -68,6 +71,11 @@
     // Restore the transform
     context.restore();
     hiddenContext.restore();
+    hideTooltip();
+    keepOpacity.length = 0;
+    overnode = false;
+    current_node_name = "";
+    simulationUpdate();
     // Build new network
     build_network(datapath);
   };
@@ -82,8 +90,11 @@
     return simulation;
   };
 
-  function highlightPicking() {
 
+  var keepOpacity = [];
+  var overnode = false;
+  var current_node_name;
+  function highlightPicking() {
     var pos = d3.mouse(this); // get the mouse pixel positions
     var pickedColor = hiddenContext.getImageData(pos[0], pos[1], 1, 1).data; // get the pixel color at mouse hover
     console.log('pickedColor:' + pickedColor)
@@ -96,13 +107,23 @@
       selected_object = getObjectByColor(selected)[0];
       is_edge = pickedColor[0] == 0 ? true:false;
       if (is_edge) {
-        movie_ids = selected_object.movie_id;
+        var link = selected_object;
+        movie_ids = link.movie_id;
         showTooltip(pos, getMovieInfos(movie_ids));
       } else {
-        name = selected_object.id;
+        var node = selected_object;
+        keepOpacity = node2neighbors[node.id];
+        console.log(keepOpacity)
+        overnode = true;
+        current_node_name = node.id;
+        simulationUpdate();
       }
     } else {
       hideTooltip();
+      keepOpacity = [];
+      overnode = false;
+      current_node_name = "";
+      simulationUpdate();
     }
 
   }
@@ -140,7 +161,7 @@
 
     // Create queue to check when to build new tooltip
     movieQueue.unshift(movies_info);
-    console.log(movieQueue.pop());
+    movieQueue.pop();
 
     // Build and move tooltip accordingly
     if (movieQueue[0] != movieQueue[1]) {
@@ -190,14 +211,86 @@
     movieQueue.unshift(undefined);
     movieQueue.pop();
 
-    var tip = d3.select('#tooltip')
-      .on('mouseover', function(d, i) {
-        tip.transition().duration(0).style('opacity', 0.98);  // on mouse over cancel mouse out transistion
-      })
-      .on('mouseout', function(d, i) {
-        tip.transition().duration(100).style('opacity', 0);  // on mouseout hide tip
-      });
+    d3.select('#tooltip')
+      .transition().duration(500)
+      .style('opacity', 0);
   } // hideTooltip()
+
+
+
+
+  function simulationUpdate(){
+    context.save();
+    hiddenContext.save();
+
+    context.clearRect(0, 0, graphWidth, height);
+    context.translate(transform.x, transform.y);
+    context.scale(transform.k, transform.k);
+
+    hiddenContext.clearRect(0, 0, graphWidth, height);
+    hiddenContext.translate(transform.x, transform.y);
+    hiddenContext.scale(transform.k, transform.k);
+    tempData.links.forEach(function(d) {
+          context.beginPath();
+          context.moveTo(d.source.x, d.source.y);
+          context.lineTo(d.target.x, d.target.y);
+          context.strokeStyle = "grey";
+          if (overnode && current_node_name != d.source.id && current_node_name != d.target.id) {
+            context.globalAlpha = 0.1;
+          } else {
+            context.globalAlpha = 1;
+            if (overnode) {
+              context.globalAlpha = 0.8;
+            }
+          }
+          context.stroke();
+
+          // Replicate on the hidden canvas
+          hiddenContext.beginPath();
+          hiddenContext.moveTo(d.source.x, d.source.y);
+          hiddenContext.lineTo(d.target.x, d.target.y);
+          hiddenContext.strokeStyle = d.color;
+          context.globalAlpha = 1;
+          hiddenContext.stroke();
+      });
+      // Draw the nodes
+      var printText = false;
+      tempData.nodes.forEach(function(d) {
+          context.beginPath();
+          context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
+          context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+          if (overnode && current_node_name != d.id && !keepOpacity.includes(d.id)) {
+            context.globalAlpha = 0.1;
+          } else {
+            context.globalAlpha = 1;
+            if (overnode) {
+              printText = true;
+            }
+          }
+          context.fill();
+          if (printText) {
+            context.beginPath();
+            context.font = '4pt Calibri';
+            context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+            context.textAlign = 'center';
+            context.fillText(d.id, d.x, d.y-5);
+            printText = false;
+          }
+          // Replicate on the hidden canvas
+          hiddenContext.beginPath();
+          hiddenContext.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
+          hiddenContext.fillStyle = d.color;
+          context.globalAlpha = 1;
+          hiddenContext.fill();
+      });
+      context.restore();
+      hiddenContext.restore();
+  }
+
+
+
+  // Set up dictionary of neighbors
+  var node2neighbors;
 
 
 
@@ -205,14 +298,29 @@
   function build_network(datapath){
     var simulation = createSimulation(graphWidth, height);
     hideTooltip();
+    node2neighbors = {};
     d3.json(datapath, function(error, data){
         if (error) throw error;
+
+        // Map each link and node to a unique color
         data.links.forEach(function(d,i){
           d.color = num2rgb(i);
         });
         data.nodes.forEach(function(d,i){
           d.color = 'rgb('+i+',0,0)';
-          console.log(d.color)
+        });
+
+        // Get the neighbors of each nodes
+        data.nodes.forEach(function(node){
+          var name = node.id;
+          node2neighbors[name] = data.links.filter(function(d){
+                  return d.source == name || d.target == name;
+              }).map(function(d){
+                  return d.source == name ? d.target : d.source;
+              });
+          if (node2neighbors[name].length <= 1) {
+            console.log(node2neighbors[name]);
+          }
         });
 
 
@@ -288,47 +396,8 @@
           simulation.force("link")
                     .links(tempData.links);
 
+          simulationUpdate();
 
-
-          function simulationUpdate(){
-            context.save();
-            hiddenContext.save();
-
-            context.clearRect(0, 0, graphWidth, height);
-            context.translate(transform.x, transform.y);
-            context.scale(transform.k, transform.k);
-
-            hiddenContext.clearRect(0, 0, graphWidth, height);
-            hiddenContext.translate(transform.x, transform.y);
-            hiddenContext.scale(transform.k, transform.k);
-            tempData.links.forEach(function(d) {
-                  context.beginPath();
-                  context.moveTo(d.source.x, d.source.y);
-                  context.lineTo(d.target.x, d.target.y);
-                  context.strokeStyle = "grey";
-                  context.stroke();
-                  // Replicate on the hidden canvas
-                  hiddenContext.beginPath();
-                  hiddenContext.moveTo(d.source.x, d.source.y);
-                  hiddenContext.lineTo(d.target.x, d.target.y);
-                  hiddenContext.strokeStyle = d.color;
-                  hiddenContext.stroke();
-              });
-              // Draw the nodes
-              tempData.nodes.forEach(function(d) {
-                  context.beginPath();
-                  context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-                  context.fillStyle = "black";
-                  context.fill();
-                  // Replicate on the hidden canvas
-                  hiddenContext.beginPath();
-                  hiddenContext.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-                  hiddenContext.fillStyle = d.color;
-                  hiddenContext.fill();
-              });
-              context.restore();
-              hiddenContext.restore();
-          }
         }
       })
     }})();
