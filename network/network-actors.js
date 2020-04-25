@@ -72,7 +72,7 @@
     context.restore();
     hiddenContext.restore();
     hideTooltip();
-    keepOpacity.length = 0;
+    keepOpacity = [];
     overnode = false;
     current_node_name = "";
     simulationUpdate();
@@ -104,16 +104,17 @@
     //if (selected !== false) showTooltip(pos, country); // build tooltip
     //if (selected === false) hideTooltip(); // remove tooltip
     if (selected != false) {
-      selected_object = getObjectByColor(selected)[0];
-      is_edge = pickedColor[0] == 0 ? true:false;
+      var object = getObjectByColor(selected);
+      var selected_object = object[0];
+      var is_edge = object[1];
+      console.log(object, selected_object, is_edge)
       if (is_edge) {
-        var link = selected_object;
+        var link = selected_object[0];
         movie_ids = link.movie_id;
         showTooltip(pos, getMovieInfos(movie_ids));
       } else {
-        var node = selected_object;
+        var node = selected_object[0];
         keepOpacity = node2neighbors[node.id];
-        console.log(keepOpacity)
         overnode = true;
         current_node_name = node.id;
         simulationUpdate();
@@ -135,17 +136,20 @@
     var b = n % 256,
         g = ((n-b)/256)%256,
         r = ((n-b)/Math.pow(256, 2)) - g/256;
-    // console.log(r, g ,b);
     return 'rgb('+r+','+g+','+b+')'
   }
 
   function getObjectByColor(color) {
-    dataset = color[0] == 0 ? tempData.links:tempData.nodes;
     rgb_str = 'rgb('+color[0]+','+color[1]+','+color[2]+')'
-
-    return dataset.filter(
+    var links_search = tempData.links.filter(
       function(d){ return d.color == rgb_str }
     );
+    var nodes_search = tempData.nodes.filter(
+      function(d){ return d.color == rgb_str }
+    );
+    var result = (links_search.length == 0) ? [nodes_search, false]:[links_search, true]
+    console.log(result, links_search, nodes_search)
+    return result
   }
 
   function getMovieInfos(list_movies) {
@@ -301,13 +305,14 @@
     node2neighbors = {};
     d3.json(datapath, function(error, data){
         if (error) throw error;
-
+        console.log("num_nodes = ",data.nodes.length)
         // Map each link and node to a unique color
         data.links.forEach(function(d,i){
           d.color = num2rgb(i);
         });
+        offset_nodes = data.links.length
         data.nodes.forEach(function(d,i){
-          d.color = 'rgb('+i+',0,0)';
+          d.color = num2rgb(offset_nodes + i)
         });
 
         // Get the neighbors of each nodes
@@ -318,9 +323,6 @@
               }).map(function(d){
                   return d.source == name ? d.target : d.source;
               });
-          if (node2neighbors[name].length <= 1) {
-            console.log(node2neighbors[name]);
-          }
         });
 
 
