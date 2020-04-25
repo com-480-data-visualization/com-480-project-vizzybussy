@@ -94,12 +94,11 @@
   var keepOpacity = [];
   var overnode = false;
   var current_node_name;
+
   function highlightPicking() {
     var pos = d3.mouse(this); // get the mouse pixel positions
     var pickedColor = hiddenContext.getImageData(pos[0], pos[1], 1, 1).data; // get the pixel color at mouse hover
-    console.log('pickedColor:' + pickedColor)
     selected = pickedColor[3] == 255 ? [pickedColor[0], pickedColor[1], pickedColor[2]]  : false; // checking for inGlobe (above) and antialiasing
-    console.log('selected:' + selected)
     //var country = countries.features[selected];
     //if (selected !== false) showTooltip(pos, country); // build tooltip
     //if (selected === false) hideTooltip(); // remove tooltip
@@ -107,7 +106,6 @@
       var object = getObjectByColor(selected);
       var selected_object = object[0];
       var is_edge = object[1];
-      console.log(object, selected_object, is_edge)
       if (is_edge) {
         var link = selected_object[0];
         movie_ids = link.movie_id;
@@ -148,7 +146,6 @@
       function(d){ return d.color == rgb_str }
     );
     var result = (links_search.length == 0) ? [nodes_search, false]:[links_search, true]
-    console.log(result, links_search, nodes_search)
     return result
   }
 
@@ -270,6 +267,9 @@
             if (overnode) {
               printText = true;
             }
+            if (current_node_name == d.id) {
+              context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
+            }
           }
           context.fill();
           if (printText) {
@@ -305,7 +305,6 @@
     node2neighbors = {};
     d3.json(datapath, function(error, data){
         if (error) throw error;
-        console.log("num_nodes = ",data.nodes.length)
         // Map each link and node to a unique color
         data.links.forEach(function(d,i){
           d.color = num2rgb(i);
