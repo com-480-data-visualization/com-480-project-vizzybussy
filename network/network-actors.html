@@ -3,13 +3,10 @@
 <head>
   <link rel="stylesheet" href="network-actors.css">
 </head>
-
-
-
   <body>
 		<p>Choose the number of common movies between actors:
 			<select id="num-movies">
-				<option value="3">3 (computing intensive)</option>
+				<option value="3">3</option>
 				<option value="4">4</option>
 		    <option value="5">5</option>
 		    <option selected value="6">6</option selected>
@@ -19,15 +16,9 @@
 				<option value="10">10</option>
 			</select>
     <div id="graphDiv"></div>
-		<div id="tooltip" style="left: 10px; top: 10px; opacity: 0;">
-			<div id="tip-header">
-				<h1>Test</h1>
-				<div>Forest cover: 49%<br>Forested area: 8,149,300 km<sup>2</sup></div>
-			</div>
-		</div>
+		<div id="tooltip" style="left: 10px; top: 10px; opacity: 0;"></div>
 
   </body>
 <script src="https://d3js.org/d3-force.v1.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="http://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
 <script src="network-actors.js"></script>

@@ -9,7 +9,7 @@
                    .on('mousemove', highlightPicking)
                    .node();
     context = graphCanvas.getContext('2d');
-    // https://books.google.fr/books?id=lkBPDwAAQBAJ&pg=PA173&lpg=PA173&dq=interact+with+d3+canvas&source=bl&ots=boP_YKjew2&sig=ACfU3U0v5wYUQM3zJutsMpvv1ADE7XFvIA&hl=fr&sa=X&ved=2ahUKEwjri6-ai_zoAhXC3YUKHcZKA0M4ChDoATAFegQIChAB#v=onepage&q=interact%20with%20d3%20canvas&f=false
+    // ref: https://books.google.fr/books?id=lkBPDwAAQBAJ&pg=PA173&lpg=PA173&dq=interact+with+d3+canvas&source=bl&ots=boP_YKjew2&sig=ACfU3U0v5wYUQM3zJutsMpvv1ADE7XFvIA&hl=fr&sa=X&ved=2ahUKEwjri6-ai_zoAhXC3YUKHcZKA0M4ChDoATAFegQIChAB#v=onepage&q=interact%20with%20d3%20canvas&f=false
     hiddenCanvas = d3.select('#graphDiv').append('canvas')
                        .attr('id', 'canvas-hidden')
                        .attr('width', graphWidth + 'px')
@@ -41,19 +41,8 @@
       hiddenContext,
       context;
 
-
-
-
-  //
-  // var div = d3.select("body").append("div")
-  //     .attr("class", "tooltip")
-  //     .style("opacity", 0);
-
   // Wait for the HTML to load
   document.addEventListener('DOMContentLoaded', init);
-
-
-
 
   function changeDataset() {
     /** Change dataset to generate the network amongst the dataset available [1-10]. */
@@ -97,11 +86,8 @@
 
   function highlightPicking() {
     var pos = d3.mouse(this); // get the mouse pixel positions
-    var pickedColor = hiddenContext.getImageData(pos[0], pos[1], 1, 1).data; // get the pixel color at mouse hover
-    selected = pickedColor[3] == 255 ? [pickedColor[0], pickedColor[1], pickedColor[2]]  : false; // checking for inGlobe (above) and antialiasing
-    //var country = countries.features[selected];
-    //if (selected !== false) showTooltip(pos, country); // build tooltip
-    //if (selected === false) hideTooltip(); // remove tooltip
+    var pickedColor = hiddenContext.getImageData(pos[0], pos[1], 1, 1).data; // get the pixel color at mouseover
+    selected = pickedColor[3] == 255 ? [pickedColor[0], pickedColor[1], pickedColor[2]]  : false; // checking for antialiasing
     if (selected != false) {
       var object = getObjectByColor(selected);
       var selected_object = object[0];
@@ -129,7 +115,7 @@
 
   function num2rgb(n){
     /** Map an integer to a rgb value.
-    /* https://math.stackexchange.com/questions/1635999/algorithm-to-convert-integer-to-3-variables-rgb*/
+    /* ref: https://math.stackexchange.com/questions/1635999/algorithm-to-convert-integer-to-3-variables-rgb */
 
     var b = n % 256,
         g = ((n-b)/256)%256,
@@ -138,6 +124,7 @@
   }
 
   function getObjectByColor(color) {
+    /** Return object with the given color */
     rgb_str = 'rgb('+color[0]+','+color[1]+','+color[2]+')'
     var links_search = tempData.links.filter(
       function(d){ return d.color == rgb_str }
@@ -150,6 +137,7 @@
   }
 
   function getMovieInfos(list_movies) {
+    /** Return the list of movies with the given ids. */
     return tempData.movies_info.filter(
       function(d){
         return list_movies.includes(d.movie_id)}
@@ -158,8 +146,63 @@
 
   var movieQueue = [undefined, undefined]; // initialise queue array to check for new build
 
-  function showTooltip(mouse, movies_info) {
+  function parseDate(date) {
+    var numbers = date.split("-")
+    var year,
+        month,
+        day;
+    year = numbers[0]
+    day = numbers[2]
+    switch(parseInt(numbers[1])){
+        case 1: month = "January";
+            break;
+        case 2: month = "February";
+            break;
+        case 3: month = "March";
+            break;
+        case 4: month = "April";
+            break;
+        case 5: month = "May";
+            break;
+        case 6: month = "June";
+            break;
+        case 7: month = "July";
+            break;
+        case 8: month = "August";
+            break;
+        case 9: month = "September";
+            break;
+        case 10: month = "October";
+            break;
+        case 11: month = "November";
+            break;
+        case 12: month = "December";
+            break;
+        }
+    return day + " " + month + " " + year;
+  }
 
+
+
+
+  function movieToHtml(movie_info) {
+    title = movie_info.original_title
+    if (title != null) {
+      d3.select('#tooltip')
+        .append("div")
+        .html('<p class="title">'+title+'</p>' +
+            "Genres: " + movie_info.genres +
+              "<br> Release date: " + parseDate(movie_info.release_date) +
+              "<br> ")
+
+
+    }
+
+  }
+
+
+  function showTooltip(mouse, movies_info) {
+    /** Show a tooltip when mouseover a edge. */
     // Create queue to check when to build new tooltip
     movieQueue.unshift(movies_info);
     movieQueue.pop();
@@ -168,27 +211,9 @@
     if (movieQueue[0] != movieQueue[1]) {
 
       // Build tooltip header
-      d3.select('#tip-header h1').html(movies_info[0].original_title);
-      d3.select('#tip-header div').html(movies_info);
-      /*
-      var headHtml =
-        'Forest cover: ' + formatPer(countryProps.forest_percent) + '' +
-        '<br>Forested area: ' + formatNum(countryProps.forest_area) + ' km<sup>2</sup>';
+      d3.select("#tooltip").html("");
+      movies_info.forEach(movieToHtml);
 
-      d3.select('#tip-header h1').html(countryProps.admin);
-      d3.select('#tip-header div').html(headHtml);
-
-      // Highlight bar in tip-visual
-      // In the book we only color the specific bar red for simplicity. Here we also increase its height to make it stand out better.
-      // In order to do this we also needed to move the yScale to higher scope (just before we call buildTooltip() above).
-      svg.selectAll('.bar')
-        .attr('fill', function(d) { return d.color; })
-        .attr('height', yScale.bandwidth());
-      d3.select('#' + stripString(countryProps.admin))
-        .attr('fill', 'orange')
-        .attr('height', yScale.bandwidth()*3)
-        .raise();
-      */
       // Show and move tooltip
       d3.select('#tooltip')
         .style('left', (mouse[0] + 20) + 'px')
@@ -208,7 +233,7 @@
   } // showTooltip()
 
   function hideTooltip() {
-
+    /** Hide the tooltip. */
     movieQueue.unshift(undefined);
     movieQueue.pop();
 
@@ -221,6 +246,7 @@
 
 
   function simulationUpdate(){
+    /** Update the force simulation. */
     context.save();
     hiddenContext.save();
 
@@ -254,52 +280,48 @@
           context.globalAlpha = 1;
           hiddenContext.stroke();
       });
-      // Draw the nodes
-      var printText = false;
-      tempData.nodes.forEach(function(d) {
-          context.beginPath();
-          context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-          context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
-          if (overnode && current_node_name != d.id && !keepOpacity.includes(d.id)) {
-            context.globalAlpha = 0.1;
-          } else {
-            context.globalAlpha = 1;
-            if (overnode) {
-              printText = true;
-            }
-            if (current_node_name == d.id) {
-              context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
-            }
-          }
-          context.fill();
-          if (printText) {
-            context.beginPath();
-            context.font = '4pt Calibri';
-            context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
-            context.textAlign = 'center';
-            context.fillText(d.id, d.x, d.y-5);
-            printText = false;
-          }
-          // Replicate on the hidden canvas
-          hiddenContext.beginPath();
-          hiddenContext.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-          hiddenContext.fillStyle = d.color;
+    // Draw the nodes
+    var printText = false;
+    tempData.nodes.forEach(function(d) {
+        context.beginPath();
+        context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
+        context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+        if (overnode && current_node_name != d.id && !keepOpacity.includes(d.id)) {
+          context.globalAlpha = 0.1;
+        } else {
           context.globalAlpha = 1;
-          hiddenContext.fill();
-      });
-      context.restore();
-      hiddenContext.restore();
+          if (overnode) {
+            printText = true;
+          }
+          if (current_node_name == d.id) {
+            context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
+          }
+        }
+        context.fill();
+        if (printText) {
+          context.beginPath();
+          context.font = '4pt Calibri';
+          context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+          context.textAlign = 'center';
+          context.fillText(d.id, d.x, d.y-5);
+          printText = false;
+        }
+        // Replicate on the hidden canvas
+        hiddenContext.beginPath();
+        hiddenContext.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
+        hiddenContext.fillStyle = d.color;
+        context.globalAlpha = 1;
+        hiddenContext.fill();
+    });
+    context.restore();
+    hiddenContext.restore();
   }
-
-
 
   // Set up dictionary of neighbors
   var node2neighbors;
 
-
-
-
   function build_network(datapath){
+    /** Build network with drag, zoom functionalities. */
     var simulation = createSimulation(graphWidth, height);
     hideTooltip();
     node2neighbors = {};
