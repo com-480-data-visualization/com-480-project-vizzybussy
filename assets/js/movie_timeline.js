@@ -442,7 +442,7 @@ function tipY(y) {
     })
     $( "#movieTimelineGenreButton" ).click(()=>{
         document.getElementById("movieTimeline").innerHTML = ""
-        chart("genres_timeline_data.csv");
+        chart("data/genres_timeline_data.csv");
     })
 
 });
