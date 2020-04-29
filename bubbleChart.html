@@ -44,8 +44,7 @@
 <script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
 <div class="row">
-    <div class="col-2"></div>
-    <div class='form-group col-8'>
+    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
         <select id="genre-select" class="form-control">
             <option selected value="all">All</option>
             <option value="Action">Action</option>
@@ -69,8 +68,12 @@
         </select>
     </div>
 </div>
+<div class="row" style="margin-top: 1em;">
+    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+        <div id="year_selector"></div>
+    </div>
+</div>
 
-<div id="year_selector"></div>
 <div id="my_dataviz"></div>
 <div id="movie_info"></div>
 
@@ -100,9 +103,8 @@
         skin: "flat",
         min: 1966,
         max: 2016,
-        from: 2005,
-        to: 2007,
-        type: 'int',
+        from: 2000,
+        type: 'single',
         prefix: "",
         grid: true,
         grid_num: 10,
@@ -303,8 +305,7 @@
             filterFuncGenre = (dat) => { return dat.filter((d) => { return d.genres === genre_selected }) }
         }
         var fromYear = $("#year_selector").data("from")
-        var toYear = $("#year_selector").data("to")
-        var filterFunc = (dat) => { return filterFuncGenre(dat).filter((d) => { return d.realease_year >= fromYear && d.realease_year < toYear }) }
+        var filterFunc = (dat) => { return filterFuncGenre(dat).filter((d) => { return d.realease_year == fromYear }) }
 
 
         local_config = {
@@ -329,7 +330,7 @@
             .style("text-anchor", "middle")
             .style("font-size", width / 8)
             .style("opacity", "0.2")
-            .text(fromYear + " - " + toYear);
+            .text(fromYear);
 
         //drawing data point
         svg.append('g')
