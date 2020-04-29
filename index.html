@@ -17,10 +17,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="assets/css/Article-List.css">
+    <link rel="stylesheet" href="assets/css/chord.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="assets/css/Team-Boxed.css">
 </head>
 
 <body id="page-top">
@@ -70,9 +73,6 @@
             </div>
         </div>
     </section>
-    <!-- Start: Article List -->
-    <div id="visualization_picker" class="article-list"></div>
-    <!-- End: Article List -->
     <!-- Start: Article Clean -->
     <div id="first_article" class="article-clean">
         <div class="container">
@@ -98,11 +98,7 @@
                 </div>
             </div>
             <div class="row"><div class="embed-responsive" style="height:70vh; pading:1em">
-  <iframe class="embed-responsive-item" src="bubbleChart.html" style="border: 0px;" scrolling="no"
-  width="100%"></iframe>
-</div></div>
-            <div class="row"><div class="embed-responsive" style="height:70vh; pading:1em">
-  <iframe class="embed-responsive-item" src="timeline.html" style="border: 0px;" scrolling="no"
+  <iframe id="bubbleChart" class="embed-responsive-item" src="bubbleChart.html" style="border: 0px;" scrolling="no"
   width="100%"></iframe>
 </div></div>
         </div>
@@ -135,6 +131,10 @@
                     <!-- End: Text -->
                 </div>
             </div>
+            <div class="row"><div class="embed-responsive" style="height:70vh; pading:1em">
+  <iframe class="embed-responsive-item" src="timeline.html" style="border: 0px;" scrolling="no"
+  width="100%"></iframe>
+</div></div>
         </div>
     </div>
     <!-- End: Article Clean -->
@@ -226,12 +226,16 @@
             </div>
         </div>
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="assets/js/autoresize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/script.min.js"></script>
+    <script src="assets/js/creative.js"></script>
+    <script src="assets/js/d3.js"></script>
+    <script src="assets/js/d3.layout.js"></script>
 </body>
 
 </html>
