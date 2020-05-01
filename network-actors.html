@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <link rel="stylesheet" href="assets/css/network-actors.css">
+</head>
+  <body>
+		<p>Choose the number of common movies between actors:
+			<select id="num-movies">
+				<option value="3">3</option>
+				<option value="4">4</option>
+		    <option value="5">5</option>
+		    <option selected value="6">6</option selected>
+		    <option value="7">7</option>
+		    <option value="8">8</option>
+		    <option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+    <div id="graphDiv"></div>
+		<div id="tooltip" style="left: 10px; top: 10px; opacity: 0;"></div>
+
+  </body>
+<script src="https://d3js.org/d3-force.v1.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="assets/js/network-actors.js"></script>
