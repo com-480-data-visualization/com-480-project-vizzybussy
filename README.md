@@ -76,7 +76,7 @@ Also, several visualizations from other fields and topics inspired us to try to 
 
 Milestone2 report: [MS2_VizzyBussy.pdf](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/MS2_VizzyBussy.pdf)
 
-Website: [http://movievizz.xyz/](http://movievizz.xyz/)
+Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
 
 
