@@ -43,6 +43,8 @@
 <script src="https://d3js.org/d3-drag.v1.min.js"></script>
 <script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
+
+
 <div class="row">
     <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
         <label for="genre-select">Genre</label>
@@ -85,11 +87,12 @@
     </div>
     <div class="col-2">
         <div id="movie_info"></div>
-        
     </div>
 </div>
 
-<div id="movie_info"></div>
+
+<script src="assets/js/themoviedb.js" type="text/javascript"></script>
+<script src="assets/js/tmdb_helpers.js" type="text/javascript"></script>
 
 <script>
     //https://observablehq.com/@will-r-chase/scatter-plot
@@ -98,7 +101,7 @@
         width = $("#graphContainer").width() - margin.left - margin.right,
         height = $(window).height() - 170 - margin.top - margin.bottom;
 
-        
+
     var config = {
         color_hover_data_point: "#55b375",
         opacity_data_point_hover: "0.9",
@@ -288,20 +291,25 @@
 
         var displayMovieInfo = (d) => {
             if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
-            d3.selectAll(("#data_uid_" + d.uid))
+            d3.selectAll(("#data_uid_" + d.id))
                 .style("fill", config.color_hover_data_point)
                 .style("opacity", config.opacity_data_point_hover)
                 .attr("stroke", "black")
 
             d3.select("#movie_info")
-                .text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
+                .append("img")
+                .attr('class', "img-fluid rounded")
+                .attr("id", "movieInfoImg")
+                setMovieImage("#movieInfoImg", d.id)
+                console.log(typeof(d.id))
+                //.text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
         }
         var removeMovieInfo = (d) => {
             if (d.datum != null) { d = d.datum } //can be called from the voronoiIntercationArea or the datapoint
             d3.select("#movie_info")
-                .text("")
+                .html("")
 
-            d3.selectAll(("#data_uid_" + d.uid))
+            d3.selectAll(("#data_uid_" + d.id))
                 .style("fill", config.color_no_hover_data_point)
                 .style("opacity", config.opacity_data_point_no_hover)
                 .attr("stroke", "none")
@@ -348,7 +356,7 @@
             .data(filterFunc(data))
             .enter()
             .append("circle")
-            .attr("id", function (d) { return "data_uid_" + d.uid }) //used to change the style of that point when mouse enters and leaves
+            .attr("id", function (d) { return "data_uid_" + d.id }) //used to change the style of that point when mouse enters and leaves
             .attr("class", function (d) { return d.genres })
             .attr("cx", function (d) { return x(d.revenue); })
             .attr("cy", function (d) { return y(d.popularity); })
