@@ -11,7 +11,3 @@ if(! $("#network_actor").is(':visivle')){
 }else{
     $("#network_actor").show()
 }
-
-$(window).scroll(function (event) {
-    
-});
