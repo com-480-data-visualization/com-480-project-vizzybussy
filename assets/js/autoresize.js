@@ -4,3 +4,14 @@ var bubbleChartCnt;
             clearTimeout(bubbleChartCnt)
             bubbleChartCnt = setTimeout(resizeFunc, 400)
         })
+
+
+if(! $("#network_actor").is(':visivle')){
+    $("#network_actor").hide()
+}else{
+    $("#network_actor").show()
+}
+
+$(window).scroll(function (event) {
+    
+});
