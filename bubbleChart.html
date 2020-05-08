@@ -82,11 +82,11 @@
 
 <!-- Create a div where the graph will take place -->
 <div class="row">
-    <div class="col-10" id="graphContainer">
+    <div class="col-md-9" id="graphContainer">
         <div id="my_dataviz"></div>
     </div>
-    <div class="col-2">
-        <div id="movie_info"></div>
+    <div class="col-md-3" id="movie_info">
+
     </div>
 </div>
 
@@ -207,6 +207,11 @@
         renderData(data)
     })
 
+    const usdFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+
 
     var renderData = (data) => {
 
@@ -281,7 +286,7 @@
 
             el2
                 .transition()
-                .duration(100)
+                .duration(200)
                 .style("fill-opacity", 0.75)
                 .style("stroke-width", "0px");
 
@@ -289,30 +294,134 @@
 
         }
 
+
+
+
+        var keepMovieInfoDisplayed = {display:false}
         var displayMovieInfo = (d) => {
             if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
-            d3.selectAll(("#data_uid_" + d.id))
-                .style("fill", config.color_hover_data_point)
-                .style("opacity", config.opacity_data_point_hover)
-                .attr("stroke", "black")
+            if (!keepMovieInfoDisplayed.display) {
+                d3.selectAll(("#data_uid_" + d.id))
+                    .transition(100)
+                    .style("fill", config.color_hover_data_point)
+                    .style("opacity", config.opacity_data_point_hover)
+                    .attr("stroke", "black")
 
-            d3.select("#movie_info")
-                .append("img")
-                .attr('class', "img-fluid rounded")
-                .attr("id", "movieInfoImg")
+                var movieDiv = d3.select("#movie_info")
+                    .append("div")
+                    .attr("class", "overflow-auto")
+                    .attr("style", "height:"+($(window).height()-170)+"px;")
+
+                movieDiv
+                    .append("div")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "col")
+                    .append("h3")
+                    .attr("class", "d-flex justify-content-center text-center")
+                    .text(d.original_title)
+                movieDiv
+                    .append("div")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "col")
+                    .append("h5")
+                    .attr("class", "d-flex justify-content-center text-center")
+                    .text(d.realease_year)
+                    
+
+                movieDiv
+                    .append("div")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "cols-xs-1 center-block")
+                    .append("img")
+                    .attr('class', "img-fluid rounded")
+                    .attr("id", "movieInfoImg")
+
                 setMovieImage("#movieInfoImg", d.id)
-                console.log(typeof(d.id))
-                //.text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
+
+                var moneyDiv = movieDiv
+                    .append("div")
+                    .attr("id", "budgetDiv")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "col")
+
+                moneyDiv
+                    .append("img")
+                    .attr("class", "img-responsive mx-auto d-block")
+                    .attr("style", "padding:1em")
+                    .attr("src", "https://img.icons8.com/bubbles/100/000000/money.png")
+
+                moneyDiv
+                    .append("div")
+                    .attr("class", "row d-flex justify-content-center text-center")
+                    .text("BUDGET : " + usdFormatter.format(d.budget))
+
+                moneyDiv
+                    .append("div")
+                    .attr("class", "row d-flex justify-content-center text-center")
+                    .text("REVENUE : " + usdFormatter.format(d.revenue))
+
+                var popularityDiv = movieDiv
+                    .append("div")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "col")
+
+                popularityDiv
+                    .append("img")
+                    .attr("class", "img-responsive mx-auto d-block")
+                    .attr("style", "padding:1em")
+                    .attr("src", "https://img.icons8.com/bubbles/100/000000/crowd.png")
+                popularityDiv
+                    .append("div")
+                    .attr("class", "row d-flex justify-content-center text-center")
+                    .text("POPULARITY : " +parseFloat(d.popularity).toFixed(1))
+
+
+            }
+            //console.log(typeof (d.id))
+            //.text("revenue : " + d.revenue + " ; popularity : " + d.popularity + " ; budget: " + d.budget + " ; title : " + d.original_title + " ; genre : " + d.genres + " ; realease year : " + d.realease_year)
         }
         var removeMovieInfo = (d) => {
             if (d.datum != null) { d = d.datum } //can be called from the voronoiIntercationArea or the datapoint
-            d3.select("#movie_info")
-                .html("")
 
-            d3.selectAll(("#data_uid_" + d.id))
-                .style("fill", config.color_no_hover_data_point)
-                .style("opacity", config.opacity_data_point_no_hover)
-                .attr("stroke", "none")
+            if (!keepMovieInfoDisplayed.display) {
+
+                d3.select("#movie_info")
+                    .html("")
+
+                
+                d3.selectAll(("#data_uid_" + d.id))
+                    .transition(100)
+                    .style("fill", config.color_no_hover_data_point)
+                    .style("opacity", config.opacity_data_point_no_hover)
+                    .attr("stroke", "none")
+            }
+        }
+
+        var permanentMovieDisplay = (d) => {
+            if (d.datum != null) { d = d.datum }
+            console.log(d.id)
+            if(keepMovieInfoDisplayed.d == null){
+                keepMovieInfoDisplayed.display = !keepMovieInfoDisplayed.display
+                keepMovieInfoDisplayed.d = d
+                if(!keepMovieInfoDisplayed.display){
+                    removeMovieInfo(keepMovieInfoDisplayed.d)
+                    delete keepMovieInfoDisplayed.d
+                }else{
+                    displayMovieInfo(keepMovieInfoDisplayed.d)
+                }
+
+            }else{
+                keepMovieInfoDisplayed.display = !keepMovieInfoDisplayed.display
+                removeMovieInfo(keepMovieInfoDisplayed.d)
+                displayMovieInfo(d)
+                keepMovieInfoDisplayed.d = d
+            }
+            console.log(keepMovieInfoDisplayed)
         }
 
 
@@ -327,7 +436,8 @@
 
         local_config = {
             action_when_entering_data_point: displayMovieInfo,
-            action_when_leaving_data_point: removeMovieInfo
+            action_when_leaving_data_point: removeMovieInfo,
+            action_when_clicking_data_point: permanentMovieDisplay
         }
 
         // Removing previously drawn elements
@@ -367,6 +477,7 @@
             //.style("fill", function (d) { return color(d.genre) } )
             .on("mouseover", local_config.action_when_entering_data_point)
             .on("mouseleave", local_config.action_when_leaving_data_point)
+            .on("click", local_config.action_when_clicking_data_point)
 
 
         //calculating Voronoi intercation area
@@ -388,6 +499,8 @@
             //.style("opacity", "0.1")
             .style("pointer-events", "all")
             .on('mouseenter', local_config.action_when_entering_data_point)
-            .on('mouseout', local_config.action_when_leaving_data_point);
+            .on('mouseout', local_config.action_when_leaving_data_point)
+            .on("click", local_config.action_when_clicking_data_point)
+
     }
 </script>
