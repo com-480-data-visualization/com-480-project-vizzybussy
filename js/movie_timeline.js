@@ -1,9 +1,9 @@
 $(function () {
 
     chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-    chartProperties = { typeGenre: true }
+    chartProperties = { typeGenre: true, code:"gfl" }
 
-    chart("genres_first_level_stream.csv", chartType, chartProperties);
+    chart("all_data_stream.csv", chartType, chartProperties);
 
     function chart(csvpath, chartType) {
 
@@ -100,6 +100,9 @@ $(function () {
                 d.norm_per_year = +d.norm_per_year;
                 d.norm_per_year = Math.round(d.norm_per_year * 1000) / 1000
             });
+            data = data.filter((d) => {
+                return d.code == chartProperties.code
+            });
             if (!chartType.firstLevel) {
                 if(chartProperties.typeGenre){
                     data = data.filter((d) => {
@@ -118,11 +121,12 @@ $(function () {
             x.domain(d3.extent(data, function (d) { return d.fullyear; }));
             y.domain([0, d3.max(data, function (d) { return d.y0 + d.y; })]);
 
+            //svg.selectAll(chartType.cssClass).transition().duration(1000)
             svg.selectAll(".layer")
                 .data(layers)
                 .enter().append("path")
-                //.transition()
-                //.duration(1000)
+                .transition()
+                .duration(1000)
                 .attr("class", "layer")
                 .attr("d", function (d) { return area(d.values); })
                 .style("fill", function (d, i) { return z(i); });
@@ -191,15 +195,13 @@ $(function () {
                         chartType = { cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false }
                         if(chartProperties.typeGenre){
                             // Load production companies
-                            chartProperties = { typeGenre: false, group: d.key }
-                            chart("production_companies_second_level_stream.csv", chartType, chartProperties)
+                            chartProperties = { typeGenre: false, group: d.key, code:"pcsl" }
+                            chart("all_data_stream.csv", chartType, chartProperties)
                             changeMovieDisplay(d.key)
                         } else {
                             // Load genres
-                            chartProperties = { typeGenre: true, group: d.key }
-                            console.log("Genres second level")
-                            console.log(chartProperties)
-                            chart("genres_second_level_stream.csv", chartType, chartProperties)
+                            chartProperties = { typeGenre: true, group: d.key, code:"gsl" }
+                            chart("all_data_stream.csv", chartType, chartProperties)
                         }
                         //chartProperties = { typeGenre: false, group: d.key }
                         //chart("production_companies_stream.csv", chartType, chartProperties)
@@ -352,14 +354,14 @@ $(function () {
     $("#movieTimelineProductionHousesButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: false }
-        chart("production_companies_first_level_stream.csv", chartType, chartProperties);
+        chartProperties = { typeGenre: false, code:"pcfl" }
+        chart("all_data_stream.csv", chartType, chartProperties);
     })
     $("#movieTimelineGenreButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: true }
-        chart("genres_first_level_stream.csv", chartType, chartProperties);
+        chartProperties = { typeGenre: true, code:"gfl" }
+        chart("all_data_stream.csv", chartType, chartProperties);
     })
 
 });
