@@ -1,11 +1,11 @@
 //https://github.com/cavestri/themoviedb-javascript-library/wiki/Movies
 
-function setMovieImage(destIDLocation, movieID) {
+function setMovieImage(destIDLocation, movieID, verbose=false) {
     console.log("id : "+movieID)
     theMovieDb.movies.getById(
         {"id":movieID },
         (d) => {
-            console.log(d)
+            if(verbose) {console.log(d)}
             var posterPath = JSON.parse(d).poster_path;
             if(posterPath!=null){
                 $(destIDLocation).attr("src" ,"https://image.tmdb.org/t/p/original" + posterPath)
