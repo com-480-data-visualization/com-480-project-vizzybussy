@@ -1,4 +1,154 @@
 ,genres,norm_per_year,production_companies,total_films,year
+7352,Action,0.0,Columbia Pictures,0,1965
+7356,Action,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7355,Action,0.0,New Line Cinema,0,1965
+7354,Action,0.0,Paramount Pictures,0,1965
+7358,Action,0.0,Relativity Media,0,1965
+7359,Action,0.0,Touchstone Pictures,0,1965
+7350,Action,0.0,Twentieth Century Fox Film Corporation,0,1965
+7357,Action,0.0,Universal Pictures,0,1965
+7351,Action,0.0,Walt Disney Pictures,0,1965
+6,Action,1.0,Warner Bros.,1,1965
+7362,Adventure,0.0,Columbia Pictures,0,1965
+7366,Adventure,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7365,Adventure,0.0,New Line Cinema,0,1965
+7364,Adventure,0.0,Paramount Pictures,0,1965
+7368,Adventure,0.0,Relativity Media,0,1965
+7369,Adventure,0.0,Touchstone Pictures,0,1965
+0,Adventure,1.0,Twentieth Century Fox Film Corporation,1,1965
+7367,Adventure,0.0,Universal Pictures,0,1965
+7361,Adventure,0.0,Walt Disney Pictures,0,1965
+7363,Adventure,0.0,Warner Bros.,0,1965
+7452,Comedy,0.0,Columbia Pictures,0,1965
+7456,Comedy,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7455,Comedy,0.0,New Line Cinema,0,1965
+7454,Comedy,0.0,Paramount Pictures,0,1965
+7458,Comedy,0.0,Relativity Media,0,1965
+7459,Comedy,0.0,Touchstone Pictures,0,1965
+1,Comedy,1.0,Twentieth Century Fox Film Corporation,1,1965
+7457,Comedy,0.0,Universal Pictures,0,1965
+7451,Comedy,0.0,Walt Disney Pictures,0,1965
+7453,Comedy,0.0,Warner Bros.,0,1965
+7392,Crime,0.0,Columbia Pictures,0,1965
+7396,Crime,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7395,Crime,0.0,New Line Cinema,0,1965
+7394,Crime,0.0,Paramount Pictures,0,1965
+7398,Crime,0.0,Relativity Media,0,1965
+7399,Crime,0.0,Touchstone Pictures,0,1965
+2,Crime,0.5,Twentieth Century Fox Film Corporation,1,1965
+7397,Crime,0.0,Universal Pictures,0,1965
+7391,Crime,0.0,Walt Disney Pictures,0,1965
+7,Crime,0.5,Warner Bros.,1,1965
+7402,Drama,0.0,Columbia Pictures,0,1965
+7406,Drama,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7405,Drama,0.0,New Line Cinema,0,1965
+7404,Drama,0.0,Paramount Pictures,0,1965
+7408,Drama,0.0,Relativity Media,0,1965
+7409,Drama,0.0,Touchstone Pictures,0,1965
+7400,Drama,0.0,Twentieth Century Fox Film Corporation,0,1965
+7407,Drama,0.0,Universal Pictures,0,1965
+7401,Drama,0.0,Walt Disney Pictures,0,1965
+8,Drama,1.0,Warner Bros.,1,1965
+7422,Family,0.0,Columbia Pictures,0,1965
+7426,Family,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7425,Family,0.0,New Line Cinema,0,1965
+7424,Family,0.0,Paramount Pictures,0,1965
+7428,Family,0.0,Relativity Media,0,1965
+7429,Family,0.0,Touchstone Pictures,0,1965
+3,Family,1.0,Twentieth Century Fox Film Corporation,1,1965
+7427,Family,0.0,Universal Pictures,0,1965
+7421,Family,0.0,Walt Disney Pictures,0,1965
+7423,Family,0.0,Warner Bros.,0,1965
+7372,Fantasy,0.0,Columbia Pictures,0,1965
+7376,Fantasy,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7375,Fantasy,0.0,New Line Cinema,0,1965
+7374,Fantasy,0.0,Paramount Pictures,0,1965
+7378,Fantasy,0.0,Relativity Media,0,1965
+7379,Fantasy,0.0,Touchstone Pictures,0,1965
+7370,Fantasy,0.0,Twentieth Century Fox Film Corporation,0,1965
+7377,Fantasy,0.0,Universal Pictures,0,1965
+7371,Fantasy,0.0,Walt Disney Pictures,0,1965
+7373,Fantasy,0.0,Warner Bros.,0,1965
+7472,History,0.0,Columbia Pictures,0,1965
+7476,History,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7475,History,0.0,New Line Cinema,0,1965
+7474,History,0.0,Paramount Pictures,0,1965
+7478,History,0.0,Relativity Media,0,1965
+7479,History,0.0,Touchstone Pictures,0,1965
+7470,History,0.0,Twentieth Century Fox Film Corporation,0,1965
+7477,History,0.0,Universal Pictures,0,1965
+7471,History,0.0,Walt Disney Pictures,0,1965
+7473,History,0.0,Warner Bros.,0,1965
+7462,Horror,0.0,Columbia Pictures,0,1965
+7466,Horror,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7465,Horror,0.0,New Line Cinema,0,1965
+7464,Horror,0.0,Paramount Pictures,0,1965
+7468,Horror,0.0,Relativity Media,0,1965
+7469,Horror,0.0,Touchstone Pictures,0,1965
+7460,Horror,0.0,Twentieth Century Fox Film Corporation,0,1965
+7467,Horror,0.0,Universal Pictures,0,1965
+7461,Horror,0.0,Walt Disney Pictures,0,1965
+7463,Horror,0.0,Warner Bros.,0,1965
+7492,Music,0.0,Columbia Pictures,0,1965
+7496,Music,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7495,Music,0.0,New Line Cinema,0,1965
+7494,Music,0.0,Paramount Pictures,0,1965
+7498,Music,0.0,Relativity Media,0,1965
+7499,Music,0.0,Touchstone Pictures,0,1965
+7490,Music,0.0,Twentieth Century Fox Film Corporation,0,1965
+7497,Music,0.0,Universal Pictures,0,1965
+7491,Music,0.0,Walt Disney Pictures,0,1965
+7493,Music,0.0,Warner Bros.,0,1965
+7442,Romance,0.0,Columbia Pictures,0,1965
+7446,Romance,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7445,Romance,0.0,New Line Cinema,0,1965
+7444,Romance,0.0,Paramount Pictures,0,1965
+7448,Romance,0.0,Relativity Media,0,1965
+7449,Romance,0.0,Touchstone Pictures,0,1965
+7440,Romance,0.0,Twentieth Century Fox Film Corporation,0,1965
+7447,Romance,0.0,Universal Pictures,0,1965
+7441,Romance,0.0,Walt Disney Pictures,0,1965
+7443,Romance,0.0,Warner Bros.,0,1965
+7382,Science Fiction,0.0,Columbia Pictures,0,1965
+7386,Science Fiction,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7385,Science Fiction,0.0,New Line Cinema,0,1965
+7384,Science Fiction,0.0,Paramount Pictures,0,1965
+7388,Science Fiction,0.0,Relativity Media,0,1965
+7389,Science Fiction,0.0,Touchstone Pictures,0,1965
+4,Science Fiction,1.0,Twentieth Century Fox Film Corporation,1,1965
+7387,Science Fiction,0.0,Universal Pictures,0,1965
+7381,Science Fiction,0.0,Walt Disney Pictures,0,1965
+7383,Science Fiction,0.0,Warner Bros.,0,1965
+7412,Thriller,0.0,Columbia Pictures,0,1965
+7416,Thriller,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7415,Thriller,0.0,New Line Cinema,0,1965
+7414,Thriller,0.0,Paramount Pictures,0,1965
+7418,Thriller,0.0,Relativity Media,0,1965
+7419,Thriller,0.0,Touchstone Pictures,0,1965
+7410,Thriller,0.0,Twentieth Century Fox Film Corporation,0,1965
+5,Thriller,0.5,Universal Pictures,1,1965
+7411,Thriller,0.0,Walt Disney Pictures,0,1965
+9,Thriller,0.5,Warner Bros.,1,1965
+7482,War,0.0,Columbia Pictures,0,1965
+7486,War,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7485,War,0.0,New Line Cinema,0,1965
+7484,War,0.0,Paramount Pictures,0,1965
+7488,War,0.0,Relativity Media,0,1965
+7489,War,0.0,Touchstone Pictures,0,1965
+7480,War,0.0,Twentieth Century Fox Film Corporation,0,1965
+7487,War,0.0,Universal Pictures,0,1965
+7481,War,0.0,Walt Disney Pictures,0,1965
+7483,War,0.0,Warner Bros.,0,1965
+7432,Western,0.0,Columbia Pictures,0,1965
+7436,Western,0.0,Metro-Goldwyn-Mayer (MGM),0,1965
+7435,Western,0.0,New Line Cinema,0,1965
+7434,Western,0.0,Paramount Pictures,0,1965
+7438,Western,0.0,Relativity Media,0,1965
+7439,Western,0.0,Touchstone Pictures,0,1965
+7430,Western,0.0,Twentieth Century Fox Film Corporation,0,1965
+7437,Western,0.0,Universal Pictures,0,1965
+7431,Western,0.0,Walt Disney Pictures,0,1965
+7433,Western,0.0,Warner Bros.,0,1965
 7352,Action,0.0,Columbia Pictures,0,1966
 7356,Action,0.0,Metro-Goldwyn-Mayer (MGM),0,1966
 7355,Action,0.0,New Line Cinema,0,1966
@@ -7649,3 +7799,153 @@
 837,Western,0.0,Universal Pictures,0,2016
 831,Western,0.0,Walt Disney Pictures,0,2016
 833,Western,0.0,Warner Bros.,0,2016
+2358,Action,0.1111111111111111,Columbia Pictures,2,2017
+756,Action,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+2369,Action,0.1111111111111111,New Line Cinema,2,2017
+2374,Action,0.16666666666666666,Paramount Pictures,3,2017
+758,Action,0.0,Relativity Media,0,2017
+759,Action,0.0,Touchstone Pictures,0,2017
+2383,Action,0.16666666666666666,Twentieth Century Fox Film Corporation,3,2017
+2390,Action,0.2777777777777778,Universal Pictures,5,2017
+2399,Action,0.05555555555555555,Walt Disney Pictures,1,2017
+2406,Action,0.1111111111111111,Warner Bros.,2,2017
+2359,Adventure,0.13333333333333333,Columbia Pictures,2,2017
+766,Adventure,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+765,Adventure,0.0,New Line Cinema,0,2017
+2375,Adventure,0.13333333333333333,Paramount Pictures,2,2017
+768,Adventure,0.0,Relativity Media,0,2017
+769,Adventure,0.0,Touchstone Pictures,0,2017
+2384,Adventure,0.2,Twentieth Century Fox Film Corporation,3,2017
+2391,Adventure,0.13333333333333333,Universal Pictures,2,2017
+2400,Adventure,0.2,Walt Disney Pictures,3,2017
+2407,Adventure,0.2,Warner Bros.,3,2017
+2360,Comedy,0.13333333333333333,Columbia Pictures,2,2017
+856,Comedy,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+2370,Comedy,0.2,New Line Cinema,3,2017
+2376,Comedy,0.06666666666666667,Paramount Pictures,1,2017
+858,Comedy,0.0,Relativity Media,0,2017
+859,Comedy,0.0,Touchstone Pictures,0,2017
+2385,Comedy,0.2,Twentieth Century Fox Film Corporation,3,2017
+2392,Comedy,0.4,Universal Pictures,6,2017
+851,Comedy,0.0,Walt Disney Pictures,0,2017
+853,Comedy,0.0,Warner Bros.,0,2017
+792,Crime,0.0,Columbia Pictures,0,2017
+796,Crime,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+795,Crime,0.0,New Line Cinema,0,2017
+794,Crime,0.0,Paramount Pictures,0,2017
+798,Crime,0.0,Relativity Media,0,2017
+799,Crime,0.0,Touchstone Pictures,0,2017
+790,Crime,0.0,Twentieth Century Fox Film Corporation,0,2017
+797,Crime,0.0,Universal Pictures,0,2017
+791,Crime,0.0,Walt Disney Pictures,0,2017
+2408,Crime,1.0,Warner Bros.,1,2017
+2361,Drama,0.07692307692307693,Columbia Pictures,1,2017
+2367,Drama,0.15384615384615385,Metro-Goldwyn-Mayer (MGM),2,2017
+2371,Drama,0.07692307692307693,New Line Cinema,1,2017
+2377,Drama,0.23076923076923078,Paramount Pictures,3,2017
+808,Drama,0.0,Relativity Media,0,2017
+809,Drama,0.0,Touchstone Pictures,0,2017
+2386,Drama,0.07692307692307693,Twentieth Century Fox Film Corporation,1,2017
+2393,Drama,0.15384615384615385,Universal Pictures,2,2017
+2401,Drama,0.15384615384615385,Walt Disney Pictures,2,2017
+2409,Drama,0.07692307692307693,Warner Bros.,1,2017
+2362,Family,0.14285714285714285,Columbia Pictures,1,2017
+826,Family,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+825,Family,0.0,New Line Cinema,0,2017
+824,Family,0.0,Paramount Pictures,0,2017
+828,Family,0.0,Relativity Media,0,2017
+829,Family,0.0,Touchstone Pictures,0,2017
+2387,Family,0.14285714285714285,Twentieth Century Fox Film Corporation,1,2017
+2394,Family,0.2857142857142857,Universal Pictures,2,2017
+2402,Family,0.42857142857142855,Walt Disney Pictures,3,2017
+823,Family,0.0,Warner Bros.,0,2017
+2363,Fantasy,0.2,Columbia Pictures,2,2017
+776,Fantasy,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+775,Fantasy,0.0,New Line Cinema,0,2017
+2378,Fantasy,0.1,Paramount Pictures,1,2017
+778,Fantasy,0.0,Relativity Media,0,2017
+779,Fantasy,0.0,Touchstone Pictures,0,2017
+770,Fantasy,0.0,Twentieth Century Fox Film Corporation,0,2017
+2395,Fantasy,0.1,Universal Pictures,1,2017
+2403,Fantasy,0.4,Walt Disney Pictures,4,2017
+2410,Fantasy,0.2,Warner Bros.,2,2017
+872,History,0.0,Columbia Pictures,0,2017
+876,History,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+875,History,0.0,New Line Cinema,0,2017
+2379,History,0.3333333333333333,Paramount Pictures,1,2017
+878,History,0.0,Relativity Media,0,2017
+879,History,0.0,Touchstone Pictures,0,2017
+2388,History,0.3333333333333333,Twentieth Century Fox Film Corporation,1,2017
+877,History,0.0,Universal Pictures,0,2017
+2404,History,0.3333333333333333,Walt Disney Pictures,1,2017
+873,History,0.0,Warner Bros.,0,2017
+2364,Horror,0.3333333333333333,Columbia Pictures,1,2017
+866,Horror,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+2372,Horror,0.3333333333333333,New Line Cinema,1,2017
+864,Horror,0.0,Paramount Pictures,0,2017
+868,Horror,0.0,Relativity Media,0,2017
+869,Horror,0.0,Touchstone Pictures,0,2017
+860,Horror,0.0,Twentieth Century Fox Film Corporation,0,2017
+2396,Horror,0.3333333333333333,Universal Pictures,1,2017
+861,Horror,0.0,Walt Disney Pictures,0,2017
+863,Horror,0.0,Warner Bros.,0,2017
+892,Music,0.0,Columbia Pictures,0,2017
+896,Music,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+895,Music,0.0,New Line Cinema,0,2017
+894,Music,0.0,Paramount Pictures,0,2017
+898,Music,0.0,Relativity Media,0,2017
+899,Music,0.0,Touchstone Pictures,0,2017
+890,Music,0.0,Twentieth Century Fox Film Corporation,0,2017
+897,Music,0.0,Universal Pictures,0,2017
+891,Music,0.0,Walt Disney Pictures,0,2017
+893,Music,0.0,Warner Bros.,0,2017
+842,Romance,0.0,Columbia Pictures,0,2017
+2368,Romance,0.25,Metro-Goldwyn-Mayer (MGM),1,2017
+2373,Romance,0.5,New Line Cinema,2,2017
+844,Romance,0.0,Paramount Pictures,0,2017
+848,Romance,0.0,Relativity Media,0,2017
+849,Romance,0.0,Touchstone Pictures,0,2017
+840,Romance,0.0,Twentieth Century Fox Film Corporation,0,2017
+2397,Romance,0.25,Universal Pictures,1,2017
+841,Romance,0.0,Walt Disney Pictures,0,2017
+843,Romance,0.0,Warner Bros.,0,2017
+2365,Science Fiction,0.14285714285714285,Columbia Pictures,1,2017
+786,Science Fiction,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+785,Science Fiction,0.0,New Line Cinema,0,2017
+2380,Science Fiction,0.2857142857142857,Paramount Pictures,2,2017
+788,Science Fiction,0.0,Relativity Media,0,2017
+789,Science Fiction,0.0,Touchstone Pictures,0,2017
+2389,Science Fiction,0.2857142857142857,Twentieth Century Fox Film Corporation,2,2017
+787,Science Fiction,0.0,Universal Pictures,0,2017
+781,Science Fiction,0.0,Walt Disney Pictures,0,2017
+2411,Science Fiction,0.2857142857142857,Warner Bros.,2,2017
+2366,Thriller,0.2,Columbia Pictures,1,2017
+816,Thriller,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+815,Thriller,0.0,New Line Cinema,0,2017
+2381,Thriller,0.4,Paramount Pictures,2,2017
+818,Thriller,0.0,Relativity Media,0,2017
+819,Thriller,0.0,Touchstone Pictures,0,2017
+810,Thriller,0.0,Twentieth Century Fox Film Corporation,0,2017
+2398,Thriller,0.2,Universal Pictures,1,2017
+2405,Thriller,0.2,Walt Disney Pictures,1,2017
+813,Thriller,0.0,Warner Bros.,0,2017
+882,War,0.0,Columbia Pictures,0,2017
+886,War,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+885,War,0.0,New Line Cinema,0,2017
+2382,War,1.0,Paramount Pictures,1,2017
+888,War,0.0,Relativity Media,0,2017
+889,War,0.0,Touchstone Pictures,0,2017
+880,War,0.0,Twentieth Century Fox Film Corporation,0,2017
+887,War,0.0,Universal Pictures,0,2017
+881,War,0.0,Walt Disney Pictures,0,2017
+883,War,0.0,Warner Bros.,0,2017
+832,Western,0.0,Columbia Pictures,0,2017
+836,Western,0.0,Metro-Goldwyn-Mayer (MGM),0,2017
+835,Western,0.0,New Line Cinema,0,2017
+834,Western,0.0,Paramount Pictures,0,2017
+838,Western,0.0,Relativity Media,0,2017
+839,Western,0.0,Touchstone Pictures,0,2017
+830,Western,0.0,Twentieth Century Fox Film Corporation,0,2017
+837,Western,0.0,Universal Pictures,0,2017
+831,Western,0.0,Walt Disney Pictures,0,2017
+833,Western,0.0,Warner Bros.,0,2017

@@ -1,511 +1,531 @@
 ,year,production_companies,total_films,norm_per_year
-492,1966,Columbia Pictures,0,0.0
-496,1966,Metro-Goldwyn-Mayer (MGM),0,0.0
-495,1966,New Line Cinema,0,0.0
-494,1966,Paramount Pictures,0,0.0
-498,1966,Relativity Media,0,0.0
-499,1966,Touchstone Pictures,0,0.0
-0,1966,Twentieth Century Fox Film Corporation,1,0.3333333333333333
-1,1966,Universal Pictures,1,0.3333333333333333
-491,1966,Walt Disney Pictures,0,0.0
-2,1966,Warner Bros.,1,0.3333333333333333
-502,1967,Columbia Pictures,0,0.0
-3,1967,Metro-Goldwyn-Mayer (MGM),1,1.0
-505,1967,New Line Cinema,0,0.0
-504,1967,Paramount Pictures,0,0.0
-508,1967,Relativity Media,0,0.0
-509,1967,Touchstone Pictures,0,0.0
-500,1967,Twentieth Century Fox Film Corporation,0,0.0
-507,1967,Universal Pictures,0,0.0
-501,1967,Walt Disney Pictures,0,0.0
-503,1967,Warner Bros.,0,0.0
-472,1968,Columbia Pictures,0,0.0
+492,1965,Columbia Pictures,0,0
+496,1965,Metro-Goldwyn-Mayer (MGM),0,0
+495,1965,New Line Cinema,0,0
+494,1965,Paramount Pictures,0,0
+498,1965,Relativity Media,0,0
+499,1965,Touchstone Pictures,0,0
+0,1965,Twentieth Century Fox Film Corporation,1,0.333333333
+1,1965,Universal Pictures,1,0.333333333
+491,1965,Walt Disney Pictures,0,0
+2,1965,Warner Bros.,1,0.333333333
+492,1966,Columbia Pictures,0,0
+496,1966,Metro-Goldwyn-Mayer (MGM),0,0
+495,1966,New Line Cinema,0,0
+494,1966,Paramount Pictures,0,0
+498,1966,Relativity Media,0,0
+499,1966,Touchstone Pictures,0,0
+0,1966,Twentieth Century Fox Film Corporation,1,0.333333333
+1,1966,Universal Pictures,1,0.333333333
+491,1966,Walt Disney Pictures,0,0
+2,1966,Warner Bros.,1,0.333333333
+502,1967,Columbia Pictures,0,0
+3,1967,Metro-Goldwyn-Mayer (MGM),1,1
+505,1967,New Line Cinema,0,0
+504,1967,Paramount Pictures,0,0
+508,1967,Relativity Media,0,0
+509,1967,Touchstone Pictures,0,0
+500,1967,Twentieth Century Fox Film Corporation,0,0
+507,1967,Universal Pictures,0,0
+501,1967,Walt Disney Pictures,0,0
+503,1967,Warner Bros.,0,0
+472,1968,Columbia Pictures,0,0
 4,1968,Metro-Goldwyn-Mayer (MGM),1,0.25
-475,1968,New Line Cinema,0,0.0
+475,1968,New Line Cinema,0,0
 5,1968,Paramount Pictures,3,0.75
-478,1968,Relativity Media,0,0.0
-479,1968,Touchstone Pictures,0,0.0
-470,1968,Twentieth Century Fox Film Corporation,0,0.0
-477,1968,Universal Pictures,0,0.0
-471,1968,Walt Disney Pictures,0,0.0
-473,1968,Warner Bros.,0,0.0
-432,1969,Columbia Pictures,0,0.0
-436,1969,Metro-Goldwyn-Mayer (MGM),0,0.0
-435,1969,New Line Cinema,0,0.0
+478,1968,Relativity Media,0,0
+479,1968,Touchstone Pictures,0,0
+470,1968,Twentieth Century Fox Film Corporation,0,0
+477,1968,Universal Pictures,0,0
+471,1968,Walt Disney Pictures,0,0
+473,1968,Warner Bros.,0,0
+432,1969,Columbia Pictures,0,0
+436,1969,Metro-Goldwyn-Mayer (MGM),0,0
+435,1969,New Line Cinema,0,0
 6,1969,Paramount Pictures,1,0.25
-438,1969,Relativity Media,0,0.0
-439,1969,Touchstone Pictures,0,0.0
+438,1969,Relativity Media,0,0
+439,1969,Touchstone Pictures,0,0
 7,1969,Twentieth Century Fox Film Corporation,1,0.25
 8,1969,Universal Pictures,2,0.5
-431,1969,Walt Disney Pictures,0,0.0
-433,1969,Warner Bros.,0,0.0
-402,1970,Columbia Pictures,0,0.0
-406,1970,Metro-Goldwyn-Mayer (MGM),0,0.0
-405,1970,New Line Cinema,0,0.0
-9,1970,Paramount Pictures,5,0.45454545454545453
-408,1970,Relativity Media,0,0.0
-409,1970,Touchstone Pictures,0,0.0
-10,1970,Twentieth Century Fox Film Corporation,4,0.36363636363636365
-407,1970,Universal Pictures,0,0.0
-401,1970,Walt Disney Pictures,0,0.0
-11,1970,Warner Bros.,2,0.18181818181818182
-422,1971,Columbia Pictures,0,0.0
-426,1971,Metro-Goldwyn-Mayer (MGM),0,0.0
-425,1971,New Line Cinema,0,0.0
+431,1969,Walt Disney Pictures,0,0
+433,1969,Warner Bros.,0,0
+402,1970,Columbia Pictures,0,0
+406,1970,Metro-Goldwyn-Mayer (MGM),0,0
+405,1970,New Line Cinema,0,0
+9,1970,Paramount Pictures,5,0.454545455
+408,1970,Relativity Media,0,0
+409,1970,Touchstone Pictures,0,0
+10,1970,Twentieth Century Fox Film Corporation,4,0.363636364
+407,1970,Universal Pictures,0,0
+401,1970,Walt Disney Pictures,0,0
+11,1970,Warner Bros.,2,0.181818182
+422,1971,Columbia Pictures,0,0
+426,1971,Metro-Goldwyn-Mayer (MGM),0,0
+425,1971,New Line Cinema,0,0
 12,1971,Paramount Pictures,1,0.25
-428,1971,Relativity Media,0,0.0
-429,1971,Touchstone Pictures,0,0.0
+428,1971,Relativity Media,0,0
+429,1971,Touchstone Pictures,0,0
 13,1971,Twentieth Century Fox Film Corporation,2,0.5
 14,1971,Universal Pictures,1,0.25
-421,1971,Walt Disney Pictures,0,0.0
-423,1971,Warner Bros.,0,0.0
-482,1972,Columbia Pictures,0,0.0
-486,1972,Metro-Goldwyn-Mayer (MGM),0,0.0
-485,1972,New Line Cinema,0,0.0
+421,1971,Walt Disney Pictures,0,0
+423,1971,Warner Bros.,0,0
+482,1972,Columbia Pictures,0,0
+486,1972,Metro-Goldwyn-Mayer (MGM),0,0
+485,1972,New Line Cinema,0,0
 15,1972,Paramount Pictures,1,0.25
-488,1972,Relativity Media,0,0.0
-489,1972,Touchstone Pictures,0,0.0
+488,1972,Relativity Media,0,0
+489,1972,Touchstone Pictures,0,0
 16,1972,Twentieth Century Fox Film Corporation,1,0.25
 17,1972,Universal Pictures,2,0.5
-481,1972,Walt Disney Pictures,0,0.0
-483,1972,Warner Bros.,0,0.0
-452,1973,Columbia Pictures,0,0.0
-18,1973,Metro-Goldwyn-Mayer (MGM),1,0.16666666666666666
-455,1973,New Line Cinema,0,0.0
-454,1973,Paramount Pictures,0,0.0
-458,1973,Relativity Media,0,0.0
-459,1973,Touchstone Pictures,0,0.0
-19,1973,Twentieth Century Fox Film Corporation,1,0.16666666666666666
+481,1972,Walt Disney Pictures,0,0
+483,1972,Warner Bros.,0,0
+452,1973,Columbia Pictures,0,0
+18,1973,Metro-Goldwyn-Mayer (MGM),1,0.166666667
+455,1973,New Line Cinema,0,0
+454,1973,Paramount Pictures,0,0
+458,1973,Relativity Media,0,0
+459,1973,Touchstone Pictures,0,0
+19,1973,Twentieth Century Fox Film Corporation,1,0.166666667
 20,1973,Universal Pictures,3,0.5
-451,1973,Walt Disney Pictures,0,0.0
-21,1973,Warner Bros.,1,0.16666666666666666
-442,1974,Columbia Pictures,0,0.0
-446,1974,Metro-Goldwyn-Mayer (MGM),0,0.0
+451,1973,Walt Disney Pictures,0,0
+21,1973,Warner Bros.,1,0.166666667
+442,1974,Columbia Pictures,0,0
+446,1974,Metro-Goldwyn-Mayer (MGM),0,0
 22,1974,New Line Cinema,1,0.2
 23,1974,Paramount Pictures,2,0.4
-448,1974,Relativity Media,0,0.0
-449,1974,Touchstone Pictures,0,0.0
+448,1974,Relativity Media,0,0
+449,1974,Touchstone Pictures,0,0
 24,1974,Twentieth Century Fox Film Corporation,1,0.2
-447,1974,Universal Pictures,0,0.0
-441,1974,Walt Disney Pictures,0,0.0
+447,1974,Universal Pictures,0,0
+441,1974,Walt Disney Pictures,0,0
 25,1974,Warner Bros.,1,0.2
-462,1975,Columbia Pictures,0,0.0
-466,1975,Metro-Goldwyn-Mayer (MGM),0,0.0
-465,1975,New Line Cinema,0,0.0
-464,1975,Paramount Pictures,0,0.0
-468,1975,Relativity Media,0,0.0
-469,1975,Touchstone Pictures,0,0.0
-460,1975,Twentieth Century Fox Film Corporation,0,0.0
-26,1975,Universal Pictures,1,0.3333333333333333
-461,1975,Walt Disney Pictures,0,0.0
-27,1975,Warner Bros.,2,0.6666666666666666
-372,1976,Columbia Pictures,0,0.0
+462,1975,Columbia Pictures,0,0
+466,1975,Metro-Goldwyn-Mayer (MGM),0,0
+465,1975,New Line Cinema,0,0
+464,1975,Paramount Pictures,0,0
+468,1975,Relativity Media,0,0
+469,1975,Touchstone Pictures,0,0
+460,1975,Twentieth Century Fox Film Corporation,0,0
+26,1975,Universal Pictures,1,0.333333333
+461,1975,Walt Disney Pictures,0,0
+27,1975,Warner Bros.,2,0.666666667
+372,1976,Columbia Pictures,0,0
 28,1976,Metro-Goldwyn-Mayer (MGM),2,0.4
-375,1976,New Line Cinema,0,0.0
+375,1976,New Line Cinema,0,0
 29,1976,Paramount Pictures,1,0.2
-378,1976,Relativity Media,0,0.0
-379,1976,Touchstone Pictures,0,0.0
+378,1976,Relativity Media,0,0
+379,1976,Touchstone Pictures,0,0
 30,1976,Twentieth Century Fox Film Corporation,1,0.2
 31,1976,Universal Pictures,1,0.2
-371,1976,Walt Disney Pictures,0,0.0
-373,1976,Warner Bros.,0,0.0
-412,1977,Columbia Pictures,0,0.0
-416,1977,Metro-Goldwyn-Mayer (MGM),0,0.0
-415,1977,New Line Cinema,0,0.0
-32,1977,Paramount Pictures,1,0.14285714285714285
-418,1977,Relativity Media,0,0.0
-419,1977,Touchstone Pictures,0,0.0
-33,1977,Twentieth Century Fox Film Corporation,4,0.5714285714285714
-34,1977,Universal Pictures,1,0.14285714285714285
-411,1977,Walt Disney Pictures,0,0.0
-35,1977,Warner Bros.,1,0.14285714285714285
-292,1978,Columbia Pictures,0,0.0
-296,1978,Metro-Goldwyn-Mayer (MGM),0,0.0
-295,1978,New Line Cinema,0,0.0
+371,1976,Walt Disney Pictures,0,0
+373,1976,Warner Bros.,0,0
+412,1977,Columbia Pictures,0,0
+416,1977,Metro-Goldwyn-Mayer (MGM),0,0
+415,1977,New Line Cinema,0,0
+32,1977,Paramount Pictures,1,0.142857143
+418,1977,Relativity Media,0,0
+419,1977,Touchstone Pictures,0,0
+33,1977,Twentieth Century Fox Film Corporation,4,0.571428571
+34,1977,Universal Pictures,1,0.142857143
+411,1977,Walt Disney Pictures,0,0
+35,1977,Warner Bros.,1,0.142857143
+292,1978,Columbia Pictures,0,0
+296,1978,Metro-Goldwyn-Mayer (MGM),0,0
+295,1978,New Line Cinema,0,0
 36,1978,Paramount Pictures,2,0.25
-298,1978,Relativity Media,0,0.0
-299,1978,Touchstone Pictures,0,0.0
-290,1978,Twentieth Century Fox Film Corporation,0,0.0
+298,1978,Relativity Media,0,0
+299,1978,Touchstone Pictures,0,0
+290,1978,Twentieth Century Fox Film Corporation,0,0
 37,1978,Universal Pictures,5,0.625
-291,1978,Walt Disney Pictures,0,0.0
+291,1978,Walt Disney Pictures,0,0
 38,1978,Warner Bros.,1,0.125
 39,1979,Columbia Pictures,1,0.125
-246,1979,Metro-Goldwyn-Mayer (MGM),0,0.0
-245,1979,New Line Cinema,0,0.0
+246,1979,Metro-Goldwyn-Mayer (MGM),0,0
+245,1979,New Line Cinema,0,0
 40,1979,Paramount Pictures,3,0.375
-248,1979,Relativity Media,0,0.0
-249,1979,Touchstone Pictures,0,0.0
+248,1979,Relativity Media,0,0
+249,1979,Touchstone Pictures,0,0
 41,1979,Twentieth Century Fox Film Corporation,3,0.375
 42,1979,Universal Pictures,1,0.125
-241,1979,Walt Disney Pictures,0,0.0
-243,1979,Warner Bros.,0,0.0
-302,1980,Columbia Pictures,0,0.0
-306,1980,Metro-Goldwyn-Mayer (MGM),0,0.0
-305,1980,New Line Cinema,0,0.0
-43,1980,Paramount Pictures,2,0.2222222222222222
-308,1980,Relativity Media,0,0.0
-309,1980,Touchstone Pictures,0,0.0
-44,1980,Twentieth Century Fox Film Corporation,1,0.1111111111111111
-45,1980,Universal Pictures,2,0.2222222222222222
-301,1980,Walt Disney Pictures,0,0.0
-46,1980,Warner Bros.,4,0.4444444444444444
-322,1981,Columbia Pictures,0,0.0
-47,1981,Metro-Goldwyn-Mayer (MGM),1,0.09090909090909091
-325,1981,New Line Cinema,0,0.0
-48,1981,Paramount Pictures,4,0.36363636363636365
-328,1981,Relativity Media,0,0.0
-329,1981,Touchstone Pictures,0,0.0
-49,1981,Twentieth Century Fox Film Corporation,2,0.18181818181818182
-50,1981,Universal Pictures,3,0.2727272727272727
-321,1981,Walt Disney Pictures,0,0.0
-51,1981,Warner Bros.,1,0.09090909090909091
+241,1979,Walt Disney Pictures,0,0
+243,1979,Warner Bros.,0,0
+302,1980,Columbia Pictures,0,0
+306,1980,Metro-Goldwyn-Mayer (MGM),0,0
+305,1980,New Line Cinema,0,0
+43,1980,Paramount Pictures,2,0.222222222
+308,1980,Relativity Media,0,0
+309,1980,Touchstone Pictures,0,0
+44,1980,Twentieth Century Fox Film Corporation,1,0.111111111
+45,1980,Universal Pictures,2,0.222222222
+301,1980,Walt Disney Pictures,0,0
+46,1980,Warner Bros.,4,0.444444444
+322,1981,Columbia Pictures,0,0
+47,1981,Metro-Goldwyn-Mayer (MGM),1,0.090909091
+325,1981,New Line Cinema,0,0
+48,1981,Paramount Pictures,4,0.363636364
+328,1981,Relativity Media,0,0
+329,1981,Touchstone Pictures,0,0
+49,1981,Twentieth Century Fox Film Corporation,2,0.181818182
+50,1981,Universal Pictures,3,0.272727273
+321,1981,Walt Disney Pictures,0,0
+51,1981,Warner Bros.,1,0.090909091
 52,1982,Columbia Pictures,1,0.0625
 53,1982,Metro-Goldwyn-Mayer (MGM),3,0.1875
-235,1982,New Line Cinema,0,0.0
+235,1982,New Line Cinema,0,0
 54,1982,Paramount Pictures,2,0.125
-238,1982,Relativity Media,0,0.0
-239,1982,Touchstone Pictures,0,0.0
+238,1982,Relativity Media,0,0
+239,1982,Touchstone Pictures,0,0
 55,1982,Twentieth Century Fox Film Corporation,1,0.0625
 56,1982,Universal Pictures,7,0.4375
-231,1982,Walt Disney Pictures,0,0.0
+231,1982,Walt Disney Pictures,0,0
 57,1982,Warner Bros.,2,0.125
-352,1983,Columbia Pictures,0,0.0
-58,1983,Metro-Goldwyn-Mayer (MGM),3,0.21428571428571427
-355,1983,New Line Cinema,0,0.0
-59,1983,Paramount Pictures,3,0.21428571428571427
-358,1983,Relativity Media,0,0.0
-359,1983,Touchstone Pictures,0,0.0
-60,1983,Twentieth Century Fox Film Corporation,1,0.07142857142857142
-61,1983,Universal Pictures,2,0.14285714285714285
-351,1983,Walt Disney Pictures,0,0.0
-62,1983,Warner Bros.,5,0.35714285714285715
-63,1984,Columbia Pictures,1,0.06666666666666667
-64,1984,Metro-Goldwyn-Mayer (MGM),1,0.06666666666666667
-65,1984,New Line Cinema,1,0.06666666666666667
-66,1984,Paramount Pictures,5,0.3333333333333333
-368,1984,Relativity Media,0,0.0
-67,1984,Touchstone Pictures,1,0.06666666666666667
-360,1984,Twentieth Century Fox Film Corporation,0,0.0
-68,1984,Universal Pictures,1,0.06666666666666667
-361,1984,Walt Disney Pictures,0,0.0
-69,1984,Warner Bros.,5,0.3333333333333333
-70,1985,Columbia Pictures,1,0.07142857142857142
-71,1985,Metro-Goldwyn-Mayer (MGM),1,0.07142857142857142
-72,1985,New Line Cinema,1,0.07142857142857142
-73,1985,Paramount Pictures,3,0.21428571428571427
-398,1985,Relativity Media,0,0.0
-399,1985,Touchstone Pictures,0,0.0
-74,1985,Twentieth Century Fox Film Corporation,2,0.14285714285714285
-75,1985,Universal Pictures,2,0.14285714285714285
-391,1985,Walt Disney Pictures,0,0.0
-76,1985,Warner Bros.,4,0.2857142857142857
-77,1986,Columbia Pictures,1,0.07142857142857142
-78,1986,Metro-Goldwyn-Mayer (MGM),1,0.07142857142857142
-335,1986,New Line Cinema,0,0.0
-79,1986,Paramount Pictures,6,0.42857142857142855
-338,1986,Relativity Media,0,0.0
-80,1986,Touchstone Pictures,1,0.07142857142857142
-81,1986,Twentieth Century Fox Film Corporation,2,0.14285714285714285
-82,1986,Universal Pictures,2,0.14285714285714285
-331,1986,Walt Disney Pictures,0,0.0
-83,1986,Warner Bros.,1,0.07142857142857142
-84,1987,Columbia Pictures,2,0.13333333333333333
-85,1987,Metro-Goldwyn-Mayer (MGM),1,0.06666666666666667
-86,1987,New Line Cinema,1,0.06666666666666667
+352,1983,Columbia Pictures,0,0
+58,1983,Metro-Goldwyn-Mayer (MGM),3,0.214285714
+355,1983,New Line Cinema,0,0
+59,1983,Paramount Pictures,3,0.214285714
+358,1983,Relativity Media,0,0
+359,1983,Touchstone Pictures,0,0
+60,1983,Twentieth Century Fox Film Corporation,1,0.071428571
+61,1983,Universal Pictures,2,0.142857143
+351,1983,Walt Disney Pictures,0,0
+62,1983,Warner Bros.,5,0.357142857
+63,1984,Columbia Pictures,1,0.066666667
+64,1984,Metro-Goldwyn-Mayer (MGM),1,0.066666667
+65,1984,New Line Cinema,1,0.066666667
+66,1984,Paramount Pictures,5,0.333333333
+368,1984,Relativity Media,0,0
+67,1984,Touchstone Pictures,1,0.066666667
+360,1984,Twentieth Century Fox Film Corporation,0,0
+68,1984,Universal Pictures,1,0.066666667
+361,1984,Walt Disney Pictures,0,0
+69,1984,Warner Bros.,5,0.333333333
+70,1985,Columbia Pictures,1,0.071428571
+71,1985,Metro-Goldwyn-Mayer (MGM),1,0.071428571
+72,1985,New Line Cinema,1,0.071428571
+73,1985,Paramount Pictures,3,0.214285714
+398,1985,Relativity Media,0,0
+399,1985,Touchstone Pictures,0,0
+74,1985,Twentieth Century Fox Film Corporation,2,0.142857143
+75,1985,Universal Pictures,2,0.142857143
+391,1985,Walt Disney Pictures,0,0
+76,1985,Warner Bros.,4,0.285714286
+77,1986,Columbia Pictures,1,0.071428571
+78,1986,Metro-Goldwyn-Mayer (MGM),1,0.071428571
+335,1986,New Line Cinema,0,0
+79,1986,Paramount Pictures,6,0.428571429
+338,1986,Relativity Media,0,0
+80,1986,Touchstone Pictures,1,0.071428571
+81,1986,Twentieth Century Fox Film Corporation,2,0.142857143
+82,1986,Universal Pictures,2,0.142857143
+331,1986,Walt Disney Pictures,0,0
+83,1986,Warner Bros.,1,0.071428571
+84,1987,Columbia Pictures,2,0.133333333
+85,1987,Metro-Goldwyn-Mayer (MGM),1,0.066666667
+86,1987,New Line Cinema,1,0.066666667
 87,1987,Paramount Pictures,3,0.2
-348,1987,Relativity Media,0,0.0
-88,1987,Touchstone Pictures,2,0.13333333333333333
-89,1987,Twentieth Century Fox Film Corporation,2,0.13333333333333333
-90,1987,Universal Pictures,2,0.13333333333333333
-341,1987,Walt Disney Pictures,0,0.0
-91,1987,Warner Bros.,2,0.13333333333333333
-92,1988,Columbia Pictures,1,0.058823529411764705
-93,1988,Metro-Goldwyn-Mayer (MGM),1,0.058823529411764705
-94,1988,New Line Cinema,1,0.058823529411764705
-95,1988,Paramount Pictures,3,0.17647058823529413
-388,1988,Relativity Media,0,0.0
-389,1988,Touchstone Pictures,0,0.0
-96,1988,Twentieth Century Fox Film Corporation,3,0.17647058823529413
-97,1988,Universal Pictures,6,0.35294117647058826
-381,1988,Walt Disney Pictures,0,0.0
-98,1988,Warner Bros.,2,0.11764705882352941
-99,1989,Columbia Pictures,1,0.05555555555555555
-276,1989,Metro-Goldwyn-Mayer (MGM),0,0.0
-100,1989,New Line Cinema,1,0.05555555555555555
-101,1989,Paramount Pictures,7,0.3888888888888889
-278,1989,Relativity Media,0,0.0
-102,1989,Touchstone Pictures,2,0.1111111111111111
-103,1989,Twentieth Century Fox Film Corporation,1,0.05555555555555555
-104,1989,Universal Pictures,3,0.16666666666666666
-271,1989,Walt Disney Pictures,0,0.0
-105,1989,Warner Bros.,3,0.16666666666666666
-262,1990,Columbia Pictures,0,0.0
+348,1987,Relativity Media,0,0
+88,1987,Touchstone Pictures,2,0.133333333
+89,1987,Twentieth Century Fox Film Corporation,2,0.133333333
+90,1987,Universal Pictures,2,0.133333333
+341,1987,Walt Disney Pictures,0,0
+91,1987,Warner Bros.,2,0.133333333
+92,1988,Columbia Pictures,1,0.058823529
+93,1988,Metro-Goldwyn-Mayer (MGM),1,0.058823529
+94,1988,New Line Cinema,1,0.058823529
+95,1988,Paramount Pictures,3,0.176470588
+388,1988,Relativity Media,0,0
+389,1988,Touchstone Pictures,0,0
+96,1988,Twentieth Century Fox Film Corporation,3,0.176470588
+97,1988,Universal Pictures,6,0.352941176
+381,1988,Walt Disney Pictures,0,0
+98,1988,Warner Bros.,2,0.117647059
+99,1989,Columbia Pictures,1,0.055555556
+276,1989,Metro-Goldwyn-Mayer (MGM),0,0
+100,1989,New Line Cinema,1,0.055555556
+101,1989,Paramount Pictures,7,0.388888889
+278,1989,Relativity Media,0,0
+102,1989,Touchstone Pictures,2,0.111111111
+103,1989,Twentieth Century Fox Film Corporation,1,0.055555556
+104,1989,Universal Pictures,3,0.166666667
+271,1989,Walt Disney Pictures,0,0
+105,1989,Warner Bros.,3,0.166666667
+262,1990,Columbia Pictures,0,0
 106,1990,Metro-Goldwyn-Mayer (MGM),1,0.05
-265,1990,New Line Cinema,0,0.0
+265,1990,New Line Cinema,0,0
 107,1990,Paramount Pictures,4,0.2
-268,1990,Relativity Media,0,0.0
+268,1990,Relativity Media,0,0
 108,1990,Touchstone Pictures,3,0.15
 109,1990,Twentieth Century Fox Film Corporation,5,0.25
 110,1990,Universal Pictures,5,0.25
 111,1990,Walt Disney Pictures,1,0.05
 112,1990,Warner Bros.,1,0.05
-113,1991,Columbia Pictures,2,0.14285714285714285
-114,1991,Metro-Goldwyn-Mayer (MGM),1,0.07142857142857142
-115,1991,New Line Cinema,2,0.14285714285714285
-116,1991,Paramount Pictures,4,0.2857142857142857
-318,1991,Relativity Media,0,0.0
-319,1991,Touchstone Pictures,0,0.0
-310,1991,Twentieth Century Fox Film Corporation,0,0.0
-117,1991,Universal Pictures,1,0.07142857142857142
-118,1991,Walt Disney Pictures,1,0.07142857142857142
-119,1991,Warner Bros.,3,0.21428571428571427
-120,1992,Columbia Pictures,2,0.08695652173913043
-121,1992,Metro-Goldwyn-Mayer (MGM),1,0.043478260869565216
-122,1992,New Line Cinema,2,0.08695652173913043
-123,1992,Paramount Pictures,3,0.13043478260869565
-258,1992,Relativity Media,0,0.0
-259,1992,Touchstone Pictures,0,0.0
-124,1992,Twentieth Century Fox Film Corporation,4,0.17391304347826086
-125,1992,Universal Pictures,3,0.13043478260869565
-126,1992,Walt Disney Pictures,2,0.08695652173913043
-127,1992,Warner Bros.,6,0.2608695652173913
-128,1993,Columbia Pictures,5,0.21739130434782608
-286,1993,Metro-Goldwyn-Mayer (MGM),0,0.0
-129,1993,New Line Cinema,5,0.21739130434782608
-130,1993,Paramount Pictures,3,0.13043478260869565
-288,1993,Relativity Media,0,0.0
-131,1993,Touchstone Pictures,2,0.08695652173913043
-132,1993,Twentieth Century Fox Film Corporation,1,0.043478260869565216
-133,1993,Universal Pictures,2,0.08695652173913043
-134,1993,Walt Disney Pictures,2,0.08695652173913043
-135,1993,Warner Bros.,3,0.13043478260869565
-136,1994,Columbia Pictures,2,0.05714285714285714
-216,1994,Metro-Goldwyn-Mayer (MGM),0,0.0
-137,1994,New Line Cinema,4,0.11428571428571428
-138,1994,Paramount Pictures,5,0.14285714285714285
-218,1994,Relativity Media,0,0.0
-139,1994,Touchstone Pictures,3,0.08571428571428572
-140,1994,Twentieth Century Fox Film Corporation,3,0.08571428571428572
-141,1994,Universal Pictures,6,0.17142857142857143
-142,1994,Walt Disney Pictures,2,0.05714285714285714
-143,1994,Warner Bros.,10,0.2857142857142857
-144,1995,Columbia Pictures,5,0.14285714285714285
-145,1995,Metro-Goldwyn-Mayer (MGM),3,0.08571428571428572
-146,1995,New Line Cinema,4,0.11428571428571428
+113,1991,Columbia Pictures,2,0.142857143
+114,1991,Metro-Goldwyn-Mayer (MGM),1,0.071428571
+115,1991,New Line Cinema,2,0.142857143
+116,1991,Paramount Pictures,4,0.285714286
+318,1991,Relativity Media,0,0
+319,1991,Touchstone Pictures,0,0
+310,1991,Twentieth Century Fox Film Corporation,0,0
+117,1991,Universal Pictures,1,0.071428571
+118,1991,Walt Disney Pictures,1,0.071428571
+119,1991,Warner Bros.,3,0.214285714
+120,1992,Columbia Pictures,2,0.086956522
+121,1992,Metro-Goldwyn-Mayer (MGM),1,0.043478261
+122,1992,New Line Cinema,2,0.086956522
+123,1992,Paramount Pictures,3,0.130434783
+258,1992,Relativity Media,0,0
+259,1992,Touchstone Pictures,0,0
+124,1992,Twentieth Century Fox Film Corporation,4,0.173913043
+125,1992,Universal Pictures,3,0.130434783
+126,1992,Walt Disney Pictures,2,0.086956522
+127,1992,Warner Bros.,6,0.260869565
+128,1993,Columbia Pictures,5,0.217391304
+286,1993,Metro-Goldwyn-Mayer (MGM),0,0
+129,1993,New Line Cinema,5,0.217391304
+130,1993,Paramount Pictures,3,0.130434783
+288,1993,Relativity Media,0,0
+131,1993,Touchstone Pictures,2,0.086956522
+132,1993,Twentieth Century Fox Film Corporation,1,0.043478261
+133,1993,Universal Pictures,2,0.086956522
+134,1993,Walt Disney Pictures,2,0.086956522
+135,1993,Warner Bros.,3,0.130434783
+136,1994,Columbia Pictures,2,0.057142857
+216,1994,Metro-Goldwyn-Mayer (MGM),0,0
+137,1994,New Line Cinema,4,0.114285714
+138,1994,Paramount Pictures,5,0.142857143
+218,1994,Relativity Media,0,0
+139,1994,Touchstone Pictures,3,0.085714286
+140,1994,Twentieth Century Fox Film Corporation,3,0.085714286
+141,1994,Universal Pictures,6,0.171428571
+142,1994,Walt Disney Pictures,2,0.057142857
+143,1994,Warner Bros.,10,0.285714286
+144,1995,Columbia Pictures,5,0.142857143
+145,1995,Metro-Goldwyn-Mayer (MGM),3,0.085714286
+146,1995,New Line Cinema,4,0.114285714
 147,1995,Paramount Pictures,7,0.2
-158,1995,Relativity Media,0,0.0
-148,1995,Touchstone Pictures,2,0.05714285714285714
-149,1995,Twentieth Century Fox Film Corporation,2,0.05714285714285714
-150,1995,Universal Pictures,6,0.17142857142857143
-151,1995,Walt Disney Pictures,1,0.02857142857142857
-152,1995,Warner Bros.,5,0.14285714285714285
+158,1995,Relativity Media,0,0
+148,1995,Touchstone Pictures,2,0.057142857
+149,1995,Twentieth Century Fox Film Corporation,2,0.057142857
+150,1995,Universal Pictures,6,0.171428571
+151,1995,Walt Disney Pictures,1,0.028571429
+152,1995,Warner Bros.,5,0.142857143
 153,1996,Columbia Pictures,7,0.14
 154,1996,Metro-Goldwyn-Mayer (MGM),2,0.04
 155,1996,New Line Cinema,6,0.12
 156,1996,Paramount Pictures,8,0.16
-228,1996,Relativity Media,0,0.0
+228,1996,Relativity Media,0,0
 157,1996,Touchstone Pictures,3,0.06
 158,1996,Twentieth Century Fox Film Corporation,6,0.12
 159,1996,Universal Pictures,7,0.14
 160,1996,Walt Disney Pictures,1,0.02
 161,1996,Warner Bros.,10,0.2
-162,1997,Columbia Pictures,4,0.07547169811320754
-163,1997,Metro-Goldwyn-Mayer (MGM),2,0.03773584905660377
-164,1997,New Line Cinema,7,0.1320754716981132
-165,1997,Paramount Pictures,10,0.18867924528301888
-118,1997,Relativity Media,0,0.0
-166,1997,Touchstone Pictures,5,0.09433962264150944
-167,1997,Twentieth Century Fox Film Corporation,6,0.11320754716981132
-168,1997,Universal Pictures,6,0.11320754716981132
-169,1997,Walt Disney Pictures,3,0.05660377358490566
-170,1997,Warner Bros.,10,0.18867924528301888
-171,1998,Columbia Pictures,5,0.06944444444444445
-172,1998,Metro-Goldwyn-Mayer (MGM),2,0.027777777777777776
-173,1998,New Line Cinema,7,0.09722222222222222
-174,1998,Paramount Pictures,11,0.1527777777777778
-188,1998,Relativity Media,0,0.0
-175,1998,Touchstone Pictures,11,0.1527777777777778
-176,1998,Twentieth Century Fox Film Corporation,11,0.1527777777777778
-177,1998,Universal Pictures,11,0.1527777777777778
-178,1998,Walt Disney Pictures,4,0.05555555555555555
-179,1998,Warner Bros.,10,0.1388888888888889
-180,1999,Columbia Pictures,12,0.13953488372093023
-181,1999,Metro-Goldwyn-Mayer (MGM),6,0.06976744186046512
-182,1999,New Line Cinema,7,0.08139534883720931
-183,1999,Paramount Pictures,12,0.13953488372093023
-148,1999,Relativity Media,0,0.0
-184,1999,Touchstone Pictures,12,0.13953488372093023
-185,1999,Twentieth Century Fox Film Corporation,5,0.05813953488372093
-186,1999,Universal Pictures,14,0.16279069767441862
-187,1999,Walt Disney Pictures,5,0.05813953488372093
-188,1999,Warner Bros.,13,0.1511627906976744
-189,2000,Columbia Pictures,9,0.10843373493975904
-190,2000,Metro-Goldwyn-Mayer (MGM),3,0.03614457831325301
-191,2000,New Line Cinema,10,0.12048192771084337
-192,2000,Paramount Pictures,9,0.10843373493975904
-208,2000,Relativity Media,0,0.0
-193,2000,Touchstone Pictures,9,0.10843373493975904
-194,2000,Twentieth Century Fox Film Corporation,10,0.12048192771084337
-195,2000,Universal Pictures,13,0.1566265060240964
-196,2000,Walt Disney Pictures,6,0.07228915662650602
-197,2000,Warner Bros.,14,0.1686746987951807
-198,2001,Columbia Pictures,8,0.09876543209876543
-199,2001,Metro-Goldwyn-Mayer (MGM),7,0.08641975308641975
-200,2001,New Line Cinema,9,0.1111111111111111
-201,2001,Paramount Pictures,10,0.12345679012345678
-178,2001,Relativity Media,0,0.0
-202,2001,Touchstone Pictures,8,0.09876543209876543
-203,2001,Twentieth Century Fox Film Corporation,11,0.13580246913580246
-204,2001,Universal Pictures,9,0.1111111111111111
-205,2001,Walt Disney Pictures,4,0.04938271604938271
-206,2001,Warner Bros.,15,0.18518518518518517
-207,2002,Columbia Pictures,7,0.07777777777777778
-208,2002,Metro-Goldwyn-Mayer (MGM),7,0.07777777777777778
+162,1997,Columbia Pictures,4,0.075471698
+163,1997,Metro-Goldwyn-Mayer (MGM),2,0.037735849
+164,1997,New Line Cinema,7,0.132075472
+165,1997,Paramount Pictures,10,0.188679245
+118,1997,Relativity Media,0,0
+166,1997,Touchstone Pictures,5,0.094339623
+167,1997,Twentieth Century Fox Film Corporation,6,0.113207547
+168,1997,Universal Pictures,6,0.113207547
+169,1997,Walt Disney Pictures,3,0.056603774
+170,1997,Warner Bros.,10,0.188679245
+171,1998,Columbia Pictures,5,0.069444444
+172,1998,Metro-Goldwyn-Mayer (MGM),2,0.027777778
+173,1998,New Line Cinema,7,0.097222222
+174,1998,Paramount Pictures,11,0.152777778
+188,1998,Relativity Media,0,0
+175,1998,Touchstone Pictures,11,0.152777778
+176,1998,Twentieth Century Fox Film Corporation,11,0.152777778
+177,1998,Universal Pictures,11,0.152777778
+178,1998,Walt Disney Pictures,4,0.055555556
+179,1998,Warner Bros.,10,0.138888889
+180,1999,Columbia Pictures,12,0.139534884
+181,1999,Metro-Goldwyn-Mayer (MGM),6,0.069767442
+182,1999,New Line Cinema,7,0.081395349
+183,1999,Paramount Pictures,12,0.139534884
+148,1999,Relativity Media,0,0
+184,1999,Touchstone Pictures,12,0.139534884
+185,1999,Twentieth Century Fox Film Corporation,5,0.058139535
+186,1999,Universal Pictures,14,0.162790698
+187,1999,Walt Disney Pictures,5,0.058139535
+188,1999,Warner Bros.,13,0.151162791
+189,2000,Columbia Pictures,9,0.108433735
+190,2000,Metro-Goldwyn-Mayer (MGM),3,0.036144578
+191,2000,New Line Cinema,10,0.120481928
+192,2000,Paramount Pictures,9,0.108433735
+208,2000,Relativity Media,0,0
+193,2000,Touchstone Pictures,9,0.108433735
+194,2000,Twentieth Century Fox Film Corporation,10,0.120481928
+195,2000,Universal Pictures,13,0.156626506
+196,2000,Walt Disney Pictures,6,0.072289157
+197,2000,Warner Bros.,14,0.168674699
+198,2001,Columbia Pictures,8,0.098765432
+199,2001,Metro-Goldwyn-Mayer (MGM),7,0.086419753
+200,2001,New Line Cinema,9,0.111111111
+201,2001,Paramount Pictures,10,0.12345679
+178,2001,Relativity Media,0,0
+202,2001,Touchstone Pictures,8,0.098765432
+203,2001,Twentieth Century Fox Film Corporation,11,0.135802469
+204,2001,Universal Pictures,9,0.111111111
+205,2001,Walt Disney Pictures,4,0.049382716
+206,2001,Warner Bros.,15,0.185185185
+207,2002,Columbia Pictures,7,0.077777778
+208,2002,Metro-Goldwyn-Mayer (MGM),7,0.077777778
 209,2002,New Line Cinema,9,0.1
-210,2002,Paramount Pictures,15,0.16666666666666666
-198,2002,Relativity Media,0,0.0
-211,2002,Touchstone Pictures,10,0.1111111111111111
-212,2002,Twentieth Century Fox Film Corporation,7,0.07777777777777778
-213,2002,Universal Pictures,12,0.13333333333333333
-214,2002,Walt Disney Pictures,8,0.08888888888888889
-215,2002,Warner Bros.,15,0.16666666666666666
-216,2003,Columbia Pictures,9,0.11688311688311688
-217,2003,Metro-Goldwyn-Mayer (MGM),6,0.07792207792207792
-218,2003,New Line Cinema,8,0.1038961038961039
-219,2003,Paramount Pictures,9,0.11688311688311688
-168,2003,Relativity Media,0,0.0
-220,2003,Touchstone Pictures,6,0.07792207792207792
-221,2003,Twentieth Century Fox Film Corporation,7,0.09090909090909091
-222,2003,Universal Pictures,14,0.18181818181818182
-223,2003,Walt Disney Pictures,6,0.07792207792207792
-224,2003,Warner Bros.,12,0.15584415584415584
-225,2004,Columbia Pictures,7,0.08641975308641975
-226,2004,Metro-Goldwyn-Mayer (MGM),6,0.07407407407407407
-227,2004,New Line Cinema,9,0.1111111111111111
-228,2004,Paramount Pictures,13,0.16049382716049382
-128,2004,Relativity Media,0,0.0
-229,2004,Touchstone Pictures,9,0.1111111111111111
-230,2004,Twentieth Century Fox Film Corporation,10,0.12345679012345678
-231,2004,Universal Pictures,7,0.08641975308641975
-232,2004,Walt Disney Pictures,6,0.07407407407407407
-233,2004,Warner Bros.,14,0.1728395061728395
-234,2005,Columbia Pictures,4,0.0547945205479452
-235,2005,Metro-Goldwyn-Mayer (MGM),6,0.0821917808219178
-236,2005,New Line Cinema,7,0.0958904109589041
-237,2005,Paramount Pictures,9,0.1232876712328767
-108,2005,Relativity Media,0,0.0
-238,2005,Touchstone Pictures,7,0.0958904109589041
-239,2005,Twentieth Century Fox Film Corporation,6,0.0821917808219178
-240,2005,Universal Pictures,15,0.2054794520547945
-241,2005,Walt Disney Pictures,7,0.0958904109589041
-242,2005,Warner Bros.,12,0.1643835616438356
-243,2006,Columbia Pictures,9,0.10588235294117647
-244,2006,Metro-Goldwyn-Mayer (MGM),3,0.03529411764705882
-245,2006,New Line Cinema,6,0.07058823529411765
-246,2006,Paramount Pictures,9,0.10588235294117647
-247,2006,Relativity Media,4,0.047058823529411764
-248,2006,Touchstone Pictures,4,0.047058823529411764
-249,2006,Twentieth Century Fox Film Corporation,13,0.15294117647058825
-250,2006,Universal Pictures,15,0.17647058823529413
-251,2006,Walt Disney Pictures,5,0.058823529411764705
+210,2002,Paramount Pictures,15,0.166666667
+198,2002,Relativity Media,0,0
+211,2002,Touchstone Pictures,10,0.111111111
+212,2002,Twentieth Century Fox Film Corporation,7,0.077777778
+213,2002,Universal Pictures,12,0.133333333
+214,2002,Walt Disney Pictures,8,0.088888889
+215,2002,Warner Bros.,15,0.166666667
+216,2003,Columbia Pictures,9,0.116883117
+217,2003,Metro-Goldwyn-Mayer (MGM),6,0.077922078
+218,2003,New Line Cinema,8,0.103896104
+219,2003,Paramount Pictures,9,0.116883117
+168,2003,Relativity Media,0,0
+220,2003,Touchstone Pictures,6,0.077922078
+221,2003,Twentieth Century Fox Film Corporation,7,0.090909091
+222,2003,Universal Pictures,14,0.181818182
+223,2003,Walt Disney Pictures,6,0.077922078
+224,2003,Warner Bros.,12,0.155844156
+225,2004,Columbia Pictures,7,0.086419753
+226,2004,Metro-Goldwyn-Mayer (MGM),6,0.074074074
+227,2004,New Line Cinema,9,0.111111111
+228,2004,Paramount Pictures,13,0.160493827
+128,2004,Relativity Media,0,0
+229,2004,Touchstone Pictures,9,0.111111111
+230,2004,Twentieth Century Fox Film Corporation,10,0.12345679
+231,2004,Universal Pictures,7,0.086419753
+232,2004,Walt Disney Pictures,6,0.074074074
+233,2004,Warner Bros.,14,0.172839506
+234,2005,Columbia Pictures,4,0.054794521
+235,2005,Metro-Goldwyn-Mayer (MGM),6,0.082191781
+236,2005,New Line Cinema,7,0.095890411
+237,2005,Paramount Pictures,9,0.123287671
+108,2005,Relativity Media,0,0
+238,2005,Touchstone Pictures,7,0.095890411
+239,2005,Twentieth Century Fox Film Corporation,6,0.082191781
+240,2005,Universal Pictures,15,0.205479452
+241,2005,Walt Disney Pictures,7,0.095890411
+242,2005,Warner Bros.,12,0.164383562
+243,2006,Columbia Pictures,9,0.105882353
+244,2006,Metro-Goldwyn-Mayer (MGM),3,0.035294118
+245,2006,New Line Cinema,6,0.070588235
+246,2006,Paramount Pictures,9,0.105882353
+247,2006,Relativity Media,4,0.047058824
+248,2006,Touchstone Pictures,4,0.047058824
+249,2006,Twentieth Century Fox Film Corporation,13,0.152941176
+250,2006,Universal Pictures,15,0.176470588
+251,2006,Walt Disney Pictures,5,0.058823529
 252,2006,Warner Bros.,17,0.2
-253,2007,Columbia Pictures,7,0.09859154929577464
-254,2007,Metro-Goldwyn-Mayer (MGM),4,0.056338028169014086
-255,2007,New Line Cinema,7,0.09859154929577464
-256,2007,Paramount Pictures,8,0.11267605633802817
-257,2007,Relativity Media,7,0.09859154929577464
-258,2007,Touchstone Pictures,1,0.014084507042253521
-259,2007,Twentieth Century Fox Film Corporation,8,0.11267605633802817
-260,2007,Universal Pictures,11,0.15492957746478872
-261,2007,Walt Disney Pictures,4,0.056338028169014086
-262,2007,Warner Bros.,14,0.19718309859154928
-263,2008,Columbia Pictures,11,0.11827956989247312
-264,2008,Metro-Goldwyn-Mayer (MGM),6,0.06451612903225806
-265,2008,New Line Cinema,10,0.10752688172043011
-266,2008,Paramount Pictures,8,0.08602150537634409
-267,2008,Relativity Media,20,0.21505376344086022
-268,2008,Touchstone Pictures,3,0.03225806451612903
-269,2008,Twentieth Century Fox Film Corporation,7,0.07526881720430108
-270,2008,Universal Pictures,13,0.13978494623655913
-271,2008,Walt Disney Pictures,5,0.053763440860215055
-272,2008,Warner Bros.,10,0.10752688172043011
-273,2009,Columbia Pictures,12,0.13793103448275862
-274,2009,Metro-Goldwyn-Mayer (MGM),3,0.034482758620689655
-275,2009,New Line Cinema,4,0.04597701149425287
-276,2009,Paramount Pictures,7,0.08045977011494253
-277,2009,Relativity Media,19,0.21839080459770116
-278,2009,Touchstone Pictures,2,0.022988505747126436
-279,2009,Twentieth Century Fox Film Corporation,7,0.08045977011494253
-280,2009,Universal Pictures,15,0.1724137931034483
-281,2009,Walt Disney Pictures,5,0.05747126436781609
-282,2009,Warner Bros.,13,0.14942528735632185
-283,2010,Columbia Pictures,8,0.10126582278481013
-284,2010,Metro-Goldwyn-Mayer (MGM),1,0.012658227848101266
-285,2010,New Line Cinema,3,0.0379746835443038
-286,2010,Paramount Pictures,7,0.08860759493670886
-287,2010,Relativity Media,18,0.22784810126582278
-288,2010,Touchstone Pictures,4,0.05063291139240506
-289,2010,Twentieth Century Fox Film Corporation,7,0.08860759493670886
-290,2010,Universal Pictures,12,0.1518987341772152
-291,2010,Walt Disney Pictures,7,0.08860759493670886
-292,2010,Warner Bros.,12,0.1518987341772152
-293,2011,Columbia Pictures,14,0.18181818181818182
-294,2011,Metro-Goldwyn-Mayer (MGM),2,0.025974025974025976
-295,2011,New Line Cinema,6,0.07792207792207792
-296,2011,Paramount Pictures,9,0.11688311688311688
-297,2011,Relativity Media,9,0.11688311688311688
-298,2011,Touchstone Pictures,4,0.05194805194805195
-299,2011,Twentieth Century Fox Film Corporation,7,0.09090909090909091
-300,2011,Universal Pictures,12,0.15584415584415584
-301,2011,Walt Disney Pictures,5,0.06493506493506493
-302,2011,Warner Bros.,9,0.11688311688311688
-303,2012,Columbia Pictures,10,0.14705882352941177
-304,2012,Metro-Goldwyn-Mayer (MGM),3,0.04411764705882353
-305,2012,New Line Cinema,3,0.04411764705882353
-306,2012,Paramount Pictures,9,0.1323529411764706
-307,2012,Relativity Media,13,0.19117647058823528
-39,2012,Touchstone Pictures,0,0.0
-308,2012,Twentieth Century Fox Film Corporation,8,0.11764705882352941
-309,2012,Universal Pictures,11,0.16176470588235295
-310,2012,Walt Disney Pictures,3,0.04411764705882353
-311,2012,Warner Bros.,8,0.11764705882352941
-312,2013,Columbia Pictures,9,0.13432835820895522
-313,2013,Metro-Goldwyn-Mayer (MGM),4,0.05970149253731343
-314,2013,New Line Cinema,6,0.08955223880597014
-315,2013,Paramount Pictures,8,0.11940298507462686
-316,2013,Relativity Media,7,0.1044776119402985
-317,2013,Touchstone Pictures,2,0.029850746268656716
-318,2013,Twentieth Century Fox Film Corporation,5,0.07462686567164178
-319,2013,Universal Pictures,9,0.13432835820895522
-320,2013,Walt Disney Pictures,5,0.07462686567164178
-321,2013,Warner Bros.,12,0.1791044776119403
-322,2014,Columbia Pictures,8,0.11428571428571428
-323,2014,Metro-Goldwyn-Mayer (MGM),5,0.07142857142857142
+253,2007,Columbia Pictures,7,0.098591549
+254,2007,Metro-Goldwyn-Mayer (MGM),4,0.056338028
+255,2007,New Line Cinema,7,0.098591549
+256,2007,Paramount Pictures,8,0.112676056
+257,2007,Relativity Media,7,0.098591549
+258,2007,Touchstone Pictures,1,0.014084507
+259,2007,Twentieth Century Fox Film Corporation,8,0.112676056
+260,2007,Universal Pictures,11,0.154929577
+261,2007,Walt Disney Pictures,4,0.056338028
+262,2007,Warner Bros.,14,0.197183099
+263,2008,Columbia Pictures,11,0.11827957
+264,2008,Metro-Goldwyn-Mayer (MGM),6,0.064516129
+265,2008,New Line Cinema,10,0.107526882
+266,2008,Paramount Pictures,8,0.086021505
+267,2008,Relativity Media,20,0.215053763
+268,2008,Touchstone Pictures,3,0.032258065
+269,2008,Twentieth Century Fox Film Corporation,7,0.075268817
+270,2008,Universal Pictures,13,0.139784946
+271,2008,Walt Disney Pictures,5,0.053763441
+272,2008,Warner Bros.,10,0.107526882
+273,2009,Columbia Pictures,12,0.137931034
+274,2009,Metro-Goldwyn-Mayer (MGM),3,0.034482759
+275,2009,New Line Cinema,4,0.045977011
+276,2009,Paramount Pictures,7,0.08045977
+277,2009,Relativity Media,19,0.218390805
+278,2009,Touchstone Pictures,2,0.022988506
+279,2009,Twentieth Century Fox Film Corporation,7,0.08045977
+280,2009,Universal Pictures,15,0.172413793
+281,2009,Walt Disney Pictures,5,0.057471264
+282,2009,Warner Bros.,13,0.149425287
+283,2010,Columbia Pictures,8,0.101265823
+284,2010,Metro-Goldwyn-Mayer (MGM),1,0.012658228
+285,2010,New Line Cinema,3,0.037974684
+286,2010,Paramount Pictures,7,0.088607595
+287,2010,Relativity Media,18,0.227848101
+288,2010,Touchstone Pictures,4,0.050632911
+289,2010,Twentieth Century Fox Film Corporation,7,0.088607595
+290,2010,Universal Pictures,12,0.151898734
+291,2010,Walt Disney Pictures,7,0.088607595
+292,2010,Warner Bros.,12,0.151898734
+293,2011,Columbia Pictures,14,0.181818182
+294,2011,Metro-Goldwyn-Mayer (MGM),2,0.025974026
+295,2011,New Line Cinema,6,0.077922078
+296,2011,Paramount Pictures,9,0.116883117
+297,2011,Relativity Media,9,0.116883117
+298,2011,Touchstone Pictures,4,0.051948052
+299,2011,Twentieth Century Fox Film Corporation,7,0.090909091
+300,2011,Universal Pictures,12,0.155844156
+301,2011,Walt Disney Pictures,5,0.064935065
+302,2011,Warner Bros.,9,0.116883117
+303,2012,Columbia Pictures,10,0.147058824
+304,2012,Metro-Goldwyn-Mayer (MGM),3,0.044117647
+305,2012,New Line Cinema,3,0.044117647
+306,2012,Paramount Pictures,9,0.132352941
+307,2012,Relativity Media,13,0.191176471
+39,2012,Touchstone Pictures,0,0
+308,2012,Twentieth Century Fox Film Corporation,8,0.117647059
+309,2012,Universal Pictures,11,0.161764706
+310,2012,Walt Disney Pictures,3,0.044117647
+311,2012,Warner Bros.,8,0.117647059
+312,2013,Columbia Pictures,9,0.134328358
+313,2013,Metro-Goldwyn-Mayer (MGM),4,0.059701493
+314,2013,New Line Cinema,6,0.089552239
+315,2013,Paramount Pictures,8,0.119402985
+316,2013,Relativity Media,7,0.104477612
+317,2013,Touchstone Pictures,2,0.029850746
+318,2013,Twentieth Century Fox Film Corporation,5,0.074626866
+319,2013,Universal Pictures,9,0.134328358
+320,2013,Walt Disney Pictures,5,0.074626866
+321,2013,Warner Bros.,12,0.179104478
+322,2014,Columbia Pictures,8,0.114285714
+323,2014,Metro-Goldwyn-Mayer (MGM),5,0.071428571
 324,2014,New Line Cinema,7,0.1
-325,2014,Paramount Pictures,8,0.11428571428571428
-326,2014,Relativity Media,5,0.07142857142857142
-327,2014,Touchstone Pictures,2,0.02857142857142857
-328,2014,Twentieth Century Fox Film Corporation,9,0.12857142857142856
-329,2014,Universal Pictures,10,0.14285714285714285
-330,2014,Walt Disney Pictures,5,0.07142857142857142
-331,2014,Warner Bros.,11,0.15714285714285714
-332,2015,Columbia Pictures,7,0.12280701754385964
-333,2015,Metro-Goldwyn-Mayer (MGM),4,0.07017543859649122
-334,2015,New Line Cinema,6,0.10526315789473684
-335,2015,Paramount Pictures,7,0.12280701754385964
-28,2015,Relativity Media,0,0.0
-29,2015,Touchstone Pictures,0,0.0
-336,2015,Twentieth Century Fox Film Corporation,4,0.07017543859649122
-337,2015,Universal Pictures,12,0.21052631578947367
-338,2015,Walt Disney Pictures,5,0.08771929824561403
-339,2015,Warner Bros.,12,0.21052631578947367
-340,2016,Columbia Pictures,6,0.14634146341463414
-341,2016,Metro-Goldwyn-Mayer (MGM),2,0.04878048780487805
-342,2016,New Line Cinema,5,0.12195121951219512
-343,2016,Paramount Pictures,5,0.12195121951219512
-58,2016,Relativity Media,0,0.0
-59,2016,Touchstone Pictures,0,0.0
-344,2016,Twentieth Century Fox Film Corporation,5,0.12195121951219512
-345,2016,Universal Pictures,10,0.24390243902439024
-346,2016,Walt Disney Pictures,5,0.12195121951219512
-347,2016,Warner Bros.,3,0.07317073170731707
+325,2014,Paramount Pictures,8,0.114285714
+326,2014,Relativity Media,5,0.071428571
+327,2014,Touchstone Pictures,2,0.028571429
+328,2014,Twentieth Century Fox Film Corporation,9,0.128571429
+329,2014,Universal Pictures,10,0.142857143
+330,2014,Walt Disney Pictures,5,0.071428571
+331,2014,Warner Bros.,11,0.157142857
+332,2015,Columbia Pictures,7,0.122807018
+333,2015,Metro-Goldwyn-Mayer (MGM),4,0.070175439
+334,2015,New Line Cinema,6,0.105263158
+335,2015,Paramount Pictures,7,0.122807018
+28,2015,Relativity Media,0,0
+29,2015,Touchstone Pictures,0,0
+336,2015,Twentieth Century Fox Film Corporation,4,0.070175439
+337,2015,Universal Pictures,12,0.210526316
+338,2015,Walt Disney Pictures,5,0.087719298
+339,2015,Warner Bros.,12,0.210526316
+340,2016,Columbia Pictures,6,0.146341463
+341,2016,Metro-Goldwyn-Mayer (MGM),2,0.048780488
+342,2016,New Line Cinema,5,0.12195122
+343,2016,Paramount Pictures,5,0.12195122
+58,2016,Relativity Media,0,0
+59,2016,Touchstone Pictures,0,0
+344,2016,Twentieth Century Fox Film Corporation,5,0.12195122
+345,2016,Universal Pictures,10,0.243902439
+346,2016,Walt Disney Pictures,5,0.12195122
+347,2016,Warner Bros.,3,0.073170732
+340,2017,Columbia Pictures,6,0.146341463
+341,2017,Metro-Goldwyn-Mayer (MGM),2,0.048780488
+342,2017,New Line Cinema,5,0.12195122
+343,2017,Paramount Pictures,5,0.12195122
+58,2017,Relativity Media,0,0
+59,2017,Touchstone Pictures,0,0
+344,2017,Twentieth Century Fox Film Corporation,5,0.12195122
+345,2017,Universal Pictures,10,0.243902439
+346,2017,Walt Disney Pictures,5,0.12195122
+347,2017,Warner Bros.,3,0.073170732

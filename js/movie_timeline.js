@@ -3,7 +3,7 @@ $(function () {
     chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
     chartProperties = { typeGenre: true }
 
-    chart("genres_timeline_data.csv", chartType, chartProperties);
+    chart("genres_first_level_stream.csv", chartType, chartProperties);
 
     function chart(csvpath, chartType) {
 
@@ -28,21 +28,25 @@ $(function () {
             .style("top", 40 + margin.top + "px");
 
         var x = d3.time.scale()
-            .range([0, width]);
+            //.range([0, width]);
+            .range([1,width-1])
 
         var y = d3.scale.linear().domain([0, 1])
-            .range([height - 10, 10]);
+            //.range([height - 10, 10]);
+            .range([height - 1, 1]);
 
         var z = d3.scale.ordinal()
             .range(colorrange);
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient("bottom")
-            .ticks(d3.timeYears, 5);
+            .ticks(d3.time.years,5)
+            .tickSize(2)
 
         var yAxis = d3.svg.axis()
-            .scale(y);
+            .scale(y)
+            .ticks(2)
+            .tickSize(2);
 
         var stack = d3.layout.stack()
             .offset(chartType.stackOffset)
@@ -66,10 +70,11 @@ $(function () {
             .style("position", "absolute")
             .style("z-index", "19")
             .style("width", "2px")
-            .style("height", "460px")
-            .style("top", "10px")
+            .style("height", height)
+            .style("top", "30px")
             .style("bottom", "30px")
             .style("left", "0px")
+            .style("margin-left","25px")
             .style("background", "#fcfcfc");
 
         var area = d3.svg.area()
@@ -125,7 +130,7 @@ $(function () {
             svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
+                .call(xAxis.orient("bottom"));
 
             svg.append("g")
                 .attr("class", "y axis")
@@ -141,8 +146,7 @@ $(function () {
 
                 .on("mousemove", function (d, i) {
                     mouse = d3.mouse(this);
-                    mousex = mouse[0];
-                    var invertedx = x.invert(mousex);
+                    var invertedx = x.invert(mouse[0]);
                     currentYear = invertedx.getFullYear()
                     d3.select(this)
                         .classed("hover", true)
@@ -152,14 +156,18 @@ $(function () {
                         return obj.year == currentYear
                     }).total_films
 
-                    //if (!chartType.firstLevel) vertical.style("left", mousex + "px")
                     tooltip
-                        .style("left", tipX(mousex) + "px")
+                        .style("left", tipX(mouse[0]) + "px")
                         .style("top", tipY(mouse[1]) + "px")
                         .html("<div class='year'>" + currentYear + "</div><div class='key'><div style='background:" + color + "' class='swatch'>&nbsp;</div>" + d.key + "</div><div class='value'>" + filmsGenreYear + " " + moviePlural((filmsGenreYear)) + "</div>")
                         .style("visibility", "visible");
                     if (chartType.firstLevel) {
                         changeMovieDisplay(d.key)
+                    }
+                    if (!chartType.firstLevel) {
+                        vertical.style("visibility", "visible")
+                        vertical.style("left", mouse[0] + "px")
+                        //tooltip.style("visibility","visible")
                     }
 
                 })
@@ -170,8 +178,10 @@ $(function () {
                         .attr("opacity", "1");
                     d3.select(this)
                         .classed("hover", false)
-                        .attr("stroke-width", "0px"),
-                        tooltip.style("visibility", "hidden");
+                        .attr("stroke-width", "0px")
+                    tooltip.style("visibility", "hidden");
+                    vertical.style("visibility", "hidden")
+                        
                     //tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "hidden");
                 })
                 .on("click", function (d, i) {
@@ -182,7 +192,7 @@ $(function () {
                         if(chartProperties.typeGenre){
                             // Load production companies
                             chartProperties = { typeGenre: false, group: d.key }
-                            chart("production_companies_stream.csv", chartType, chartProperties)
+                            chart("production_companies_second_level_stream.csv", chartType, chartProperties)
                             changeMovieDisplay(d.key)
                         } else {
                             // Load genres
@@ -260,7 +270,7 @@ $(function () {
         //console.log(x)
         //console.log(winWidth - tipWidth - 30)
         if (x > winWidth / 2 - tipWidth) {
-            y = x - tipWidth;
+            y = x - tipWidth*1.2;
             //console.log("X desno");
         } else {
             y = x + tipWidth / 2;
@@ -283,13 +293,14 @@ $(function () {
             //console.log("Y right")
         } else {
             x = y + 45;
+            x = y + tipHeight / 2;
             //console.log("Y left")
         }
         return y;
     }
 
 
-    $.getJSON('most_popular_movies.json', function (data) {
+    $.getJSON('most_popular_movies_per_genre.json', function (data) {
 
         //console.log(data)
         Object.keys(data).forEach(function (k) {
@@ -348,7 +359,7 @@ $(function () {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
         chartProperties = { typeGenre: true }
-        chart("genres_timeline_data.csv", chartType, chartProperties);
+        chart("genres_first_level_stream.csv", chartType, chartProperties);
     })
 
 });
