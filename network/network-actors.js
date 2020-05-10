@@ -19,23 +19,46 @@
     document.getElementById("canvas-hidden").style.visibility = "hidden";
 
 
-    var num_movies_obj = document.getElementById("num-movies"),
-        num_movies = num_movies_obj.value;
+    num_movies = document.getElementById("num-movies").value;
     datapath = `data/dataset_${num_movies}_common_movies.json`;
     build_network(datapath);
     d3.select("#num-movies").on("change", changeDataset);
 
   }
 
-
+  var num_movies;
   var transform = d3.zoomIdentity;
   var radius = 3;
+  var margin = 10
   var selected = false;
   var defaultNodeCol = "white",
       highlightCol = "yellow";
   var tempData;
-  var height = window.innerHeight;
-  var graphWidth =  window.innerWidth;
+  var elem;
+  var height;
+  var graphWidth;
+
+  var actor_selected = false,
+      actor_selected_name = "";
+
+  updateBB();
+  function updateBB(){
+    elem = document.getElementById("graphDiv");
+    if (elem) {
+       var rect = elem.getBoundingClientRect();
+       height = rect.height;
+       graphWidth = rect.width;
+       console.log(rect.height);
+    }
+  }
+
+  var zoom = d3.zoom()
+               .scaleExtent([1 / 10, 8])
+               .on("zoom", zoomed);
+
+
+
+
   var graphCanvas,
       hiddenCanvas,
       hiddenContext,
@@ -65,6 +88,7 @@
     overnode = false;
     current_node_name = "";
     simulationUpdate();
+    min_x = graphWidth; min_y = height; max_x = 0; max_y = 0;
     // Build new network
     build_network(datapath);
   };
@@ -98,14 +122,17 @@
         showTooltip(pos, getMovieInfos(movie_ids));
       } else {
         var node = selected_object[0];
-        keepOpacity = node2neighbors[node.id];
-        overnode = true;
-        current_node_name = node.id;
+        if (!actor_selected) {
+          keepOpacity = node2neighbors[node.id];
+          overnode = true;
+          current_node_name = node.id;
+        }
+
         simulationUpdate();
       }
     } else {
       hideTooltip();
-      keepOpacity = [];
+      if (!actor_selected) keepOpacity = [];
       overnode = false;
       current_node_name = "";
       simulationUpdate();
@@ -186,11 +213,15 @@
 
 
   function movieToHtml(movie_info) {
-    title = movie_info.original_title
+    var title = movie_info.title
+    var image = getMoviePosterPath(parseInt(movie_info.movie_id))
+    console.log(image)
     if (title != null) {
+      console.log(image)
       d3.select('#tooltip')
         .append("div")
-        .html('<p class="title">'+title+'</p>' +
+        .html("<img src='"+image+"'>" +
+          '<p class="title">'+title+'</p>' +
             "Genres: " + movie_info.genres +
               "<br> Release date: " + parseDate(movie_info.release_date) +
               "<br> ")
@@ -244,6 +275,30 @@
 
 
 
+  function zoomed() {
+    console.log("zooming")
+    transform = d3.event.transform;
+    simulationUpdate();
+  }
+
+  function update_bb(d) {
+    var dx = parseInt(d.x),
+        dy = parseInt(d.y);
+    if (dx > max_x) {
+      max_x = dx + 10;
+    }
+    if (dx < min_x) {
+      min_x = dx - 10;
+    }
+    if (dy > max_y) {
+      max_y = dy + 10;
+    }
+    if (dy < min_y) {
+      min_y = dy - 10;
+    }
+
+  }
+
 
   function simulationUpdate(){
     /** Update the force simulation. */
@@ -262,11 +317,11 @@
           context.moveTo(d.source.x, d.source.y);
           context.lineTo(d.target.x, d.target.y);
           context.strokeStyle = "grey";
-          if (overnode && current_node_name != d.source.id && current_node_name != d.target.id) {
+          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id ) {
             context.globalAlpha = 0.1;
           } else {
             context.globalAlpha = 1;
-            if (overnode) {
+            if (actor_selected || overnode) {
               context.globalAlpha = 0.8;
             }
           }
@@ -282,18 +337,21 @@
       });
     // Draw the nodes
     var printText = false;
+    var margin = 10
+
+
     tempData.nodes.forEach(function(d) {
         context.beginPath();
         context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
         context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
-        if (overnode && current_node_name != d.id && !keepOpacity.includes(d.id)) {
+        if ((actor_selected || overnode) && current_node_name != d.id && actor_selected_name != d.id && !keepOpacity.includes(d.id)) {
           context.globalAlpha = 0.1;
         } else {
           context.globalAlpha = 1;
-          if (overnode) {
+          if (actor_selected || overnode) {
             printText = true;
           }
-          if (current_node_name == d.id) {
+          if (current_node_name == d.id || actor_selected_name == d.id) {
             context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
           }
         }
@@ -315,6 +373,7 @@
     });
     context.restore();
     hiddenContext.restore();
+
   }
 
   // Set up dictionary of neighbors
@@ -352,11 +411,46 @@
         function initGraph(data){
           tempData = data;
 
-          function zoomed() {
-            console.log("zooming")
-            transform = d3.event.transform;
-            simulationUpdate();
-          }
+
+
+          function autocomplete($ctl, data, cb, freeInput) {
+            // Ref: http://jsfiddle.net/jlowery2663/o4n29wn3/
+            $ctl.autocomplete({
+              minLength: 0,
+              autoFocus: false,
+              messages: {
+                  noResults: '',
+                  results: function () {}
+              },
+              source: data,
+              select: function (e, ui) {
+                  // console.log("ui.item", ui.item)
+                  cb(e, ui)
+
+              },
+              change: function (e, ui) {
+                  if (!(freeInput || ui.item)) {
+                    e.target.value = "";
+                    actor_selected = false;
+                    actor_selected_name = "";
+                    keepOpacity = [];
+                    console.log("No actor selected: ", actor_selected, actor_selected_name);
+                    simulationUpdate()
+                  }
+              }
+            });
+          };
+
+          autocomplete($('#actor'), tempData.nodes.map(n => n.id), function (e, ui) {
+            actor_selected = true;
+            actor_selected_name = ui.item.value;
+            keepOpacity = node2neighbors[actor_selected_name];
+            console.log("Actor selected: ", actor_selected, actor_selected_name)
+            simulationUpdate()
+          });
+
+
+
 
           d3.select(graphCanvas)
               .call(d3.drag()
@@ -364,9 +458,7 @@
                       .on("start", dragstarted)
                       .on("drag", dragged)
                       .on("end",dragended))
-              .call(d3.zoom()
-                      .scaleExtent([1 / 10, 8])
-                      .on("zoom", zoomed));
+              .call(zoom);
 
         function dragsubject() {
           console.log("dragsubject start")
