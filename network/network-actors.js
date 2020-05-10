@@ -209,41 +209,79 @@
     return day + " " + month + " " + year;
   }
 
+  function drawTooltip(image_url, title, genres, release_date, link) {
+    d3.select('#tooltip')
+      .append('div')
+      .attr("class", "")
+      .html("<div class='panel'>" +
+        "<img class='resize' src='"+image_url+"'>" +
+        '<p class="title">'+title+'</p>' +
+          "Genres: " + genres.toString().replace(/,/g, ", ") +
+            "<br> Release date: " + parseDate(release_date) +
+            "<br> " +
+            "<br> More info: " + parseDate(release_date) +
+            "<br> " +
+          "</div>")
+  }
 
 
 
   function movieToHtml(movie_info) {
     var title = movie_info.title
-    var image = getMoviePosterPath(parseInt(movie_info.movie_id))
-    console.log(image)
-    if (title != null) {
-      console.log(image)
-      d3.select('#tooltip')
-        .append("div")
-        .html("<img src='"+image+"'>" +
-          '<p class="title">'+title+'</p>' +
-            "Genres: " + movie_info.genres +
-              "<br> Release date: " + parseDate(movie_info.release_date) +
-              "<br> ")
+    theMovieDb.movies.getById(
+        {"id":movie_info.movie_id},
+        (d) => {
+            var posterPath = JSON.parse(d).poster_path;
+            if(posterPath!=null){
+                var image_url = "https://image.tmdb.org/t/p/w500" + JSON.parse(d).poster_path
+                console.log(d)
+            }else{
+                var image_url = "https://as1.ftcdn.net/jpg/02/23/81/56/500_F_223815602_idMOSbp7Z3eN25V2mslRioWS68V3LNZt.jpg"
+            }
+            drawTooltip(image_url, title, movie_info.genres, movie_info.release_date)
+        },
+        (d) => {
+            console.log(d)})
+  }
 
-
-    }
-
+  function actorToHtml(actor) {
+    
   }
 
 
-  function showTooltip(mouse, movies_info) {
-    /** Show a tooltip when mouseover a edge. */
-    // Create queue to check when to build new tooltip
-    movieQueue.unshift(movies_info);
-    movieQueue.pop();
+  function showTooltip(mouse, movies_info, actor = false) {
+    if (!actor) {
+      /** Show a tooltip when mouseover a edge. */
+      // Create queue to check when to build new tooltip
+      movieQueue.unshift(movies_info);
+      movieQueue.pop();
 
-    // Build and move tooltip accordingly
-    if (movieQueue[0] != movieQueue[1]) {
+      // Build and move tooltip accordingly
+      if (movieQueue[0] != movieQueue[1]) {
 
-      // Build tooltip header
-      d3.select("#tooltip").html("");
-      movies_info.forEach(movieToHtml);
+        // Build tooltip
+        d3.select("#tooltip").html("")
+        _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieToHtml);
+
+        // Show and move tooltip
+        d3.select('#tooltip')
+          .style('left', (mouse[0] + 20) + 'px')
+          .style('top', (mouse[1] + 20) + 'px')
+          .transition().duration(100)
+          .style('opacity', 0.98);
+
+      } else {
+
+        // Move tooltip
+        d3.select('#tooltip')
+          .style('left', (mouse[0] + 20) + 'px')
+          .style('top', (mouse[1] + 20) + 'px');
+
+      } // check when new tooltip need to be build and moved vs when tooltip just needs to be moved
+    } else {
+      // Build tooltip
+      d3.select("#tooltip").html("")
+      _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieToHtml);
 
       // Show and move tooltip
       d3.select('#tooltip')
@@ -251,15 +289,7 @@
         .style('top', (mouse[1] + 20) + 'px')
         .transition().duration(100)
         .style('opacity', 0.98);
-
-    } else {
-
-      // Move tooltip
-      d3.select('#tooltip')
-        .style('left', (mouse[0] + 20) + 'px')
-        .style('top', (mouse[1] + 20) + 'px');
-
-    } // check when new tooltip need to be build and moved vs when tooltip just needs to be moved
+    }
 
   } // showTooltip()
 
@@ -267,16 +297,17 @@
     /** Hide the tooltip. */
     movieQueue.unshift(undefined);
     movieQueue.pop();
-
+    /*
     d3.select('#tooltip')
       .transition().duration(500)
-      .style('opacity', 0);
+      .delay(300)
+      .style('opacity', 0.5);
+    */
   } // hideTooltip()
 
 
 
   function zoomed() {
-    console.log("zooming")
     transform = d3.event.transform;
     simulationUpdate();
   }
@@ -393,6 +424,21 @@
         offset_nodes = data.links.length
         data.nodes.forEach(function(d,i){
           d.color = num2rgb(offset_nodes + i)
+          theMovieDb.people.getById({"id":parseInt(d.person_id)}, (person) => {
+            var person_dict = JSON.parse(person);
+            console.log(person_dict)
+            if (parseInt(d['gender']) == 0) {
+              d['gender'] = person_dict['gender'];
+            }
+            d.imdb_id = person_dict['imdb_id'];
+            d.birthday = person_dict['birthday'];
+            if (person_dict['deathday'] != null) {
+              d.deathday = person_dict['deathday'];
+            }
+            if (person_dict['profile_path'] != null) {
+              d.profile_path = person_dict['profile_path']
+            }
+          }, (person) => console.log(person))
         });
 
         // Get the neighbors of each nodes
@@ -461,7 +507,6 @@
               .call(zoom);
 
         function dragsubject() {
-          console.log("dragsubject start")
           var i,
               x = transform.invertX(d3.event.x),
               y = transform.invertY(d3.event.y),
@@ -477,13 +522,11 @@
               node.x =  transform.applyX(node.x);
               node.y = transform.applyY(node.y);
 
-              console.log(node)
 
               return node;
             }
           }
 
-            console.log("dragsubject start +")
         }
 
 

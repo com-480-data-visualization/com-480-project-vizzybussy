@@ -21,7 +21,6 @@ function getMoviePosterPath(movieID){
     theMovieDb.movies.getById(
         {"id":movieID },
         (d) => {
-            console.log(JSON.parse(d));
             var posterPath = JSON.parse(d).poster_path;
             if(posterPath!=null){
               console.log("https://image.tmdb.org/t/p/w500" + JSON.parse(d).poster_path)
@@ -31,22 +30,6 @@ function getMoviePosterPath(movieID){
             }
         },
         (d) => {
-            console.log("ERROR: " + d)})
-}
+            console.log(d)})
 
-function getMovieTitle(movieID) {
-  theMovieDb.movies.getById(
-      {"id":movieID },
-      (d) => {
-          console.log(JSON.parse(d));
-          var posterPath = JSON.parse(d).poster_path;
-          if(posterPath!=null){
-            console.log("https://image.tmdb.org/t/p/w500" + JSON.parse(d).poster_path)
-              return "https://image.tmdb.org/t/p/w500" + JSON.parse(d).poster_path
-          }else{
-             return "https://as1.ftcdn.net/jpg/02/23/81/56/500_F_223815602_idMOSbp7Z3eN25V2mslRioWS68V3LNZt.jpg"
-          }
-      },
-      (d) => {
-          console.log("ERROR: " + d)})
-  }
+}
