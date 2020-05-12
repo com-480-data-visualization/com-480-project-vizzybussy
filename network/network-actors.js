@@ -126,12 +126,14 @@
           keepOpacity = node2neighbors[node.id];
           overnode = true;
           current_node_name = node.id;
+          showTooltipActor(pos, node);
+          console.log(node)
         }
 
         simulationUpdate();
       }
     } else {
-      hideTooltip();
+      //hideTooltip();
       if (!actor_selected) keepOpacity = [];
       overnode = false;
       current_node_name = "";
@@ -171,8 +173,6 @@
     );
   }
 
-  var movieQueue = [undefined, undefined]; // initialise queue array to check for new build
-
   function parseDate(date) {
     var numbers = date.split("-")
     var year,
@@ -209,21 +209,41 @@
     return day + " " + month + " " + year;
   }
 
-  function drawTooltip(image_url, title, genres, release_date, link) {
-    d3.select('#tooltip')
-      .append('div')
-      .attr("class", "")
-      .html("<div class='panel'>" +
-        "<img class='resize' src='"+image_url+"'>" +
-        '<p class="title">'+title+'</p>' +
-          "Genres: " + genres.toString().replace(/,/g, ", ") +
-            "<br> Release date: " + parseDate(release_date) +
-            "<br> " +
-            "<br> More info: " + parseDate(release_date) +
+  function drawTooltip(image_url, title, genres, production_companies, release_date, link) {
+    if (first_element) {
+      d3.select('#tooltip')
+        .append('div')
+        .attr("class", "")
+        .html("<span id='close'>x</span>" +
+            '<p class="header">Common movies between the two connected actors.</p>'+
+            "<div class='panel'>" +
+              '<p class="title">'+title+'</p>' +
+              "<img class='resize' src='"+image_url+"'>" +
+              '<p class="text"> <b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
+              '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
+              '<p class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</p>"+
+              '<p class="text"> <b>Browse on IMDb:</b> ' + '<a href="'+link+'" target="_blank">'+link+'</a>' + "</p>"+
+              "<br> " +
+            "</div>")
+            first_element = false;
+            document.getElementById('close').onclick = hideTooltip;
+
+    } else {
+      d3.select('#tooltip')
+        .append('div')
+        .attr("class", "")
+        .html("<div class='panel'>" +
+            '<p class="title">'+title+'</p>' +
+            "<img class='resize' src='"+image_url+"'>" +
+            '<p class="text"><b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
+            '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
+            '<p class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</p>"+
+            '<p class="text"> <b>Browse on IMDb:</b> ' + '<a href="'+link+'" target="_blank">'+link+'</a>' + "</p>"+
             "<br> " +
           "</div>")
+      console.log(document.getElementById("graphDiv").getBoundingClientRect())
+    }
   }
-
 
 
   function movieToHtml(movie_info) {
@@ -232,83 +252,163 @@
         {"id":movie_info.movie_id},
         (d) => {
             var posterPath = JSON.parse(d).poster_path;
+            var imdbId = JSON.parse(d).imdb_id
             if(posterPath!=null){
-                var image_url = "https://image.tmdb.org/t/p/w500" + JSON.parse(d).poster_path
-                console.log(d)
+                var image_url = "https://image.tmdb.org/t/p/w500" + posterPath;
+
             }else{
                 var image_url = "https://as1.ftcdn.net/jpg/02/23/81/56/500_F_223815602_idMOSbp7Z3eN25V2mslRioWS68V3LNZt.jpg"
             }
-            drawTooltip(image_url, title, movie_info.genres, movie_info.release_date)
-        },
+
+            if(imdbId!=null){
+                var imdb_url = "https://www.imdb.com/title/" + imdbId;
+
+            }else{
+                var imdb_url = "https://as1.ftcdn.net/jpg/02/23/81/56/500_F_223815602_idMOSbp7Z3eN25V2mslRioWS68V3LNZt.jpg"
+            }
+            if (current_length < length_checker) {
+              drawTooltip(image_url, title, movie_info.genres, movie_info.production_companies, movie_info.release_date, imdb_url)
+              current_length++;
+            }
+          },
         (d) => {
             console.log(d)})
   }
 
-  function actorToHtml(actor) {
-    
+  function drawTooltipActor(actor_info) {
+    var bday = actor_info.birthday == null? "Missing data":parseDate(actor_info.birthday)
+    var html_content = "<span id='close'>x</span>" +
+      "<div class='actorpanel'>" +
+        '<p class="title">'+actor_info.id+'</p>' +
+        "<img class='actor' src='"+"https://image.tmdb.org/t/p/w500"+actor_info.profile_path+"' alt='No picture found for this actor.'>" +
+        '<p class="text"> <b>Birthday:</b> ' + bday + "</p>"+
+        '<p class="text"> <b>IMDb profile:</b> ' + '<a href="'+"https://www.imdb.com/name/"+ actor_info.imdb_id +'" target="_blank">'+"https://www.imdb.com/name/"+ actor_info.imdb_id+'</a>' + "</p>"+
+      "<br> " +
+      "</div>"
+    d3.select('#tooltip')
+      .append('div')
+      .attr("class", "")
+      .html(html_content)
+    document.getElementById('close').onclick = hideTooltip;
   }
 
-
-  function showTooltip(mouse, movies_info, actor = false) {
-    if (!actor) {
+  var first_element = true,
+      length_checker = 0,
+      current_length = 0,
+      tooltipQueue = [undefined, undefined];
+  function showTooltip(mouse, movies_info) {
       /** Show a tooltip when mouseover a edge. */
       // Create queue to check when to build new tooltip
-      movieQueue.unshift(movies_info);
-      movieQueue.pop();
-
+      tooltipQueue.unshift(movies_info);
+      tooltipQueue.pop();
+      length_checker = movies_info.length;
+      current_length = 0;
       // Build and move tooltip accordingly
-      if (movieQueue[0] != movieQueue[1]) {
-
+      if (tooltipQueue[0] != tooltipQueue[1]) {
         // Build tooltip
         d3.select("#tooltip").html("")
+        first_element = true;
         _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieToHtml);
-
         // Show and move tooltip
-        d3.select('#tooltip')
-          .style('left', (mouse[0] + 20) + 'px')
-          .style('top', (mouse[1] + 20) + 'px')
-          .transition().duration(100)
-          .style('opacity', 0.98);
+        if (mouse[0] > (Math.floor(graphWidth/2))) {
+          d3.select('#tooltip')
+            .style('left', (mouse[0] - 300 - 15) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .transition().duration(100)
+            .style('opacity', 0.98);
+        } else {
+          d3.select('#tooltip')
+            .transition().duration(100)
+            .style('left', (mouse[0] + 30) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .transition().duration(100)
+            .style('opacity', 0.98);
+        }
+
 
       } else {
 
         // Move tooltip
-        d3.select('#tooltip')
-          .style('left', (mouse[0] + 20) + 'px')
-          .style('top', (mouse[1] + 20) + 'px');
+        if (mouse[0] > (Math.floor(graphWidth/2))) {
+          d3.select('#tooltip')
+            .style('left', (mouse[0] - 300 - 15) + 'px')
+            .style('top', (mouse[1] + 20) + 'px')
+        } else {
+          d3.select('#tooltip')
+            .transition().duration(100)
+            .style('left', (mouse[0] + 30) + 'px')
+            .style('top', (mouse[1] + 20) + 'px')
+        }
 
       } // check when new tooltip need to be build and moved vs when tooltip just needs to be moved
-    } else {
-      // Build tooltip
-      d3.select("#tooltip").html("")
-      _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieToHtml);
-
-      // Show and move tooltip
-      d3.select('#tooltip')
-        .style('left', (mouse[0] + 20) + 'px')
-        .style('top', (mouse[1] + 20) + 'px')
-        .transition().duration(100)
-        .style('opacity', 0.98);
-    }
 
   } // showTooltip()
 
-  function hideTooltip() {
+  function showTooltipActor(mouse, actor_info) {
+      /** Show a tooltip when mouseover a edge. */
+      // Create queue to check when to build new tooltip
+      tooltipQueue.unshift(actor_info);
+      tooltipQueue.pop();
+      // Build and move tooltip accordingly
+      if (tooltipQueue[0] != tooltipQueue[1]) {
+        // Build tooltip
+        d3.select("#tooltip").html("");
+        drawTooltipActor(actor_info);
+        // Show and move tooltip
+        if (mouse[0] > (Math.floor(graphWidth/2))) {
+          d3.select('#tooltip')
+            .style('left', (mouse[0] - 300 - 15) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .transition().duration(100)
+            .style('opacity', 0.98);
+        } else {
+          d3.select('#tooltip')
+            .transition().duration(100)
+            .style('left', (mouse[0] + 30) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .transition().duration(100)
+            .style('opacity', 0.98);
+        }
+
+
+      } else {
+        // Move tooltip
+        if (mouse[0] > (Math.floor(graphWidth/2))) {
+          d3.select('#tooltip')
+            .style('left', (mouse[0] - 300 - 15) + 'px')
+            .style('top', (mouse[1] + 20) + 'px')
+        } else {
+          d3.select('#tooltip')
+            .transition().duration(100)
+            .style('left', (mouse[0] + 30) + 'px')
+            .style('top', (mouse[1] + 20) + 'px')
+        }
+
+      } // check when new tooltip need to be build and moved vs when tooltip just needs to be moved
+
+  }
+
+
+
+
+  function hideTooltip(duration=500) {
     /** Hide the tooltip. */
-    movieQueue.unshift(undefined);
-    movieQueue.pop();
-    /*
+    tooltipQueue.unshift(undefined);
+    tooltipQueue.pop();
+    current_length = 0;
+    length_checker = 0;
+    d3.select('#tooltip').html("")
     d3.select('#tooltip')
-      .transition().duration(500)
-      .delay(300)
-      .style('opacity', 0.5);
-    */
+      .transition().duration(duration)
+      .style('opacity', 0)
+
   } // hideTooltip()
 
 
 
   function zoomed() {
     transform = d3.event.transform;
+    hideTooltip(100);
     simulationUpdate();
   }
 
@@ -382,6 +482,11 @@
           if (actor_selected || overnode) {
             printText = true;
           }
+          if (actor_selected_name == d.id && update_once) {
+            showTooltipActor([d.x, d.y], d);
+            update_once=false;
+            simulationUpdate();
+          }
           if (current_node_name == d.id || actor_selected_name == d.id) {
             context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
           }
@@ -408,7 +513,8 @@
   }
 
   // Set up dictionary of neighbors
-  var node2neighbors;
+  var node2neighbors,
+      update_once = false;
 
   function build_network(datapath){
     /** Build network with drag, zoom functionalities. */
@@ -426,7 +532,6 @@
           d.color = num2rgb(offset_nodes + i)
           theMovieDb.people.getById({"id":parseInt(d.person_id)}, (person) => {
             var person_dict = JSON.parse(person);
-            console.log(person_dict)
             if (parseInt(d['gender']) == 0) {
               d['gender'] = person_dict['gender'];
             }
@@ -479,6 +584,7 @@
                     e.target.value = "";
                     actor_selected = false;
                     actor_selected_name = "";
+                    hideTooltip(100);
                     keepOpacity = [];
                     console.log("No actor selected: ", actor_selected, actor_selected_name);
                     simulationUpdate()
@@ -490,6 +596,7 @@
           autocomplete($('#actor'), tempData.nodes.map(n => n.id), function (e, ui) {
             actor_selected = true;
             actor_selected_name = ui.item.value;
+            update_once = true;
             keepOpacity = node2neighbors[actor_selected_name];
             console.log("Actor selected: ", actor_selected, actor_selected_name)
             simulationUpdate()
@@ -507,6 +614,7 @@
               .call(zoom);
 
         function dragsubject() {
+          hideTooltip(100);
           var i,
               x = transform.invertX(d3.event.x),
               y = transform.invertY(d3.event.y),
@@ -531,12 +639,14 @@
 
 
         function dragstarted() {
+          hideTooltip(100);
           if (!d3.event.active) simulation.alphaTarget(0.3).restart();
           d3.event.subject.fx = transform.invertX(d3.event.x);
           d3.event.subject.fy = transform.invertY(d3.event.y);
           }
 
         function dragged() {
+          hideTooltip(100);
           d3.event.subject.fx = transform.invertX(d3.event.x);
           d3.event.subject.fy = transform.invertY(d3.event.y);
 
