@@ -85,14 +85,31 @@
     <div class="col-md-9" id="graphContainer">
         <div id="my_dataviz"></div>
     </div>
-    <div class="col-md-3" id="movie_info">
-
+    <div class="col-md-3" id="movie_info" style="padding-top: 1em;">
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
+            </div>
+            <div class="col-sm-8">
+                Hover over any of the bubbles to get more information about the movie.
+            </div>
+        </div>
+        <p></p>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="https://img.icons8.com/ios/100/000000/video.png" style="width: 100%;max-width: 75px;" />
+            </div>
+            <div class="col-sm-8">
+                If you want to watch the movie trailer click on the thumbnail and start watching.
+            </div>
+        </div>
     </div>
 </div>
 
 
-<script src="assets/js/themoviedb.js" type="text/javascript"></script>
-<script src="assets/js/tmdb_helpers.js" type="text/javascript"></script>
+
+<script  src="./assets/js/themoviedb.js" type="text/javascript"></script>
+<script src="./assets/js/tmdb_helpers.js" type="text/javascript"></script>
 
 <script>
     //https://observablehq.com/@will-r-chase/scatter-plot
@@ -297,20 +314,38 @@
 
 
 
-        var keepMovieInfoDisplayed = {display:false}
+        var keepMovieInfoDisplayed = { display: false }
         var displayMovieInfo = (d) => {
             if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
             if (!keepMovieInfoDisplayed.display) {
                 d3.selectAll(("#data_uid_" + d.id))
-                    .transition(100)
                     .style("fill", config.color_hover_data_point)
                     .style("opacity", config.opacity_data_point_hover)
                     .attr("stroke", "black")
 
-                var movieDiv = d3.select("#movie_info")
+                d3.select("#movie_info")
+                    .html("")
+                var movieDivInfo = d3.select("#movie_info")
                     .append("div")
                     .attr("class", "overflow-auto")
-                    .attr("style", "height:"+($(window).height()-170)+"px;")
+                    .attr("style", "height:" + ($(window).height() - 170) + "px;")
+
+                var movieDiv = movieDivInfo
+                    .append("div")
+
+                var moneyDiv = movieDivInfo
+                    .append("div")
+                    .attr("id", "budgetDiv")
+                    .attr("class", "row")
+
+                var popularityDiv = movieDivInfo
+                    .append("div")
+                    .attr("class", "row")
+                
+                var creditsDiv = movieDivInfo
+                    .append("div")
+                    .attr("class", "row")
+                    .attr("id", "creditMovieDiv")
 
                 movieDiv
                     .append("div")
@@ -328,57 +363,61 @@
                     .append("h5")
                     .attr("class", "d-flex justify-content-center text-center")
                     .text(d.realease_year)
-                    
+
 
                 movieDiv
                     .append("div")
                     .attr("class", "row")
                     .append("div")
-                    .attr("class", "cols-xs-1 center-block")
+                    .attr("class", "cols-sm-1 center-block")
+                    .append('a')
+                    .attr("id", "movieInfoImgLink")
+                    .append("div")
+                    .attr("class", "d-flex justify-content-center")
                     .append("img")
                     .attr('class', "img-fluid rounded")
+                    .attr("style", "width:50%;")
                     .attr("id", "movieInfoImg")
 
-                setMovieImage("#movieInfoImg", d.id)
+                setMovieImage("#movieInfoImg", d.id, movieInfoImgLink = "#movieInfoImgLink", creditMovieDiv = "#creditMovieDiv", verbose = true)
 
-                var moneyDiv = movieDiv
-                    .append("div")
-                    .attr("id", "budgetDiv")
-                    .attr("class", "row")
-                    .append("div")
-                    .attr("class", "col")
+
 
                 moneyDiv
+                    .append("div")
+                    .attr("class", "col-sm-4")
                     .append("img")
                     .attr("class", "img-responsive mx-auto d-block")
                     .attr("style", "padding:1em")
-                    .attr("src", "https://img.icons8.com/bubbles/100/000000/money.png")
+                    .attr("src", "https://img.icons8.com/bubbles/75/000000/money.png")
 
                 moneyDiv
                     .append("div")
-                    .attr("class", "row d-flex justify-content-center text-center")
+                    .attr("class", "col-sm-8")
+                    .append("div")
+                    .attr("class", "container d-flex h-100")
+                    .append("div")
+                    .attr("class", "row justify-content-center align-self-center")
                     .text("BUDGET : " + usdFormatter.format(d.budget))
-
-                moneyDiv
-                    .append("div")
-                    .attr("class", "row d-flex justify-content-center text-center")
+                    .append("p")
                     .text("REVENUE : " + usdFormatter.format(d.revenue))
 
-                var popularityDiv = movieDiv
-                    .append("div")
-                    .attr("class", "row")
-                    .append("div")
-                    .attr("class", "col")
-
                 popularityDiv
+                    .append("div")
+                    .attr("class", "col-sm-4")
                     .append("img")
                     .attr("class", "img-responsive mx-auto d-block")
                     .attr("style", "padding:1em")
-                    .attr("src", "https://img.icons8.com/bubbles/100/000000/crowd.png")
+                    .attr("src", "https://img.icons8.com/bubbles/75/000000/crowd.png")
+
                 popularityDiv
                     .append("div")
-                    .attr("class", "row d-flex justify-content-center text-center")
-                    .text("POPULARITY : " +parseFloat(d.popularity).toFixed(1))
+                    .attr("class", "col-sm-8")
+                    .append("div")
+                    .attr("class", "container d-flex h-100")
+                    .append("div")
+                    .attr("class", "row justify-content-center align-self-center")
+                    .text("POPULARITY : " + parseFloat(d.popularity).toFixed(1))
 
 
             }
@@ -393,9 +432,8 @@
                 d3.select("#movie_info")
                     .html("")
 
-                
+
                 d3.selectAll(("#data_uid_" + d.id))
-                    .transition(100)
                     .style("fill", config.color_no_hover_data_point)
                     .style("opacity", config.opacity_data_point_no_hover)
                     .attr("stroke", "none")
@@ -405,17 +443,17 @@
         var permanentMovieDisplay = (d) => {
             if (d.datum != null) { d = d.datum }
             console.log(d.id)
-            if(keepMovieInfoDisplayed.d == null){
+            if (keepMovieInfoDisplayed.d == null) {
                 keepMovieInfoDisplayed.display = !keepMovieInfoDisplayed.display
                 keepMovieInfoDisplayed.d = d
-                if(!keepMovieInfoDisplayed.display){
+                if (!keepMovieInfoDisplayed.display) {
                     removeMovieInfo(keepMovieInfoDisplayed.d)
                     delete keepMovieInfoDisplayed.d
-                }else{
+                } else {
                     displayMovieInfo(keepMovieInfoDisplayed.d)
                 }
 
-            }else{
+            } else {
                 keepMovieInfoDisplayed.display = !keepMovieInfoDisplayed.display
                 removeMovieInfo(keepMovieInfoDisplayed.d)
                 displayMovieInfo(d)
