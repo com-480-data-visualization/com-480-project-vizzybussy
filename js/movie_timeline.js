@@ -1,7 +1,7 @@
 $(function () {
 
     chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-    chartProperties = { typeGenre: true, code:"gfl" }
+    chartProperties = { typeGenre: true, code: "gfl" }
 
     chart("all_data_stream.csv", chartType, chartProperties);
 
@@ -29,7 +29,7 @@ $(function () {
 
         var x = d3.time.scale()
             //.range([0, width]);
-            .range([1,width-1])
+            .range([1, width - 1])
 
         var y = d3.scale.linear().domain([0, 1])
             //.range([height - 10, 10]);
@@ -40,12 +40,12 @@ $(function () {
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .ticks(d3.time.years,5)
+            .ticks(d3.time.years, 5)
             .tickSize(2)
 
         var yAxis = d3.svg.axis()
             .scale(y)
-            .ticks(2)
+            .ticks(1)
             .tickSize(2);
 
         var stack = d3.layout.stack()
@@ -74,7 +74,7 @@ $(function () {
             .style("top", "30px")
             .style("bottom", "30px")
             .style("left", "0px")
-            .style("margin-left","25px")
+            .style("margin-left", "25px")
             .style("background", "#fcfcfc");
 
         var area = d3.svg.area()
@@ -92,6 +92,7 @@ $(function () {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
         var graph = d3.csv(csvpath, function (data) {
             data.forEach(function (d) {
                 // Cast to date and integer
@@ -104,15 +105,15 @@ $(function () {
                 return d.code == chartProperties.code
             });
             if (!chartType.firstLevel) {
-                if(chartProperties.typeGenre){
+                if (chartProperties.typeGenre) {
                     data = data.filter((d) => {
                         return d.production_companies == chartProperties.group
                     });
                 } else {
-                data = data.filter((d) => {
-                    return d.genres == chartProperties.group
-                });
-            }
+                    data = data.filter((d) => {
+                        return d.genres == chartProperties.group
+                    });
+                }
             };
 
             var layers = stack(nest.entries(data));
@@ -125,8 +126,9 @@ $(function () {
             svg.selectAll(".layer")
                 .data(layers)
                 .enter().append("path")
-                .transition()
-                .duration(1000)
+                //.transition()
+                //.duration(1000)
+                //.end()
                 .attr("class", "layer")
                 .attr("d", function (d) { return area(d.values); })
                 .style("fill", function (d, i) { return z(i); });
@@ -136,6 +138,14 @@ $(function () {
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis.orient("bottom"));
 
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (width / 2) + " ," +
+                    (height + margin.top + 10) + ")")
+                .style("text-anchor", "middle")
+                .text("Year");
+
             svg.append("g")
                 .attr("class", "y axis")
                 .attr("transform", "translate(" + width + ", 0)")
@@ -144,6 +154,26 @@ $(function () {
             svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis.orient("left"));
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Popularity");
+
+                svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", width + 5)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Popularity");
+
+            if (chartType.firstLevel & chartProperties.typeGenre) showGenreLabels(svg, width)
+            if (chartType.firstLevel & !chartProperties.typeGenre) showProductionHousesLabels(svg, width)
 
             svg.selectAll(".layer")
                 .attr("opacity", 1)
@@ -165,6 +195,12 @@ $(function () {
                         .style("top", tipY(mouse[1]) + "px")
                         .html("<div class='year'>" + currentYear + "</div><div class='key'><div style='background:" + color + "' class='swatch'>&nbsp;</div>" + d.key + "</div><div class='value'>" + filmsGenreYear + " " + moviePlural((filmsGenreYear)) + "</div>")
                         .style("visibility", "visible");
+
+                    //console.log(d3.select(this))
+                    d3.select(this)
+                        .style("stroke", "black")
+                        .style("stroke-width", "2px");
+
                     if (chartType.firstLevel) {
                         changeMovieDisplay(d.key)
                     }
@@ -183,26 +219,31 @@ $(function () {
                     d3.select(this)
                         .classed("hover", false)
                         .attr("stroke-width", "0px")
+                    d3.select(this)
+                        //.style("stroke","black")
+                        .style("stroke-width", "0px");
                     tooltip.style("visibility", "hidden");
                     vertical.style("visibility", "hidden")
-                        
+
                     //tooltip.html("<p>" + d.key + "<br>" + currentYear + "</p>").style("visibility", "hidden");
                 })
+
                 .on("click", function (d, i) {
                     if (chartType.firstLevel) {
                         document.getElementById("movieTimeline").innerHTML = ""
                         tooltip.style("visibility", "hidden");
                         chartType = { cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false }
-                        if(chartProperties.typeGenre){
+                        if (chartProperties.typeGenre) {
                             // Load production companies
-                            chartProperties = { typeGenre: false, group: d.key, code:"pcsl" }
+                            chartProperties = { typeGenre: false, group: d.key, code: "pcsl" }
                             chart("all_data_stream.csv", chartType, chartProperties)
                             changeMovieDisplay(d.key)
                         } else {
                             // Load genres
-                            chartProperties = { typeGenre: true, group: d.key, code:"gsl" }
+                            chartProperties = { typeGenre: true, group: d.key, code: "gsl" }
                             chart("all_data_stream.csv", chartType, chartProperties)
                         }
+                        $("#movieTimelineHeading").html("Movie Timeline - "+d.key);
                         //chartProperties = { typeGenre: false, group: d.key }
                         //chart("production_companies_stream.csv", chartType, chartProperties)
                         //createSubchart("production_companies_stream.csv",d.key)
@@ -212,12 +253,51 @@ $(function () {
                 })
         });
 
+
+    }
+
+    function showGenreLabels(svg, width) {
+        var genreLabels = [
+            { "percWidth": 0.65, "cx": "800", "cy": "7.6em", "text": "Drama", fontsize: "24px" },
+            { "percWidth": 0.85, "cx": "130", "cy": "13.5em", "text": "Comedy", fontsize: "20px" },
+            { "percWidth": 0.55, "cx": "250", "cy": "1.7em", "text": "Thriller", fontsize: "20px" },
+            { "percWidth": 0.75, "cx": "250", "cy": "4.4em", "text": "Romance", fontsize: "18px" },
+            { "percWidth": 0.3, "cx": "550", "cy": "16.5em", "text": "Action", fontsize: "20px" },
+            { "percWidth": 0.14, "cx": "550", "cy": "13em", "text": "Crime", fontsize: "18px" },
+            { "percWidth": 0.28, "cx": "230", "cy": "4.1em", "text": "Science Fiction", fontsize: "18px" }];
+        genreLabels.forEach(genre => {
+            svg.append("text")
+                .attr("x", width * genre.percWidth)
+                .attr("y", genre.cy)
+                .attr("text-anchor", "middle")
+                .style("font-size", genre.fontsize)
+                .text(genre.text);
+        })
+    }
+
+    function showProductionHousesLabels(svg, width) {
+        var phLabels = [
+            //{ "percWidth": 0.65, "cx": "800", "cy": "9em", "text": "Drama" },
+            { "percWidth": 0.4, "cx": "130", "cy": "12em", "text": "Paramount Pictures", fontsize: "20px" },
+            { "percWidth": 0.75, "cx": "250", "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
+            { "percWidth": 0.85, "cx": "550", "cy": "18.5em", "text": "Columbia Pictures", fontsize: "18px" },
+            { "percWidth": 0.12, "cx": "550", "cy": "10.5em", "text": "Twenty", fontsize: "18px" },
+            { "percWidth": 0.12, "cx": "550", "cy": "11.5em", "text": "Century Fox", fontsize: "18px" },
+            { "percWidth": 0.65, "cy": "5.5em", "text": "Universal Pictures", fontsize: "20px" }];
+        phLabels.forEach(ph => {
+            svg.append("text")
+                .attr("x", width * ph.percWidth)
+                .attr("y", ph.cy)
+                .attr("text-anchor", "middle")
+                .style("font-size", ph.fontsize)
+                .text(ph.text);
+        })
     }
 
     // generate a legend
     function legend(layers, genre) {
 
-        $('.secondLevelMovieTimeline').prepend('<div class="legend"><div class="title">' + genre + '</div></div>');
+        $('.secondLevelMovieTimeline').prepend('<div class="legend"></div>');
         $('.legend').hide();
         var legend = []
         layers.forEach(function (d, i) {
@@ -272,7 +352,7 @@ $(function () {
         //console.log(x)
         //console.log(winWidth - tipWidth - 30)
         if (x > winWidth / 2 - tipWidth) {
-            y = x - tipWidth*1.2;
+            y = x - tipWidth * 1.2;
             //console.log("X desno");
         } else {
             y = x + tipWidth / 2;
@@ -354,14 +434,18 @@ $(function () {
     $("#movieTimelineProductionHousesButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: false, code:"pcfl" }
+        chartProperties = { typeGenre: false, code: "pcfl" }
         chart("all_data_stream.csv", chartType, chartProperties);
+        $("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: true, code:"gfl" }
+        chartProperties = { typeGenre: true, code: "gfl" }
         chart("all_data_stream.csv", chartType, chartProperties);
+        $("#movieTimelineHeading").html("Movie Timeline");
     })
+
+    $("#movieTimelineHeading").html("Movie Timeline");
 
 });
