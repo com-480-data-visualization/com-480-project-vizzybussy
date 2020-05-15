@@ -3,13 +3,42 @@ $(function () {
     chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
     chartProperties = { typeGenre: true, code: "gfl" }
 
+    //https://flatuicolors.com/palette/au
+
+    colorrange1 = ["#f6e58d", "#f9ca24", "#ffbe76", "#f0932b", "#ff7979","#eb4d4b",
+            "#badc58", "#6ab04c", "#c7ecee", "#7ed6df",
+            //"#e056fd", "#686de0",
+            //"#4834d4", "#30336b", "#130f40", "#C994C7", "#D4B9DA", "#F1EEF6"];
+        ];
+
+        colorrange2 = ["#eb4d4b", "#ff7979", "#ffbe76", "#f9ca24", "#f0932b", "#ff7979",
+            "#c7ecee", "#95afc0", "#7ed6df", "#dff9fb",
+            "#ff7979", "#badc58",
+            "#6ab04c", "#f9ca24", "#f0932b"];
+        
+
+        colorfrench = ["#fad390", "#f8c291", "#6a89cc", "#82ccdd", "#b8e994", "#f6b93b",
+            "#badc58", "#6ab04c", "#4a69bd", "#60a3bc",
+            "#78e08f", "#fa983a",
+            "#b71540", "#1e3799", "#0c2461"];
+        //colorrange = colorfrench
+
+        colorau = ["#f6e58d", "#ffbe76", "#ff7979", "#badc58", "#dff9fb", "#f9ca24",
+            "#f0932b", "#eb4d4b", "#6ab04c", "#c7ecee",
+            "#7ed6df", "#686de0",
+            "#30336b", "#22a6b3", "#4834d4"];
+
     chart("all_data_stream.csv", chartType, chartProperties);
 
-    function chart(csvpath, chartType) {
+    function chart(csvpath, chartType,chartProperties) {
 
-        colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9",
-            "#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6",
-            "#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
+        if(chartProperties.typeGenre){
+            colorrange = colorrange2
+        } else {
+            colorrange = colorrange1
+        }
+
+        //colorrange = colororange2
 
         strokecolor = colorrange[0];
 
@@ -117,7 +146,13 @@ $(function () {
             };
 
             var layers = stack(nest.entries(data));
-            if (!chartType.firstLevel) legend(layers, chartProperties.group)
+            if (!chartType.firstLevel)
+                if (chartProperties.typeGenre) {
+                    legend(layers, chartProperties.group, "legend-genre")
+                } else {
+                    legend(layers, chartProperties.group, "legend-ph")
+                }
+
 
             x.domain(d3.extent(data, function (d) { return d.fullyear; }));
             y.domain([0, d3.max(data, function (d) { return d.y0 + d.y; })]);
@@ -162,15 +197,15 @@ $(function () {
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text("Popularity");
+                .text("Production Popularity");
 
-                svg.append("text")
+            svg.append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("y", width + 5)
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text("Popularity");
+                .text("Production Popularity");
 
             if (chartType.firstLevel & chartProperties.typeGenre) showGenreLabels(svg, width)
             if (chartType.firstLevel & !chartProperties.typeGenre) showProductionHousesLabels(svg, width)
@@ -198,7 +233,7 @@ $(function () {
 
                     //console.log(d3.select(this))
                     d3.select(this)
-                        .style("stroke", "black")
+                        .style("stroke", "#535c68")
                         .style("stroke-width", "2px");
 
                     if (chartType.firstLevel) {
@@ -243,7 +278,7 @@ $(function () {
                             chartProperties = { typeGenre: true, group: d.key, code: "gsl" }
                             chart("all_data_stream.csv", chartType, chartProperties)
                         }
-                        $("#movieTimelineHeading").html("Movie Timeline - "+d.key);
+                        $("#movieTimelineHeading").html("Movie Timeline - " + d.key);
                         //chartProperties = { typeGenre: false, group: d.key }
                         //chart("production_companies_stream.csv", chartType, chartProperties)
                         //createSubchart("production_companies_stream.csv",d.key)
@@ -258,13 +293,15 @@ $(function () {
 
     function showGenreLabels(svg, width) {
         var genreLabels = [
-            { "percWidth": 0.65, "cx": "800", "cy": "7.6em", "text": "Drama", fontsize: "24px" },
-            { "percWidth": 0.85, "cx": "130", "cy": "13.5em", "text": "Comedy", fontsize: "20px" },
-            { "percWidth": 0.55, "cx": "250", "cy": "1.7em", "text": "Thriller", fontsize: "20px" },
-            { "percWidth": 0.75, "cx": "250", "cy": "4.4em", "text": "Romance", fontsize: "18px" },
-            { "percWidth": 0.3, "cx": "550", "cy": "16.5em", "text": "Action", fontsize: "20px" },
-            { "percWidth": 0.14, "cx": "550", "cy": "13em", "text": "Crime", fontsize: "18px" },
-            { "percWidth": 0.28, "cx": "230", "cy": "4.1em", "text": "Science Fiction", fontsize: "18px" }];
+            { "percWidth": 0.65, "cy": "7.6em", "text": "Drama", fontsize: "24px" },
+            { "percWidth": 0.85, "cy": "13.5em", "text": "Comedy", fontsize: "20px" },
+            { "percWidth": 0.55, "cy": "1.7em", "text": "Thriller", fontsize: "20px" },
+            { "percWidth": 0.75, "cy": "4.4em", "text": "Romance", fontsize: "18px" },
+            { "percWidth": 0.39, "cy": "16.5em", "text": "Action", fontsize: "20px" },
+            { "percWidth": 0.28, "cy": "16.2em", "text": "Adventure", fontsize: "18px" },
+            { "percWidth": 0.14, "cy": "13em", "text": "Crime", fontsize: "18px" },
+            { "percWidth": 0.28, "cy": "4.1em", "text": "Science Fiction", fontsize: "18px" },
+            { "percWidth": 0.43, "cy": "6.9em", "text": "Horror", fontsize: "16px" }];
         genreLabels.forEach(genre => {
             svg.append("text")
                 .attr("x", width * genre.percWidth)
@@ -281,8 +318,9 @@ $(function () {
             { "percWidth": 0.4, "cx": "130", "cy": "12em", "text": "Paramount Pictures", fontsize: "20px" },
             { "percWidth": 0.75, "cx": "250", "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
             { "percWidth": 0.85, "cx": "550", "cy": "18.5em", "text": "Columbia Pictures", fontsize: "18px" },
-            { "percWidth": 0.12, "cx": "550", "cy": "10.5em", "text": "Twenty", fontsize: "18px" },
-            { "percWidth": 0.12, "cx": "550", "cy": "11.5em", "text": "Century Fox", fontsize: "18px" },
+            { "percWidth": 0.87, "cx": "550", "cy": "12.7em", "text": "Relativity Media", fontsize: "16px" },
+            { "percWidth": 0.12, "cx": "550", "cy": "12.5em", "text": "Twenty", fontsize: "16px" },
+            { "percWidth": 0.12, "cx": "550", "cy": "13.5em", "text": "Century Fox", fontsize: "16px" },
             { "percWidth": 0.65, "cy": "5.5em", "text": "Universal Pictures", fontsize: "20px" }];
         phLabels.forEach(ph => {
             svg.append("text")
@@ -295,9 +333,9 @@ $(function () {
     }
 
     // generate a legend
-    function legend(layers, genre) {
+    function legend(layers, genre, className) {
 
-        $('.secondLevelMovieTimeline').prepend('<div class="legend"></div>');
+        $('.secondLevelMovieTimeline').prepend('<div class="legend float-container ' + className + '"></div>');
         $('.legend').hide();
         var legend = []
         layers.forEach(function (d, i) {
@@ -310,7 +348,7 @@ $(function () {
         });
 
         legend.forEach(function (d, i) {
-            $('.secondLevelMovieTimeline .legend').append('<div class="item"><div class="swatch" style="background: ' + d.color + '"></div>' + d.key + '</div>');
+            $('.secondLevelMovieTimeline .legend').append('<div class="item float-child"><div class="swatch" style="background: ' + d.color + '"></div>' + d.key + '</div>');
         });
 
         $('.legend').fadeIn();
@@ -412,7 +450,8 @@ $(function () {
     });
 
     $.getJSON('most_popular_movies_per_pc.json', function (data) {
-
+        mostPopularMoviesPerPC = data
+        console.log(data)
         Object.keys(data).forEach(function (k) {
             var div = document.createElement("div");
             var pcDivId = "movies-" + k
