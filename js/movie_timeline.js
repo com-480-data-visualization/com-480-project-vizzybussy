@@ -5,35 +5,56 @@ $(function () {
 
     //https://flatuicolors.com/palette/au
 
-    colorrange1 = ["#f6e58d", "#f9ca24", "#ffbe76", "#f0932b", "#ff7979","#eb4d4b",
-            "#badc58", "#6ab04c", "#c7ecee", "#7ed6df",
-            //"#e056fd", "#686de0",
-            //"#4834d4", "#30336b", "#130f40", "#C994C7", "#D4B9DA", "#F1EEF6"];
-        ];
+    colorrange1 = ["#f6e58d", "#f9ca24", "#ffbe76", "#f0932b", "#ff7979", "#eb4d4b",
+        "#badc58", "#22a6b3", "#c7ecee", "#7ed6df",
+        //"#e056fd", "#686de0",
+        //"#4834d4", "#30336b", "#130f40", "#C994C7", "#D4B9DA", "#F1EEF6"];
+    ];
 
-        colorrange2 = ["#eb4d4b", "#ff7979", "#ffbe76", "#f9ca24", "#f0932b", "#ff7979",
-            "#c7ecee", "#95afc0", "#7ed6df", "#dff9fb",
-            "#ff7979", "#badc58",
-            "#6ab04c", "#f9ca24", "#f0932b"];
-        
+    colorrange2 = ["#eb4d4b", "#ff7979", "#ffbe76", "#f9ca24", "#f0932b", "#ff7979",
+        "#c7ecee", "#95afc0", "#7ed6df", "#dff9fb",
+        "#ff7979", "#badc58",
+        "#6ab04c", "#f9ca24", "#f0932b"];
 
-        colorfrench = ["#fad390", "#f8c291", "#6a89cc", "#82ccdd", "#b8e994", "#f6b93b",
-            "#badc58", "#6ab04c", "#4a69bd", "#60a3bc",
-            "#78e08f", "#fa983a",
-            "#b71540", "#1e3799", "#0c2461"];
-        //colorrange = colorfrench
+    colorrange3 = ["#f0932b", "#f9ca24", "#6ab04c", "#22a6b3", "#7ed6df", "#badc58",
+        "#c7ecee", "#95afc0", "#686de0", "#dff9fb",
+        "#ff7979", "#ffbe76",
+        "#eb4d4b", "#f6e58d", "#535c68"];
 
-        colorau = ["#f6e58d", "#ffbe76", "#ff7979", "#badc58", "#dff9fb", "#f9ca24",
-            "#f0932b", "#eb4d4b", "#6ab04c", "#c7ecee",
-            "#7ed6df", "#686de0",
-            "#30336b", "#22a6b3", "#4834d4"];
+
+    colorfrench = ["#fad390", "#f8c291", "#6a89cc", "#82ccdd", "#b8e994", "#f6b93b",
+        "#badc58", "#6ab04c", "#4a69bd", "#60a3bc",
+        "#78e08f", "#fa983a",
+        "#b71540", "#1e3799", "#0c2461"];
+    //colorrange = colorfrench
+
+    colorau = ["#f6e58d", "#ffbe76", "#ff7979", "#badc58", "#dff9fb", "#f9ca24",
+        "#f0932b", "#eb4d4b", "#6ab04c", "#c7ecee",
+        "#7ed6df", "#686de0",
+        "#30336b", "#22a6b3", "#4834d4"];
+
+    colorch = ["#3742fa", "#eccc68", "#ff7f50", "#2ed573", "#7bed9f", "#f1f2f6",
+        "#ff6348", "#ced6e0", "#ff4757", "#dff9fb",
+        "#ff6b81", "#575fcf",
+        "#1e90ff", "#747d8c", "#dfe4ea"];
+    
+    cbsafe = ["#648FFF","#785EF0","#d81b60", "#fe6100", "#ffb000", 
+    "#648FFF","#785EF0","#d81b60", "#fe6100", "#ffb000" ,"#648FFF",
+    "#785EF0","#d81b60", "#fe6100", "#ffb000"  ]
+
+    cbsafe_genres = ['#00429d', '#245fa8', '#387cb2', '#4b99bc', '#62b6c6', 
+    '#81d3cf', '#adeed8', '#ffffe0', '#ffdabb', '#ffb498', 
+    '#fa8c78', '#ea685f', '#d4444b', '#b8203f', '#93003a']
+
+    cbsafe_pcs = ['#00429d', '#2c6aac', '#4793ba', '#68bcc7', '#99e4d4',
+     '#ffcbad', '#fd947e', '#e6615a', '#c42e43', '#93003a']
 
     chart("all_data_stream.csv", chartType, chartProperties);
 
-    function chart(csvpath, chartType,chartProperties) {
+    function chart(csvpath, chartType, chartProperties) {
 
-        if(chartProperties.typeGenre){
-            colorrange = colorrange2
+        if (chartProperties.typeGenre) {
+            colorrange = colorrange3
         } else {
             colorrange = colorrange1
         }
@@ -237,7 +258,7 @@ $(function () {
                         .style("stroke-width", "2px");
 
                     if (chartType.firstLevel) {
-                        changeMovieDisplay(d.key)
+                        changeMovieDisplay(d.key, chartProperties.typeGenre)
                     }
                     if (!chartType.firstLevel) {
                         vertical.style("visibility", "visible")
@@ -272,7 +293,7 @@ $(function () {
                             // Load production companies
                             chartProperties = { typeGenre: false, group: d.key, code: "pcsl" }
                             chart("all_data_stream.csv", chartType, chartProperties)
-                            changeMovieDisplay(d.key)
+                            //changeMovieDisplay(d.key)
                         } else {
                             // Load genres
                             chartProperties = { typeGenre: true, group: d.key, code: "gsl" }
@@ -282,7 +303,7 @@ $(function () {
                         //chartProperties = { typeGenre: false, group: d.key }
                         //chart("production_companies_stream.csv", chartType, chartProperties)
                         //createSubchart("production_companies_stream.csv",d.key)
-                        changeMovieDisplay(d.key)
+                        //changeMovieDisplay(d.key)
                     }
 
                 })
@@ -363,6 +384,19 @@ $(function () {
             hideAllMovieDivs()
             movieDiv.style.display = "block"
         }
+
+        if (chartProperties.typeGenre) {
+            console.log(most_popular_movies_per_genre[genre])
+        }
+        currentData = most_popular_movies_per_genre[genre]
+        for (var i = 0; i < 5; i++) {
+            var movie = currentData[i];
+            var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
+            console.log(currentCard.getElementsByClassName('card-title'))
+            currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
+            currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
+            currentCard.getElementsByClassName('card-text')[0].textContent = movie.overview
+        }
     };
 
     function hideAllMovieDivs() {
@@ -419,9 +453,9 @@ $(function () {
         return y;
     }
 
-
+    var most_popular_movies_per_genre;
     $.getJSON('most_popular_movies_per_genre.json', function (data) {
-
+        most_popular_movies_per_genre = data
         //console.log(data)
         Object.keys(data).forEach(function (k) {
             var div = document.createElement("div");
@@ -449,9 +483,9 @@ $(function () {
 
     });
 
+    var most_popular_movies_per_pc;
     $.getJSON('most_popular_movies_per_pc.json', function (data) {
-        mostPopularMoviesPerPC = data
-        console.log(data)
+        most_popular_movies_per_pc = data
         Object.keys(data).forEach(function (k) {
             var div = document.createElement("div");
             var pcDivId = "movies-" + k
