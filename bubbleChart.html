@@ -142,7 +142,7 @@
         color_no_hover_data_point: "#69b3a2",
 
         slider_max_year: 2016,
-        slider_min_year:1966
+        slider_min_year: 1966
     }
 
     https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg
@@ -352,9 +352,21 @@
                     .attr("style", "width:50%;")
                     .attr("id", "movieInfoImg")
 
-                setMovieImage("#movieInfoImg", d.id, movieInfoImgLink = "#movieInfoImgLink", creditMovieDiv = "#creditMovieDiv", verbose = true)
+                movieDiv
+                    .append("div")
+                    .attr("class", "row")
+                    .append("div")
+                    .attr("class", "cols-sm-1 center-block")
+                    .append('a')
+                    .attr("id", "movieInfoYoutubeLink")
+                    .append("div")
+                    .attr("class", "d-flex justify-content-center")
+                    .append("img")
+                    .attr('class', "img-fluid rounded")
+                    .attr("style", "width:15%;")
+                    .attr("src", "./assets/img/youtube.svg")
 
-
+                setMovieImage("#movieInfoImg", d.id, movieInfoImgLink = "#movieInfoImgLink", creditMovieDiv = "#creditMovieDiv", movieInfoYoutubeLink="#movieInfoYoutubeLink", verbose = true)
 
                 moneyDiv
                     .append("div")

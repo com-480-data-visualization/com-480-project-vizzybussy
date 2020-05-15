@@ -2,7 +2,7 @@
 
 //import { credits } from "assets/js/themoviedb";
 
-function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMovieDiv=null ,verbose=false) {
+function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMovieDiv=null, movieInfoYoutubeLink=null, verbose=false) {
     console.log("id : "+movieID)
     theMovieDb.movies.getById(
         {"id":movieID,
@@ -18,6 +18,7 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
             }
             if(data.videos.results.length != 0 && movieInfoImgLink!=null){
                 $(movieInfoImgLink).attr("href", "https://www.youtube.com/watch?v="+data.videos.results[0].key).attr("target","_blank")
+                $(movieInfoYoutubeLink).attr("href", "https://www.youtube.com/watch?v="+data.videos.results[0].key).attr("target","_blank")
             }
             if(data.credits != null && data.credits.cast != null && data.credits.cast.length>0 && creditMovieDiv != null){
                 for(i = 0; i< 6 && data.credits.cast.length > i; i++){
@@ -26,7 +27,6 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                     +"' target='_blank'> "
                     +"<img class='img-fluid rounded' style='width:100%;'"
                    +" src="+(data.credits.cast[i].profile_path == null ? "'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'": "'https://image.tmdb.org/t/p/w600_and_h900_bestv2/"+data.credits.cast[i].profile_path)+"'>"
-                    
                     +"<p>"+data.credits.cast[i].name.toString()+"</p>"+"</textarea>"
                     +"</a></div>"
                     )
