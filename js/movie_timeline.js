@@ -1,7 +1,7 @@
 $(function () {
 
     chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-    chartProperties = { typeGenre: true, code: "gfl" }
+    chartProperties = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production" }
 
     //https://flatuicolors.com/palette/au
 
@@ -218,7 +218,7 @@ $(function () {
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text("Production Popularity");
+                .text(chartProperties.y_title);
 
             svg.append("text")
                 .attr("transform", "rotate(-90)")
@@ -226,7 +226,7 @@ $(function () {
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text("Production Popularity");
+                .text(chartProperties.y_title);
 
             if (chartType.firstLevel & chartProperties.typeGenre) showGenreLabels(svg, width)
             if (chartType.firstLevel & !chartProperties.typeGenre) showProductionHousesLabels(svg, width)
@@ -291,12 +291,12 @@ $(function () {
                         chartType = { cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false }
                         if (chartProperties.typeGenre) {
                             // Load production companies
-                            chartProperties = { typeGenre: false, group: d.key, code: "pcsl" }
+                            chartProperties = { typeGenre: false, group: d.key, code: "pcsl", y_title:"Number of movies per production house" }
                             chart("all_data_stream.csv", chartType, chartProperties)
                             //changeMovieDisplay(d.key)
                         } else {
                             // Load genres
-                            chartProperties = { typeGenre: true, group: d.key, code: "gsl" }
+                            chartProperties = { typeGenre: true, group: d.key, code: "gsl", y_title:"Number of movies per genre" }
                             chart("all_data_stream.csv", chartType, chartProperties)
                         }
                         $("#movieTimelineHeading").html("Movie Timeline - " + d.key);
@@ -315,6 +315,7 @@ $(function () {
     function showGenreLabels(svg, width) {
         var genreLabels = [
             { "percWidth": 0.65, "cy": "7.6em", "text": "Drama", fontsize: "24px" },
+            { "percWidth": 0.82, "cy": "10.4em", "text": "Family", fontsize: "14px" },
             { "percWidth": 0.85, "cy": "13.5em", "text": "Comedy", fontsize: "20px" },
             { "percWidth": 0.55, "cy": "1.7em", "text": "Thriller", fontsize: "20px" },
             { "percWidth": 0.75, "cy": "4.4em", "text": "Romance", fontsize: "18px" },
@@ -322,6 +323,11 @@ $(function () {
             { "percWidth": 0.28, "cy": "16.2em", "text": "Adventure", fontsize: "18px" },
             { "percWidth": 0.14, "cy": "13em", "text": "Crime", fontsize: "18px" },
             { "percWidth": 0.28, "cy": "4.1em", "text": "Science Fiction", fontsize: "18px" },
+            { "percWidth": 0.24, "cy": "0.9em", "text": "War", fontsize: "14px" },
+            { "percWidth": 0.065, "cy": "1.3em", "text": "Western", fontsize: "16px" },
+            { "percWidth": 0.52, "cy": "9.3em", "text": "Fantasy", fontsize: "14px" },
+            { "percWidth": 0.09, "cy": "7.7em", "text": "Music", fontsize: "14px" },
+            { "percWidth": 0.3, "cy": "10.1em", "text": "History", fontsize: "14px" },
             { "percWidth": 0.43, "cy": "6.9em", "text": "Horror", fontsize: "16px" }];
         genreLabels.forEach(genre => {
             svg.append("text")
@@ -507,14 +513,14 @@ $(function () {
     $("#movieTimelineProductionHousesButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: false, code: "pcfl" }
+        chartProperties = { typeGenre: false, code: "pcfl" , y_title:"Ratio of production houses' movie distribution"}
         chart("all_data_stream.csv", chartType, chartProperties);
         $("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
         chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: true, code: "gfl" }
+        chartProperties = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production" }
         chart("all_data_stream.csv", chartType, chartProperties);
         $("#movieTimelineHeading").html("Movie Timeline");
     })
