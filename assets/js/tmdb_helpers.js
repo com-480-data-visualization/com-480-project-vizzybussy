@@ -24,7 +24,8 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                     $(creditMovieDiv).append("<div class='col-4'> <a href='https://www.themoviedb.org/person/"
                     +data.credits.cast[i].id
                     +"' target='_blank'> "
-                    +"<img class='img-fluid rounded' style='width:100%' src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/"+data.credits.cast[i].profile_path+"'>"
+                    +"<img class='img-fluid rounded' style='width:100%;'"
+                   +" src="+(data.credits.cast[i].profile_path == null ? "'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'": "'https://image.tmdb.org/t/p/w600_and_h900_bestv2/"+data.credits.cast[i].profile_path)+"'>"
                     
                     +"<p>"+data.credits.cast[i].name.toString()+"</p>"+"</textarea>"
                     +"</a></div>"

@@ -23,15 +23,6 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 
-<!--IOn rangeSlider https://github.com/IonDen/ion.rangeSlider-->
-
-<!--Plugin CSS file with desired skin-->
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
-
-<!--Plugin JavaScript file-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-
 <!-- Brush imports js-->
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
@@ -43,10 +34,19 @@
 <script src="https://d3js.org/d3-drag.v1.min.js"></script>
 <script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
+<script src="assets/external/jquery/jquery.js"></script>
+<link rel="stylesheet" href="./assets/css/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
 
 <div class="row">
-    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+    <div class="col-4 text-center my-auto">
+        Timeline control:
+        <button type="button" class="btn btn-light" id="timelineControl">Play</button>
+    </div>
+    <div class="col-7">
         <label for="genre-select">Genre</label>
         <select id="genre-select" class="form-control">
             <option selected value="all">All</option>
@@ -73,7 +73,10 @@
 </div>
 <div class="row" style="margin-top: 1em;">
     <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
-        <div id="year_selector"></div>
+
+        <div id="year_selector" style="margin-bottom: 2em;">
+            <div id="custom-handle" class="ui-slider-handle"></div>
+        </div>
     </div>
 </div>
 
@@ -108,8 +111,21 @@
 
 
 
-<script  src="./assets/js/themoviedb.js" type="text/javascript"></script>
+<script src="./assets/js/themoviedb.js" type="text/javascript"></script>
 <script src="./assets/js/tmdb_helpers.js" type="text/javascript"></script>
+
+
+<!--Jquerry ui custom handle-->
+<style>
+    #custom-handle {
+        width: 3em;
+        height: 1.6em;
+        top: 50%;
+        margin-top: -.8em;
+        text-align: center;
+        line-height: 1.6em;
+    }
+</style>
 
 <script>
     //https://observablehq.com/@will-r-chase/scatter-plot
@@ -123,22 +139,37 @@
         color_hover_data_point: "#55b375",
         opacity_data_point_hover: "0.9",
         opacity_data_point_no_hover: "0.5",
-        color_no_hover_data_point: "#69b3a2"
+        color_no_hover_data_point: "#69b3a2",
+
+        slider_max_year: 2016,
+        slider_min_year:1966
     }
 
-    var $year_sel = $("#year_selector")
+    https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg
 
-    $year_sel.ionRangeSlider({
-        skin: "flat",
-        min: 1966,
-        max: 2016,
-        from: 2000,
-        type: 'single',
-        prefix: "",
-        grid: true,
-        grid_num: 10,
-        prettify_enabled: false
-    });
+    $("#timelineControl").attr("onclick", "timelineAction()")
+
+    var myTimelineTimer = null
+    var timelineAction = () => {
+        if (myTimelineTimer == null) {
+            $("#timelineControl").text("Stop")
+            myTimelineTimer = setInterval(() => {
+                $("#year_selector").slider("value", $("#year_selector").slider("value") + 1);
+                if ($("#year_selector").slider("value") == config.slider_max_year) {
+                    clearInterval(myTimelineTimer)
+                    myTimelineTimer = null
+                    $("#timelineControl").text("Start")
+                }
+            }, 1000)
+        } else {
+            clearInterval(myTimelineTimer)
+            myTimelineTimer = null
+            $("#timelineControl").text("Start")
+        }
+
+
+    }
+
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -203,9 +234,30 @@
     //Read the data
     d3.csv("data/bubbleData.csv", function (data) {
 
-        $("#year_selector").on("change", function () {
-            renderData(data)
-        })
+        $(function () {
+            var handle = $("#custom-handle");
+            $("#year_selector").slider({
+                //range: "max",
+                create: function () {
+                    handle.text($(this).slider("value"));
+                },
+                //animate: "fast",
+                min: config.slider_min_year,
+                max: config.slider_max_year,
+                value: 2000,
+                change: function (event, ui) {
+                    console.log(ui.value);
+                    handle.text(ui.value);
+                    renderData(data)
+                },
+                slide: function (event, ui) {
+                    console.log(ui.value);
+                    handle.text(ui.value);
+                }
+            })
+        });
+
+
 
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
@@ -231,85 +283,6 @@
 
 
     var renderData = (data) => {
-
-
-
-        function tooltipMouseOver(d, i) {
-            let el = d3.select("my_dataviz");
-
-            let div = el
-                .append("g")
-                .append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0);
-
-            div
-                .html(`Hellow`)
-                .style("opacity", 0.9)
-                .style("left", (d3.event.pageX + 28) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-
-            let el2 = d3.selectAll("circle#point-" + i);
-
-            el2
-                .transition()
-                .duration(100)
-                .style("fill-opacity", 0.9)
-                .style("stroke", "black")
-                .style("stroke-width", "1px")
-                .style("stroke-opacity", 0.7);
-
-
-            let guides = d3.select("svg")
-                .append("g")
-                .attr("class", "guides")
-                .style("pointer-events", "none");
-
-            guides
-                .append("line")
-                .attr("x1", el2.attr("cx"))
-                .attr("x2", el2.attr("cx"))
-                .attr("y1", el2.attr("cy"))
-                .attr("y2", height - margin.bottom)
-                .style("stroke", el2.attr("fill"))
-                .style("opacity", 0)
-                .transition()
-                .duration(200)
-                .style("opacity", 0.7);
-
-            guides
-                .append("line")
-                .attr("x1", el2.attr("cx"))
-                .attr("x2", margin.left)
-                .attr("y1", el2.attr("cy"))
-                .attr("y2", el2.attr("cy"))
-                .style("stroke", el2.attr("fill"))
-                .style("opacity", 0)
-                .transition()
-                .duration(200)
-                .style("opacity", 0.7);
-
-
-
-        }
-
-        function tooltipMouseOut(d, i) {
-            let el = d3.selectAll(".tooltip");
-
-            el.each(function () {
-                el.remove();
-            });
-            let el2 = d3.selectAll("circle#point-" + i);
-
-            el2
-                .transition()
-                .duration(200)
-                .style("fill-opacity", 0.75)
-                .style("stroke-width", "0px");
-
-            d3.select(".guides").remove();
-
-        }
 
 
 
@@ -341,7 +314,7 @@
                 var popularityDiv = movieDivInfo
                     .append("div")
                     .attr("class", "row")
-                
+
                 var creditsDiv = movieDivInfo
                     .append("div")
                     .attr("class", "row")
@@ -468,7 +441,7 @@
         if (genre_selected != "all") {
             filterFuncGenre = (dat) => { return dat.filter((d) => { return d.genres === genre_selected }) }
         }
-        var fromYear = $("#year_selector").data("from")
+        var fromYear = $("#year_selector").slider("option", "value")
         var filterFunc = (dat) => { return filterFuncGenre(dat).filter((d) => { return d.realease_year == fromYear }) }
 
 
