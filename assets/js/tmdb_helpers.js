@@ -30,12 +30,6 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                     +"</a></div>"
                     )
 
-                    <div class="view overlay">
-    <img src="https://mdbootstrap.com/img/Photos/Others/forest-sm.jpg" class="img-fluid " alt="smaple image">
-    <div class="mask flex-center rgba-red-strong">
-        <p class="white-text">Strong overlay</p>
-    </div>
-</div>
                     console.log(data.credits.cast[i].name.toString())
                 }
             }
