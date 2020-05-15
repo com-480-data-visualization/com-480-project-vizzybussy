@@ -482,10 +482,12 @@
           if (actor_selected || overnode) {
             printText = true;
           }
-          if (actor_selected_name == d.id && update_once) {
+          if (actor_selected_name == d.id) {
             showTooltipActor([d.x, d.y], d);
-            update_once=false;
-            simulationUpdate();
+            if (update_once) {
+              update_once=false;
+              simulationUpdate();
+            }
           }
           if (current_node_name == d.id || actor_selected_name == d.id) {
             context.arc(d.x, d.y, radius*1.3, 0, 2 * Math.PI, true);
