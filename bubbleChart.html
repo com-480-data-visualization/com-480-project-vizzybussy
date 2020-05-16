@@ -41,12 +41,13 @@
 
 
 
+
 <div class="row">
     <div class="col-4 text-center my-auto">
         Timeline control:
         <button type="button" class="btn btn-light" id="timelineControl">Play</button>
     </div>
-    <div class="col-7">
+    <div class="col-4">
         <label for="genre-select">Genre</label>
         <select id="genre-select" class="form-control">
             <option selected value="all">All</option>
@@ -69,6 +70,11 @@
             <option value="Music">Music</option>
             <option value="Documentary">Documentary</option>
         </select>
+    </div>
+    <div class="col-4 ui-widget my-auto">
+        <!--<label for="search">Search: </label>-->
+        <input id="search">
+        <button type="button" class="btn btn-light">Search</button>
     </div>
 </div>
 <div class="row" style="margin-top: 1em;">
@@ -246,15 +252,38 @@
                 max: config.slider_max_year,
                 value: 2000,
                 change: function (event, ui) {
-                    console.log(ui.value);
-                    handle.text(ui.value);
-                    renderData(data)
+                    if(ui.value != null){ //called from search
+                        console.log(ui.value);
+                        handle.text(ui.value);
+                        renderData(data)
+                    }
                 },
                 slide: function (event, ui) {
                     console.log(ui.value);
                     handle.text(ui.value);
                 }
             })
+        });
+
+
+
+        var movies = []
+        for (const d in data) {
+            movies.push({label:data[d].original_title, data:data[d]})
+        }
+
+        $(function () {
+            $("#search").autocomplete({
+                source: movies,
+                minLength: 3,
+                delay: 0,
+                change: function(event, ui) {
+                    console.log(ui.item.data)
+                    $("#year_selector").slider("value", ui.item.data.realease_year)
+                    $("#custom-handle").text(ui.item.data.realease_year)
+                    renderData(data).displayMovieInfo(ui.item.data)
+                }
+            });
         });
 
 
@@ -366,7 +395,7 @@
                     .attr("style", "width:15%;")
                     .attr("src", "./assets/img/youtube.svg")
 
-                setMovieImage("#movieInfoImg", d.id, movieInfoImgLink = "#movieInfoImgLink", creditMovieDiv = "#creditMovieDiv", movieInfoYoutubeLink="#movieInfoYoutubeLink", verbose = true)
+                setMovieImage("#movieInfoImg", d.id, movieInfoImgLink = "#movieInfoImgLink", creditMovieDiv = "#creditMovieDiv", movieInfoYoutubeLink = "#movieInfoYoutubeLink", verbose = true)
 
                 moneyDiv
                     .append("div")
