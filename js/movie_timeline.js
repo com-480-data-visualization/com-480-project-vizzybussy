@@ -34,37 +34,48 @@ $(function () {
         "#ff6348", "#ced6e0", "#ff4757", "#dff9fb",
         "#ff6b81", "#575fcf",
         "#1e90ff", "#747d8c", "#dfe4ea"];
-    
-    cbsafe = ["#648FFF","#785EF0","#d81b60", "#fe6100", "#ffb000", 
-    "#648FFF","#785EF0","#d81b60", "#fe6100", "#ffb000" ,"#648FFF",
-    "#785EF0","#d81b60", "#fe6100", "#ffb000"  ]
 
-    cbsafe_genres = ['#00429d', '#245fa8', '#387cb2', '#4b99bc', '#62b6c6', 
-    '#81d3cf', '#adeed8', '#ffffe0', '#ffdabb', '#ffb498', 
-    '#fa8c78', '#ea685f', '#d4444b', '#b8203f', '#93003a']
+    cbsafe = ["#648FFF", "#785EF0", "#d81b60", "#fe6100", "#ffb000",
+        "#648FFF", "#785EF0", "#d81b60", "#fe6100", "#ffb000", "#648FFF",
+        "#785EF0", "#d81b60", "#fe6100", "#ffb000"]
+
+    cbsafe_genres = ['#00429d', '#245fa8', '#387cb2', '#4b99bc', '#62b6c6',
+        '#81d3cf', '#adeed8', '#ffffe0', '#ffdabb', '#ffb498',
+        '#fa8c78', '#ea685f', '#d4444b', '#b8203f', '#93003a']
 
     cbsafe_pcs = ['#00429d', '#2c6aac', '#4793ba', '#68bcc7', '#99e4d4',
-     '#ffcbad', '#fd947e', '#e6615a', '#c42e43', '#93003a']
+        '#ffcbad', '#fd947e', '#e6615a', '#c42e43', '#93003a']
 
-    chartPropertiesGenreFirstLevel = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production",
-                                        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange : colorrange3 }
+    chartPropertiesGenreFirstLevel = {
+        typeGenre: true, code: "gfl", y_title: "Ratio of genre production",
+        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange: colorrange3
+    }
 
-    chartPropertiesPHFirstLevel = { typeGenre: false, code: "pcfl" , y_title:"Ratio of production houses' movie distribution",
-                                        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange : colorrange1 }
+    chartPropertiesPHFirstLevel = {
+        typeGenre: false, code: "pcfl", y_title: "Ratio of production houses' movie distribution",
+        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange: colorrange1
+    }
 
-    chartPropertiesGenreSecondLevel = { typeGenre: true, code: "gsl", y_title:"Number of movies per genre" ,
-                                        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange : colorrange3 } 
-    
-    chartPropertiesPHSecondLevel = { typeGenre: false,  code: "pcsl", y_title:"Number of movies per production house",
-                                        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange : colorrange1 }
+    chartPropertiesGenreSecondLevel = {
+        typeGenre: true, code: "gsl", y_title: "Number of movies per genre",
+        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange: colorrange3
+    }
 
-    currentChartProperties = chartPropertiesGenreFirstLevel                          
+    chartPropertiesPHSecondLevel = {
+        typeGenre: false, code: "pcsl", y_title: "Number of movies per production house",
+        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange: colorrange1
+    }
 
-    chart("all_data_stream.csv");
+    var colorBlindChecked = false
 
     function chart(csvpath) {
 
         colorrange = currentChartProperties.colorrange
+
+        if (colorBlindChecked) {
+            if (currentChartProperties.typeGenre) colorrange = cbsafe_genres
+            else colorrange = cbsafe_pcs
+        }
 
         var format = d3.time.format("%Y");
 
@@ -270,6 +281,12 @@ $(function () {
                     }
 
                 })
+                .on("mouseover", function(d, i) {
+                    svg.selectAll(".layer").transition()
+                    .duration(250)
+                    .attr("opacity", function(d, j) {
+                      return j != i ? 0.8 : 1;
+                  })})
                 .on("mouseout", function (d, i) {
                     svg.selectAll(".layer")
                         .transition()
@@ -289,18 +306,28 @@ $(function () {
 
                 .on("click", function (d, i) {
                     if (currentChartProperties.firstLevel) {
-                        document.getElementById("movieTimeline").innerHTML = ""
+                        //document.getElementById("movieTimeline").innerHTML = ""
                         tooltip.style("visibility", "hidden");
                         if (currentChartProperties.typeGenre) {
-                            // Load production companies
                             currentChartProperties = chartPropertiesPHSecondLevel
                             currentChartProperties.group = d.key
-                            chart("all_data_stream.csv")
+                            $("#movieTimeline").children().last().fadeOut(400, function () {
+                                $("#movieTimeline").html("")
+                                chart("all_data_stream.csv");
+                            });
+                            // Load production companies
+                            //currentChartProperties = chartPropertiesPHSecondLevel
+                            //currentChartProperties.group = d.key
+                            //chart("all_data_stream.csv")
                         } else {
                             // Load genres
                             currentChartProperties = chartPropertiesGenreSecondLevel
                             currentChartProperties.group = d.key
-                            chart("all_data_stream.csv")
+                            $("#movieTimeline").children().last().fadeOut(400, function () {
+                                $("#movieTimeline").html("")
+                                chart("all_data_stream.csv")
+                            });
+
                         }
                         $("#movieTimelineHeading").html("Movie Timeline - " + d.key);
                     }
@@ -361,6 +388,7 @@ $(function () {
     // generate a legend
     function legend(layers, genre, className) {
 
+        $(".legend").html("")
         $('.secondLevelMovieTimeline').prepend('<div class="legend float-container ' + className + '"></div>');
         $('.legend').hide();
         var legend = []
@@ -397,7 +425,7 @@ $(function () {
         for (var i = 0; i < 5; i++) {
             var movie = currentData[i];
             var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
-            console.log(currentCard.getElementsByClassName('card-title'))
+            //console.log(currentCard.getElementsByClassName('card-title'))
             currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
             currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
             currentCard.getElementsByClassName('card-text')[0].textContent = movie.overview
@@ -510,19 +538,42 @@ $(function () {
     });
 
     $("#movieTimelineProductionHousesButton").click(() => {
-        document.getElementById("movieTimeline").innerHTML = ""
-        currentChartProperties = chartPropertiesPHFirstLevel
-        console.log(currentChartProperties)
-        chart("all_data_stream.csv");
-        $("#movieTimelineHeading").html("Movie Timeline");
+
+        $('.legend').fadeOut();
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            currentChartProperties = chartPropertiesPHFirstLevel
+            chart("all_data_stream.csv");
+            $("#movieTimelineHeading").html("Movie Timeline");
+        });
+        //$("#movieTimeline").html("")
+        //currentChartProperties = chartPropertiesPHFirstLevel
+        //console.log(currentChartProperties)
+        //chart("all_data_stream.csv");
+        //$("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
-        document.getElementById("movieTimeline").innerHTML = ""
-        currentChartProperties = chartPropertiesGenreFirstLevel
-        chart("all_data_stream.csv");
-        $("#movieTimelineHeading").html("Movie Timeline");
+        $('.legend').fadeOut();
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            currentChartProperties = chartPropertiesGenreFirstLevel
+            chart("all_data_stream.csv");
+            $("#movieTimelineHeading").html("Movie Timeline");
+        });
+        //$("#movieTimeline").html("")
+        //currentChartProperties = chartPropertiesGenreFirstLevel
+        //chart("all_data_stream.csv");
+        //$("#movieTimelineHeading").html("Movie Timeline");
     })
 
+    $("#movieTimelineBlindColorCheck").click(() => {
+        colorBlindChecked = !colorBlindChecked
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            //$(this).html("")
+            chart("all_data_stream.csv")
+        });
+    })
+
+    currentChartProperties = chartPropertiesGenreFirstLevel
+    chart("all_data_stream.csv");
     $("#movieTimelineHeading").html("Movie Timeline");
 
 });
