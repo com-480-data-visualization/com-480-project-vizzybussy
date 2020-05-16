@@ -29,6 +29,7 @@ theMovieDb.common = {
         }
       }
     }
+    console.log(query)
     return query;
   },
   validateCallbacks: function(success, error) {

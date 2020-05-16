@@ -102,7 +102,7 @@
                     <!-- End: Text -->
                 </div>
             </div>
-            <div class="row"><div class="embed-responsive" style="height:70vh; pading:1em">
+            <div class="row"><div class="embed-responsive" style="height:100vh; pading:1em">
   <iframe id="bubbleChart" class="embed-responsive-item" src="bubbleChart.html" style="border: 0px;" scrolling="no"
   width="100%"></iframe>
 </div></div>
@@ -208,20 +208,6 @@
         </div>
     </div>
     <!-- End: Team Boxed -->
-    <div class="article-list">
-        <div class="container my-auto">
-            <div class="media article-list">
-                <div class="media-body">
-                    <h2 class="text-center">Data sources</h2>
-                    <hr data-aos="zoom-in" data-aos-duration="200" class="dark my-4">
-                    <p class="text-center">This product uses the TMDb API but is not endorsed or certified by TMDb.<br></p>
-                    <div class="row">
-                        <div class="col text-center"><img src="assets/img/tmdb.svg" style="max-width: 18vw;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -238,16 +224,32 @@
             </div>
         </div>
     </section>
+    <div class="article-list" style="padding-bottom: 8em;">
+        <div class="container my-auto">
+            <div class="media article-list">
+                <div class="media-body">
+                    <h2 class="text-center">Data sources</h2>
+                    <hr data-aos="zoom-in" data-aos-duration="200" class="dark my-4">
+                    <p class="text-center">This product uses the TMDb API but is not endorsed or certified by TMDb.<br></p>
+                    <div class="row">
+                        <div class="col text-center"><img id="testImgLocation" src="assets/img/tmdb.svg" style="max-width: 12vw;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="assets/js/autoresize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/creative.js"></script>
     <script src="assets/js/d3.js"></script>
     <script src="assets/js/d3.layout.js"></script>
+    <script src="assets/js/themoviedb.js"></script>
+    <script src="assets/js/autoresize.js"></script>
+    <script src="assets/js/tmdb_helpers.js"></script>
 </body>
 
 </html>
