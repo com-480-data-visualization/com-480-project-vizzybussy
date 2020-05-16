@@ -1,8 +1,5 @@
 $(function () {
 
-    chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-    chartProperties = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production" }
-
     //https://flatuicolors.com/palette/au
 
     colorrange1 = ["#f6e58d", "#f9ca24", "#ffbe76", "#f0932b", "#ff7979", "#eb4d4b",
@@ -49,19 +46,25 @@ $(function () {
     cbsafe_pcs = ['#00429d', '#2c6aac', '#4793ba', '#68bcc7', '#99e4d4',
      '#ffcbad', '#fd947e', '#e6615a', '#c42e43', '#93003a']
 
-    chart("all_data_stream.csv", chartType, chartProperties);
+    chartPropertiesGenreFirstLevel = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production",
+                                        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange : colorrange3 }
 
-    function chart(csvpath, chartType, chartProperties) {
+    chartPropertiesPHFirstLevel = { typeGenre: false, code: "pcfl" , y_title:"Ratio of production houses' movie distribution",
+                                        cssClass: ".chart", stackOffset: "expand", firstLevel: true, colorrange : colorrange1 }
 
-        if (chartProperties.typeGenre) {
-            colorrange = colorrange3
-        } else {
-            colorrange = colorrange1
-        }
+    chartPropertiesGenreSecondLevel = { typeGenre: true, code: "gsl", y_title:"Number of movies per genre" ,
+                                        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange : colorrange3 } 
+    
+    chartPropertiesPHSecondLevel = { typeGenre: false,  code: "pcsl", y_title:"Number of movies per production house",
+                                        cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false, colorrange : colorrange1 }
 
-        //colorrange = colororange2
+    currentChartProperties = chartPropertiesGenreFirstLevel                          
 
-        strokecolor = colorrange[0];
+    chart("all_data_stream.csv");
+
+    function chart(csvpath) {
+
+        colorrange = currentChartProperties.colorrange
 
         var format = d3.time.format("%Y");
 
@@ -69,7 +72,7 @@ $(function () {
         var width = document.body.clientWidth - margin.left - margin.right;
         var height = 400 - margin.top - margin.bottom;
 
-        var tooltip = d3.select(chartType.cssClass)
+        var tooltip = d3.select(currentChartProperties.cssClass)
             .append("div")
             .attr("class", "tip")
             .style("position", "absolute")
@@ -99,18 +102,18 @@ $(function () {
             .tickSize(2);
 
         var stack = d3.layout.stack()
-            .offset(chartType.stackOffset)
+            .offset(currentChartProperties.stackOffset)
             .values(function (d) { return d.values; })
             .x(function (d) { return d.fullyear; })
             .y(function (d) {
-                if (chartProperties.firstLevel)
+                if (currentChartProperties.firstLevel)
                     return d.norm_per_year;
                 else return d.total_films;
             });
 
         var nest = d3.nest()
             .key(function (d) {
-                if (chartProperties.typeGenre) return d.genres;
+                if (currentChartProperties.typeGenre) return d.genres;
                 else return d.production_companies;
             });
 
@@ -132,11 +135,11 @@ $(function () {
             .x(function (d) { return x(d.fullyear); })
             .y0(function (d) { return y(d.y0); })
             .y1(function (d) {
-                if (chartType.firstLevel) return y(d.y0 + d.norm_per_year);
+                if (currentChartProperties.firstLevel) return y(d.y0 + d.norm_per_year);
                 else return y(d.y0 + d.total_films);
             });
 
-        var svg = d3.select(chartType.cssClass).append("svg")
+        var svg = d3.select(currentChartProperties.cssClass).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -152,26 +155,26 @@ $(function () {
                 d.norm_per_year = Math.round(d.norm_per_year * 1000) / 1000
             });
             data = data.filter((d) => {
-                return d.code == chartProperties.code
+                return d.code == currentChartProperties.code
             });
-            if (!chartType.firstLevel) {
-                if (chartProperties.typeGenre) {
+            if (!currentChartProperties.firstLevel) {
+                if (currentChartProperties.typeGenre) {
                     data = data.filter((d) => {
-                        return d.production_companies == chartProperties.group
+                        return d.production_companies == currentChartProperties.group
                     });
                 } else {
                     data = data.filter((d) => {
-                        return d.genres == chartProperties.group
+                        return d.genres == currentChartProperties.group
                     });
                 }
             };
 
             var layers = stack(nest.entries(data));
-            if (!chartType.firstLevel)
-                if (chartProperties.typeGenre) {
-                    legend(layers, chartProperties.group, "legend-genre")
+            if (!currentChartProperties.firstLevel)
+                if (currentChartProperties.typeGenre) {
+                    legend(layers, currentChartProperties.group, "legend-genre")
                 } else {
-                    legend(layers, chartProperties.group, "legend-ph")
+                    legend(layers, currentChartProperties.group, "legend-ph")
                 }
 
 
@@ -218,7 +221,7 @@ $(function () {
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text(chartProperties.y_title);
+                .text(currentChartProperties.y_title);
 
             svg.append("text")
                 .attr("transform", "rotate(-90)")
@@ -226,10 +229,10 @@ $(function () {
                 .attr("x", 0 - (height / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
-                .text(chartProperties.y_title);
+                .text(currentChartProperties.y_title);
 
-            if (chartType.firstLevel & chartProperties.typeGenre) showGenreLabels(svg, width)
-            if (chartType.firstLevel & !chartProperties.typeGenre) showProductionHousesLabels(svg, width)
+            if (currentChartProperties.firstLevel & currentChartProperties.typeGenre) showGenreLabels(svg, width)
+            if (currentChartProperties.firstLevel & !currentChartProperties.typeGenre) showProductionHousesLabels(svg, width)
 
             svg.selectAll(".layer")
                 .attr("opacity", 1)
@@ -257,10 +260,10 @@ $(function () {
                         .style("stroke", "#535c68")
                         .style("stroke-width", "2px");
 
-                    if (chartType.firstLevel) {
-                        changeMovieDisplay(d.key, chartProperties.typeGenre)
+                    if (currentChartProperties.firstLevel) {
+                        changeMovieDisplay(d.key, currentChartProperties.typeGenre)
                     }
-                    if (!chartType.firstLevel) {
+                    if (!currentChartProperties.firstLevel) {
                         vertical.style("visibility", "visible")
                         vertical.style("left", mouse[0] + "px")
                         //tooltip.style("visibility","visible")
@@ -285,25 +288,21 @@ $(function () {
                 })
 
                 .on("click", function (d, i) {
-                    if (chartType.firstLevel) {
+                    if (currentChartProperties.firstLevel) {
                         document.getElementById("movieTimeline").innerHTML = ""
                         tooltip.style("visibility", "hidden");
-                        chartType = { cssClass: ".secondLevelMovieTimeline", stackOffset: "silhouette", firstLevel: false }
-                        if (chartProperties.typeGenre) {
+                        if (currentChartProperties.typeGenre) {
                             // Load production companies
-                            chartProperties = { typeGenre: false, group: d.key, code: "pcsl", y_title:"Number of movies per production house" }
-                            chart("all_data_stream.csv", chartType, chartProperties)
-                            //changeMovieDisplay(d.key)
+                            currentChartProperties = chartPropertiesPHSecondLevel
+                            currentChartProperties.group = d.key
+                            chart("all_data_stream.csv")
                         } else {
                             // Load genres
-                            chartProperties = { typeGenre: true, group: d.key, code: "gsl", y_title:"Number of movies per genre" }
-                            chart("all_data_stream.csv", chartType, chartProperties)
+                            currentChartProperties = chartPropertiesGenreSecondLevel
+                            currentChartProperties.group = d.key
+                            chart("all_data_stream.csv")
                         }
                         $("#movieTimelineHeading").html("Movie Timeline - " + d.key);
-                        //chartProperties = { typeGenre: false, group: d.key }
-                        //chart("production_companies_stream.csv", chartType, chartProperties)
-                        //createSubchart("production_companies_stream.csv",d.key)
-                        //changeMovieDisplay(d.key)
                     }
 
                 })
@@ -391,8 +390,8 @@ $(function () {
             movieDiv.style.display = "block"
         }
 
-        if (chartProperties.typeGenre) {
-            console.log(most_popular_movies_per_genre[genre])
+        if (currentChartProperties.typeGenre) {
+            //console.log(most_popular_movies_per_genre[genre])
         }
         currentData = most_popular_movies_per_genre[genre]
         for (var i = 0; i < 5; i++) {
@@ -512,16 +511,15 @@ $(function () {
 
     $("#movieTimelineProductionHousesButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
-        chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: false, code: "pcfl" , y_title:"Ratio of production houses' movie distribution"}
-        chart("all_data_stream.csv", chartType, chartProperties);
+        currentChartProperties = chartPropertiesPHFirstLevel
+        console.log(currentChartProperties)
+        chart("all_data_stream.csv");
         $("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
         document.getElementById("movieTimeline").innerHTML = ""
-        chartType = { cssClass: ".chart", stackOffset: "expand", firstLevel: true }
-        chartProperties = { typeGenre: true, code: "gfl", y_title:"Ratio of genre production" }
-        chart("all_data_stream.csv", chartType, chartProperties);
+        currentChartProperties = chartPropertiesGenreFirstLevel
+        chart("all_data_stream.csv");
         $("#movieTimelineHeading").html("Movie Timeline");
     })
 
