@@ -27,7 +27,7 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                     +"' target='_blank'> "
                     +"<img class='img-fluid rounded' style='width:100%;'"
                    +" src="+(data.credits.cast[i].profile_path == null ? "'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'": "'https://image.tmdb.org/t/p/w600_and_h900_bestv2/"+data.credits.cast[i].profile_path)+"'>"
-                    +"<p>"+data.credits.cast[i].name.toString()+"</p>"+"</textarea>"
+                    +"<p style='color:black'>"+data.credits.cast[i].name.toString()+"</p>"
                     +"</a></div>"
                     )
 

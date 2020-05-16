@@ -237,83 +237,6 @@
         .text("Popularity");
 
 
-    //Read the data
-    d3.csv("data/bubbleData.csv", function (data) {
-
-        $(function () {
-            var handle = $("#custom-handle");
-            $("#year_selector").slider({
-                //range: "max",
-                create: function () {
-                    handle.text($(this).slider("value"));
-                },
-                //animate: "fast",
-                min: config.slider_min_year,
-                max: config.slider_max_year,
-                value: 2000,
-                change: function (event, ui) {
-                    if(ui.value != null){ //called from search
-                        console.log(ui.value);
-                        handle.text(ui.value);
-                        renderData(data)
-                    }
-                },
-                slide: function (event, ui) {
-                    console.log(ui.value);
-                    handle.text(ui.value);
-                }
-            })
-        });
-
-
-
-        var movies = []
-        for (const d in data) {
-            movies.push({label:data[d].original_title, data:data[d]})
-        }
-
-        $(function () {
-            $("#search").autocomplete({
-                source: movies,
-                minLength: 3,
-                delay: 0,
-                change: function(event, ui) {
-                    console.log(ui.item.data)
-                    $("#year_selector").slider("value", ui.item.data.realease_year)
-                    $("#custom-handle").text(ui.item.data.realease_year)
-                    renderData(data).displayMovieInfo(ui.item.data)
-                }
-            });
-        });
-
-
-
-        // Color scale: give me a specie name, I return a color
-        var color = d3.scaleOrdinal()
-            .domain(["setosa", "versicolor", "virginica"])
-            .range(["#440154ff", "#21908dff", "#fde725ff"])
-
-
-        d3.select('#genre-select').on('change', function () {
-            var f = document.getElementById('genre-select')
-            selected_genre = f.options[f.selectedIndex].value
-            console.log(selected_genre)
-            renderData(data)
-        })
-
-
-        renderData(data)
-    })
-
-    const usdFormatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    })
-
-
-    var renderData = (data) => {
-
-
 
 
         var keepMovieInfoDisplayed = { display: false }
@@ -475,6 +398,83 @@
             }
             console.log(keepMovieInfoDisplayed)
         }
+
+    //Read the data
+    d3.csv("data/bubbleData.csv", function (data) {
+
+        $(function () {
+            var handle = $("#custom-handle");
+            $("#year_selector").slider({
+                //range: "max",
+                create: function () {
+                    handle.text($(this).slider("value"));
+                },
+                //animate: "fast",
+                min: config.slider_min_year,
+                max: config.slider_max_year,
+                value: 2000,
+                change: function (event, ui) {
+                    if(ui.value != null){ //called from search
+                        console.log(ui.value);
+                        handle.text(ui.value);
+                        renderData(data)
+                    }
+                },
+                slide: function (event, ui) {
+                    console.log(ui.value);
+                    handle.text(ui.value);
+                }
+            })
+        });
+
+
+
+        var movies = []
+        for (const d in data) {
+            movies.push({label:data[d].original_title, data:data[d]})
+        }
+
+        $(function () {
+            $("#search").autocomplete({
+                source: movies,
+                minLength: 3,
+                delay: 0,
+                change: function(event, ui) {
+                    console.log(ui.item.data)
+                    $("#year_selector").slider("value", ui.item.data.realease_year)
+                    $("#custom-handle").text(ui.item.data.realease_year)
+                    displayMovieInfo(ui.item.data)
+                    permanentMovieDisplay(ui.item.data)
+                }
+            });
+        });
+
+
+
+        // Color scale: give me a specie name, I return a color
+        var color = d3.scaleOrdinal()
+            .domain(["setosa", "versicolor", "virginica"])
+            .range(["#440154ff", "#21908dff", "#fde725ff"])
+
+
+        d3.select('#genre-select').on('change', function () {
+            var f = document.getElementById('genre-select')
+            selected_genre = f.options[f.selectedIndex].value
+            console.log(selected_genre)
+            renderData(data)
+        })
+
+
+        renderData(data)
+    })
+
+    const usdFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+
+
+    var renderData = (data) => {
 
 
         var genre_selected = $("select#genre-select").val();
