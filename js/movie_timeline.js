@@ -369,13 +369,17 @@ $(function () {
     function showProductionHousesLabels(svg, width) {
         var phLabels = [
             //{ "percWidth": 0.65, "cx": "800", "cy": "9em", "text": "Drama" },
-            { "percWidth": 0.4, "cx": "130", "cy": "12em", "text": "Paramount Pictures", fontsize: "20px" },
-            { "percWidth": 0.75, "cx": "250", "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
-            { "percWidth": 0.85, "cx": "550", "cy": "18.5em", "text": "Columbia Pictures", fontsize: "18px" },
-            { "percWidth": 0.87, "cx": "550", "cy": "12.7em", "text": "Relativity Media", fontsize: "16px" },
-            { "percWidth": 0.12, "cx": "550", "cy": "12.5em", "text": "Twenty", fontsize: "16px" },
-            { "percWidth": 0.12, "cx": "550", "cy": "13.5em", "text": "Century Fox", fontsize: "16px" },
-            { "percWidth": 0.65, "cy": "5.5em", "text": "Universal Pictures", fontsize: "20px" }];
+            { "percWidth": 0.45,  "cy": "9.7em", "text": "Paramount Pictures", fontsize: "20px" },
+            { "percWidth": 0.57, "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
+            { "percWidth": 0.55, "cy": "16.5em", "text": "Columbia Pictures", fontsize: "18px" },
+            { "percWidth": 0.86, "cy": "10.8em", "text": "Relativity Media", fontsize: "16px" },
+            { "percWidth": 0.115, "cy": "17em", "text": "20th Century", fontsize: "18px" },
+            { "percWidth": 0.115, "cy": "18em", "text": "Studios", fontsize: "18px" },
+            { "percWidth": 0.67, "cy": "10.5em", "text": "Touchstone Pictures", fontsize: "14px" },
+            { "percWidth": 0.36, "cy": "18.7em", "text": "Metro-Goldwyn-Mayer (MGM)", fontsize: "14px" },
+            { "percWidth": 0.7, "cy": "16.5em", "text": "New Line Cinema", fontsize: "14px" },
+            { "percWidth": 0.75, "cy": "5em", "text": "Walt Disney", fontsize: "16px" },
+            { "percWidth": 0.33, "cy": "6.9em", "text": "Universal Pictures", fontsize: "18px" }];
         phLabels.forEach(ph => {
             svg.append("text")
                 .attr("x", width * ph.percWidth)
