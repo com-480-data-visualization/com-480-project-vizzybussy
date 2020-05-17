@@ -272,7 +272,8 @@ $(function () {
                         .style("stroke-width", "2px");
 
                     if (currentChartProperties.firstLevel) {
-                        changeMovieDisplay(d.key, currentChartProperties.typeGenre)
+                        $("#movieTimelineMoviesDisplay").css("visibility","visible")
+                        changeMovieDisplay(d.key, color)
                     }
                     if (!currentChartProperties.firstLevel) {
                         vertical.style("visibility", "visible")
@@ -410,36 +411,30 @@ $(function () {
     }
 
 
-    function changeMovieDisplay(genre) {
-        var genreDivId = "movies-" + genre
-        var movieDiv = document.getElementById(genreDivId);
-        if (movieDiv.style.display == "none") {
-            hideAllMovieDivs()
-            movieDiv.style.display = "block"
-        }
+    function changeMovieDisplay(key,color) {
 
         if (currentChartProperties.typeGenre) {
-            //console.log(most_popular_movies_per_genre[genre])
+            currentData = most_popular_movies_per_genre[key]
+        } else {
+            currentData = most_popular_movies_per_pc[key]
         }
-        currentData = most_popular_movies_per_genre[genre]
         for (var i = 0; i < 5; i++) {
             var movie = currentData[i];
             var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
-            //console.log(currentCard.getElementsByClassName('card-title'))
+            currentCard.getElementsByClassName('card-header')[0].style.backgroundColor = color;
+            currentCard.style.borderColor = color;
+            currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = key
             currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
             currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
-            currentCard.getElementsByClassName('card-text')[0].textContent = movie.overview
-        }
-    };
+            currentCard.getElementsByClassName('timeline-movie-year')[0].innerHTML = new Date(movie.release_date).getFullYear()
+            currentCard.getElementsByClassName('timeline-movie-year')[0].style.display = "block"
+            var posterDivId = "#timeline_movie_poster_"+(i+1)
+            setMovieImage(posterDivId,movie.id)
+                    
 
-    function hideAllMovieDivs() {
-        var parentDiv = document.getElementById('movieTimelineMoviesDisplay');
-        var subs = parentDiv.children
-        for (var i = 0; i < subs.length; i++) {
-            var a = subs[i];
-            a.style.display = 'none';
         }
-    }
+          
+    };
 
     // function to decide whether to pluralize the word "movie" in the tooltip
     function moviePlural(x) {
