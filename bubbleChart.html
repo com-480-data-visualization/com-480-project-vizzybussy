@@ -142,15 +142,32 @@
 
 
     var config = {
-        color_hover_data_point: "#55b375",
         opacity_data_point_hover: "0.9",
         opacity_data_point_no_hover: "0.5",
-        color_no_hover_data_point: "#69b3a2",
+        color_no_genre_data_point: "#444444",
 
         slider_max_year: 2016,
         slider_min_year: 1966,
 
         graph_background_color: "#FFFFFF"
+    }
+
+    genreColors = {
+        Adventure: "#f0932b",
+        Action: "#f9ca24",
+        Comedy: "#6ab04c",
+        Crime: "#22a6b3",
+        Drama: "#7ed6df",
+        Family: "#badc58",
+        Fantasy: "#c7ecee",
+        History: "#95afc0",
+        Horror: "#686de0",
+        Music: "#dff9fb",
+        Romance: "#ff7979",
+        "Science Fiction": "#ffbe76",
+        Thriller: "#eb4d4b",
+        War: "#f6e58d",
+        Western: "#535c68"
     }
 
     https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg
@@ -255,7 +272,7 @@
             var movieDivInfo = d3.select("#movie_info")
                 .append("div")
                 .attr("class", "overflow-auto")
-                .attr("style", "height:" + ($(window).height() - 170) + "px;")
+                .attr("style", "height:" + (height + margin.top + margin.bottom) + "px;")
                 .append("div")
                 .attr("style", "overflow-x: hidden;")
 
@@ -339,8 +356,7 @@
                 .attr("class", "container d-flex h-100")
                 .append("div")
                 .attr("class", "row align-self-center")
-                .html("<div style='font-size: 80%;'>BUDGET : " + usdFormatter.format(d.budget) + "<p>" + "REVENUE : " + usdFormatter.format(d.revenue) +"</div>")
-                //.text("REVENUE : " + usdFormatter.format(d.revenue))
+                .html("<div style='font-size: 80%;'>BUDGET : " + usdFormatter.format(d.budget) + "<p>" + "REVENUE : " + usdFormatter.format(d.revenue) + "</div>")
 
             popularityDiv
                 .append("div")
@@ -357,7 +373,7 @@
                 .attr("class", "container d-flex h-100")
                 .append("div")
                 .attr("class", "row  align-self-center")
-                .html("<div style='font-size: 80%;'>POPULARITY : " + parseFloat(d.popularity).toFixed(1)+"</div>")
+                .html("<div style='font-size: 80%;'>POPULARITY : " + parseFloat(d.popularity).toFixed(1) + "</div>")
 
 
         }
@@ -392,7 +408,6 @@
 
 
             d3.selectAll(("#data_uid_" + d.id))
-                .style("fill", config.color_no_hover_data_point)
                 .style("opacity", config.opacity_data_point_no_hover)
                 .attr("stroke", "none")
         }
@@ -554,10 +569,9 @@
             .attr("cx", function (d) { return x(d.revenue); })
             .attr("cy", function (d) { return y(d.popularity); })
             .attr("r", function (d) { return z(d.budget); })
-            .style("fill", config.color_no_hover_data_point)
+            .style("fill", function(d) { 
+                return genreColors[d.genres] == undefined ? config.color_no_genre_data_point : genreColors[d.genres]})
             .style("opacity", config.opacity_data_point_no_hover)
-            //.attr("stroke", "black")
-            //.style("fill", function (d) { return color(d.genre) } )
             .on("mouseover", local_config.action_when_entering_data_point)
             .on("mouseleave", local_config.action_when_leaving_data_point)
             .on("click", local_config.action_when_clicking_data_point)
