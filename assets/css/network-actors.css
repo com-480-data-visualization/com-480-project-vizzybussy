@@ -86,12 +86,31 @@
   font-size: 15px;
 }
 
+.titleactor {
+  margin-left: auto;
+  margin-right: auto;
+  color: #666;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+
 .text {
   font-size: 13px;
   padding-top: 0px;
   padding-left: 10px;
   padding-bottom: 0px;
 }
+
+.textactor {
+  font-size: 13px;
+  padding-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 .imdb {
   padding-top:5px;
@@ -109,6 +128,7 @@
 }
 
 #help {
+
 
 }
 

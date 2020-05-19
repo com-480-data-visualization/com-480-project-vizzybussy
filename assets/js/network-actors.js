@@ -143,7 +143,6 @@
       if (!actor_selected) keepOpacity = [];
       overnode = false;
       current_node_name = "";
-      keepOpacity = [];
       simulationUpdate();
     }
   }
@@ -312,12 +311,12 @@
   }
 
   function drawTooltipActor(actor_info) {
-    var bday = actor_info.birthday == undefined? "":'<p class="text"> <b>Birthday:</b> ' + parseDate(actor_info.birthday) + "</p>";
+    var bday = actor_info.birthday == undefined? "":'<p class="textactor"> <b>Birthday:</b> ' + parseDate(actor_info.birthday) + "</p>";
     var picture = actor_info.profile_path == undefined ? "": "<img class='actor' src='"+"https://image.tmdb.org/t/p/w500"+actor_info.profile_path+"' alt='No picture found for this actor.'>";
     //console.log(actor_info.profile_path)
     var html_content =
         "<div class='actorpanel'>" +
-        '<span class="title">'+actor_info.id+'</span>' +
+        '<span class="titleactor">'+actor_info.id+'</span>' +
         "<button id='close'>Close</button>" +
         picture +
         bday +
