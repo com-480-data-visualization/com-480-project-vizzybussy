@@ -246,10 +246,10 @@
       d3.select('#tooltip')
         .append('div')
         .attr("class", "")
-        .html("<span id='close'>×</span>" +
-            '<p class="header">Common movies between the two connected actors.</p>'+
+        .html('<p class="header">Common movies</p>'+
             "<div class='panel'>" +
-              '<p class="title">'+title+'</p>' +
+              "<button id='close'>Close</button>" +
+              '<span class="title">'+title+'</span>' +
               "<img class='resize' src='"+image_url+"'>" +
               '<p class="text"> <b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
               '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
@@ -265,7 +265,7 @@
         .append('div')
         .attr("class", "")
         .html("<div class='panel'>" +
-            '<p class="title">'+title+'</p>' +
+            '<span class="title">'+title+'</span>' +
             "<img class='resize' src='"+image_url+"'>" +
             '<p class="text"><b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
             '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
@@ -312,8 +312,8 @@
     console.log(actor_info.profile_path)
     var html_content =
         "<div class='actorpanel'>" +
-        '<p class="title">'+actor_info.id+'</p>' +
-        "<span id='close'>×</span>" +
+        '<span class="title">'+actor_info.id+'</span>' +
+        "<button id='close'>Close</button>" +
         picture +
         bday +
         '<p class="text"> <b>IMDb profile:</b> ' + '<a href="'+"https://www.imdb.com/name/"+ actor_info.imdb_id +'" target="_blank">'+"https://www.imdb.com/name/"+ actor_info.imdb_id+'</a>' + "</p>"+
@@ -337,6 +337,8 @@
       tooltipQueue.pop();
       length_checker = movies_info.length;
       current_length = 0;
+
+      $('body').addClass("fixedPosition");
       // Build and move tooltip accordingly
       if (tooltipQueue[0] != tooltipQueue[1]) {
         // Build tooltip
@@ -435,7 +437,7 @@
     d3.select('#tooltip')
       .transition().duration(duration)
       .style('opacity', 0)
-
+    $('body').removeClass("fixedPosition");
   } // hideTooltip()
 
 

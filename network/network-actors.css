@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
 #tooltip {
   position: absolute;
   display: inline-block;
@@ -13,6 +15,7 @@
   overflow-y: auto;
   opacity: 0;
   justify-content: space-between;
+  border-radius: 5%;
 }
 
 
@@ -23,7 +26,6 @@
 
 /* Track */
 #tooltip::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
@@ -38,24 +40,15 @@
   background: #FF8C00;
 }
 
-
-#close {
-    position: absolute;
-    float:right;
-    display:inline-block;
-    padding:1px 5px;
-    background:#ccc;
-    user-select: none;
-    border-radius:50%;
+#tooltip::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 10%;
 }
 
-#close:hover {
-        float:right;
-        display:inline-block;
-        padding:1px 5px;
-        background:#ccc;
-    color:#fff;
-    }
+#tooltip::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 10%;
+}
 
 #options {
   position: absolute;
@@ -79,7 +72,7 @@
 /* Tooltip title */
 .title {
   padding: 15px 10px;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   color: #666;
   font-weight: bold;
   font-size: 15px;
@@ -94,8 +87,11 @@
 }
 
 .header {
-  padding: 20px 10px;
-  border-bottom: 4px solid #ccc;
+  padding-bottom: 20px;
+  padding-left: 20%;
+  /* border-bottom: 4px solid #ccc; */
+  margin-left: auto;
+  margin-right: auto;
   color: #666;
   font-weight: bold;
   font-size: 20px;
@@ -103,7 +99,7 @@
 
 .panel {
   display: inline-grid;
-  border-bottom: 5px dotted orange;
+  border-top: 5px dotted orange;
 }
 .actorpanel {
   display: inline-grid;
@@ -149,6 +145,7 @@ img.resize {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  float: right;
 }
 
 img.actor {
@@ -157,4 +154,69 @@ img.actor {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+
+button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 6px;
+  left: 90%;
+  letter-spacing: 1.5px;
+  line-height: 22.5px;
+  outline: none;
+  overflow: hidden;
+  padding: 10px 0 0;
+  position: absolute;
+  text-transform: uppercase;
+  top: 25px;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease-in;
+  width: 30px;
+  border-radius: 30%
+}
+
+button::before,
+button::after {
+  background-color: #fe6100;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform-origin: center left;
+  transition: all 0.2s ease-in;
+  width: 141.4214px;
+  z-index: -1;
+}
+
+button::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+button::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+button:hover {
+  color: white;
+}
+
+button:hover::before,
+button:hover::after {
+  height: 50px;
+  transform: rotate(0deg);
+}
+
+
+.fixedPosition
+{
+   position: fixed;
 }
