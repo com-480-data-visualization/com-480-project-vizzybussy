@@ -7,6 +7,7 @@
                    .attr('width', graphWidth + 'px')
                    .attr('height', height + 'px')
                    .on('mousemove', highlightPicking)
+                   .on('contextmenu', tooltipPicking)
                    .node();
     context = graphCanvas.getContext('2d');
     // ref: https://books.google.fr/books?id=lkBPDwAAQBAJ&pg=PA173&lpg=PA173&dq=interact+with+d3+canvas&source=bl&ots=boP_YKjew2&sig=ACfU3U0v5wYUQM3zJutsMpvv1ADE7XFvIA&hl=fr&sa=X&ved=2ahUKEwjri6-ai_zoAhXC3YUKHcZKA0M4ChDoATAFegQIChAB#v=onepage&q=interact%20with%20d3%20canvas&f=false
@@ -37,6 +38,7 @@
   var elem;
   var height;
   var graphWidth;
+  var original_transform;
 
   var actor_selected = false,
       actor_selected_name = "";
@@ -117,16 +119,19 @@
       var selected_object = object[0];
       var is_edge = object[1];
       if (is_edge) {
-        var link = selected_object[0];
-        movie_ids = link.movie_id;
-        showTooltip(pos, getMovieInfos(movie_ids));
+        if (!actor_selected) {
+          console.log(selected_object[0])
+          keepOpacity = [selected_object[0].source['id'], selected_object[0].target['id']];
+          overnode = true;
+          simulationUpdate();
+        }
       } else {
         var node = selected_object[0];
         if (!actor_selected) {
           keepOpacity = node2neighbors[node.id];
           overnode = true;
           current_node_name = node.id;
-          showTooltipActor(pos, node);
+          // showTooltipActor(pos, node);
           console.log(node)
         }
 
@@ -137,9 +142,36 @@
       if (!actor_selected) keepOpacity = [];
       overnode = false;
       current_node_name = "";
+      keepOpacity = [];
       simulationUpdate();
     }
+  }
 
+  function tooltipPicking() {
+    var pos = d3.mouse(this); // get the mouse pixel positions
+    var pickedColor = hiddenContext.getImageData(pos[0], pos[1], 1, 1).data; // get the pixel color at mouseover
+    selected = pickedColor[3] == 255 ? [pickedColor[0], pickedColor[1], pickedColor[2]]  : false; // checking for antialiasing
+    if (selected != false) {
+      var object = getObjectByColor(selected);
+      var selected_object = object[0];
+      var is_edge = object[1];
+      if (is_edge) {
+        var link = selected_object[0];
+        movie_ids = link.movie_id;
+        showTooltip(pos, getMovieInfos(movie_ids));
+      } else {
+        var node = selected_object[0];
+        showTooltipActor(pos, node);
+        simulationUpdate();
+      }
+    } else {
+      hideTooltip();
+      // if (!actor_selected) keepOpacity = [];
+      // overnode = false;
+      // current_node_name = "";
+      simulationUpdate();
+    }
+    d3.event.preventDefault();
   }
 
   function num2rgb(n){
@@ -214,7 +246,7 @@
       d3.select('#tooltip')
         .append('div')
         .attr("class", "")
-        .html("<span id='close'>x</span>" +
+        .html("<span id='close'>×</span>" +
             '<p class="header">Common movies between the two connected actors.</p>'+
             "<div class='panel'>" +
               '<p class="title">'+title+'</p>' +
@@ -246,7 +278,7 @@
   }
 
 
-  function movieToHtml(movie_info) {
+  function movieInfoExtract(movie_info) {
     var title = movie_info.title
     theMovieDb.movies.getById(
         {"id":movie_info.movie_id},
@@ -255,7 +287,6 @@
             var imdbId = JSON.parse(d).imdb_id
             if(posterPath!=null){
                 var image_url = "https://image.tmdb.org/t/p/w500" + posterPath;
-
             }else{
                 var image_url = "https://as1.ftcdn.net/jpg/02/23/81/56/500_F_223815602_idMOSbp7Z3eN25V2mslRioWS68V3LNZt.jpg"
             }
@@ -276,15 +307,18 @@
   }
 
   function drawTooltipActor(actor_info) {
-    var bday = actor_info.birthday == null? "Missing data":parseDate(actor_info.birthday)
-    var html_content = "<span id='close'>x</span>" +
-      "<div class='actorpanel'>" +
+    var bday = actor_info.birthday == undefined? "":'<p class="text"> <b>Birthday:</b> ' + parseDate(actor_info.birthday) + "</p>";
+    var picture = actor_info.profile_path == undefined ? "": "<img class='actor' src='"+"https://image.tmdb.org/t/p/w500"+actor_info.profile_path+"' alt='No picture found for this actor.'>";
+    console.log(actor_info.profile_path)
+    var html_content =
+        "<div class='actorpanel'>" +
         '<p class="title">'+actor_info.id+'</p>' +
-        "<img class='actor' src='"+"https://image.tmdb.org/t/p/w500"+actor_info.profile_path+"' alt='No picture found for this actor.'>" +
-        '<p class="text"> <b>Birthday:</b> ' + bday + "</p>"+
+        "<span id='close'>×</span>" +
+        picture +
+        bday +
         '<p class="text"> <b>IMDb profile:</b> ' + '<a href="'+"https://www.imdb.com/name/"+ actor_info.imdb_id +'" target="_blank">'+"https://www.imdb.com/name/"+ actor_info.imdb_id+'</a>' + "</p>"+
-      "<br> " +
-      "</div>"
+        "<br> " +
+        "</div>"
     d3.select('#tooltip')
       .append('div')
       .attr("class", "")
@@ -308,7 +342,7 @@
         // Build tooltip
         d3.select("#tooltip").html("")
         first_element = true;
-        _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieToHtml);
+        _.sortBy(movies_info, (d) => d['movie_id']).forEach(movieInfoExtract);
         // Show and move tooltip
         if (mouse[0] > (Math.floor(graphWidth/2))) {
           d3.select('#tooltip')
@@ -448,7 +482,7 @@
           context.moveTo(d.source.x, d.source.y);
           context.lineTo(d.target.x, d.target.y);
           context.strokeStyle = "grey";
-          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id ) {
+          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id && !(keepOpacity.includes(d.source.id) && keepOpacity.includes(d.target.id))) {
             context.globalAlpha = 0.1;
           } else {
             context.globalAlpha = 1;
@@ -474,7 +508,7 @@
     tempData.nodes.forEach(function(d) {
         context.beginPath();
         context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-        context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+        context.fillStyle = d.gender == 2 ? "#00429d": (d.gender == 1 ? "#d81b60":"black" );
         if ((actor_selected || overnode) && current_node_name != d.id && actor_selected_name != d.id && !keepOpacity.includes(d.id)) {
           context.globalAlpha = 0.1;
         } else {
@@ -483,7 +517,7 @@
             printText = true;
           }
           if (actor_selected_name == d.id) {
-            showTooltipActor([d.x, d.y], d);
+            //showTooltipActor([d.x, d.y], d);
             if (update_once) {
               update_once=false;
               simulationUpdate();
@@ -497,7 +531,7 @@
         if (printText) {
           context.beginPath();
           context.font = '4pt Calibri';
-          context.fillStyle = d.gender == 2 ? "blue": (d.gender == 1 ? "red":"black" );
+          context.fillStyle = d.gender == 2 ? "#00429d": (d.gender == 1 ? "#d81b60":"black" );
           context.textAlign = 'center';
           context.fillText(d.id, d.x, d.y-5);
           printText = false;
@@ -569,7 +603,7 @@
           function autocomplete($ctl, data, cb, freeInput) {
             // Ref: http://jsfiddle.net/jlowery2663/o4n29wn3/
             $ctl.autocomplete({
-              minLength: 0,
+              minLength: 1,
               autoFocus: false,
               messages: {
                   noResults: '',
