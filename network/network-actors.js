@@ -303,7 +303,7 @@
             }
           },
         (d) => {
-            console.log("[ERROR]: TMDB not reachable, data: ",d)})
+            console.log(d)})
   }
 
   function drawTooltipActor(actor_info) {
