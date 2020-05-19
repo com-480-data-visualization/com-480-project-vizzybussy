@@ -331,7 +331,7 @@
       current_length = 0,
       tooltipQueue = [undefined, undefined];
   function showTooltip(mouse, movies_info) {
-      /** Show a tooltip when mouseover a edge. */
+      /** Show a tooltip when rightclick a edge. */
       // Create queue to check when to build new tooltip
       tooltipQueue.unshift(movies_info);
       tooltipQueue.pop();
@@ -381,7 +381,7 @@
   } // showTooltip()
 
   function showTooltipActor(mouse, actor_info) {
-      /** Show a tooltip when mouseover a edge. */
+      /** Show a tooltip when rightclick a edge. */
       // Create queue to check when to build new tooltip
       tooltipQueue.unshift(actor_info);
       tooltipQueue.pop();
