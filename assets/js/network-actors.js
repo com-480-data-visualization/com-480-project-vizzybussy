@@ -1,6 +1,7 @@
 ;(function () {
   // We use a IIFE wrapping to hide the code from adversary
   // Setup config variables and start the program
+  // Credits: Johan Barthas, https://github.com/cweo
   function init () {
     graphCanvas = d3.select('#graphDiv').append('canvas')
                    .attr('id', 'main-canvas')
@@ -357,14 +358,14 @@
         if (mouse[0] > (Math.floor(graphWidth/2))) {
           d3.select('#tooltip')
             .style('left', (mouse[0] - 300 - 15) + 'px')
-            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .style('top', Math.min(300, Math.max(80, mouse[1] + 15)) + 'px')
             .transition().duration(100)
             .style('opacity', 0.98);
         } else {
           d3.select('#tooltip')
             .transition().duration(100)
             .style('left', (mouse[0] + 30) + 'px')
-            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
+            .style('top', Math.min(300, Math.max(80, mouse[1] + 15)) + 'px')
             .transition().duration(100)
             .style('opacity', 0.98);
         }
