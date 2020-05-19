@@ -263,7 +263,6 @@
         if (d.datum != null) { d = d.datum }//can be called from the voronoiIntercationArea or the datapoint
         if (!keepMovieInfoDisplayed.display) {
             d3.selectAll(("#data_uid_" + d.id))
-                .style("fill", config.color_hover_data_point)
                 .style("opacity", config.opacity_data_point_hover)
                 .attr("stroke", "black")
 
@@ -346,7 +345,6 @@
                 .attr("class", "col-sm-4")
                 .append("img")
                 .attr("class", "img-responsive mx-auto d-block")
-                .attr("style", "padding:1em")
                 .attr("src", "https://img.icons8.com/bubbles/75/000000/money.png")
 
             moneyDiv
@@ -363,7 +361,7 @@
                 .attr("class", "col-sm-4")
                 .append("img")
                 .attr("class", "img-responsive mx-auto d-block")
-                .attr("style", "padding:1em")
+                .attr("style", "padding-bottom:1em")
                 .attr("src", "https://img.icons8.com/bubbles/75/000000/crowd.png")
 
             popularityDiv
