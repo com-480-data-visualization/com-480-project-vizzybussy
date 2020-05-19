@@ -158,6 +158,7 @@ img.movie {
   margin-left: auto;
   margin-right: auto;
   float: left;
+  border-radius: 5%;
 }
 
 img.actor {
@@ -166,6 +167,7 @@ img.actor {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5%;
 }
 
 img.imdb {
