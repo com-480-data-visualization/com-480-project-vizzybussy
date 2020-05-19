@@ -89,6 +89,7 @@
     hideTooltip();
     keepOpacity = [];
     overnode = false;
+    overedge = false;
     current_node_name = "";
     simulationUpdate();
     min_x = graphWidth; min_y = height; max_x = 0; max_y = 0;
@@ -110,6 +111,7 @@
   var keepOpacity = [];
   var overnode = false;
   var current_node_name;
+  var overedge = false;
 
   function highlightPicking() {
     var pos = d3.mouse(this); // get the mouse pixel positions
@@ -123,6 +125,7 @@
         if (!actor_selected) {
           //console.log(selected_object[0])
           keepOpacity = [selected_object[0].source['id'], selected_object[0].target['id']];
+          overedge = true;
           overnode = true;
           simulationUpdate();
         }
@@ -142,6 +145,7 @@
       //hideTooltip();
       if (!actor_selected) keepOpacity = [];
       overnode = false;
+      overedge = false;
       current_node_name = "";
       simulationUpdate();
     }
@@ -488,7 +492,7 @@
           context.moveTo(d.source.x, d.source.y);
           context.lineTo(d.target.x, d.target.y);
           context.strokeStyle = "grey";
-          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id && !(keepOpacity.includes(d.source.id) && keepOpacity.includes(d.target.id))) {
+          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id && !(keepOpacity.includes(d.source.id) && keepOpacity.includes(d.target.id) && overedge)) {
             context.globalAlpha = 0.1;
           } else {
             context.globalAlpha = 1;
