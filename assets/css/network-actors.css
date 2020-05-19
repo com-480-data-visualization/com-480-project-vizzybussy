@@ -55,7 +55,7 @@
   float:right;
   display:inline-block;
   padding:2px 5px;
-  background:#FFE7AE;
+  background:#f1f2f6;
   user-select: none;
   border-radius: 10px;
 }
@@ -128,9 +128,115 @@
 }
 
 #help {
+  right:2%;
+  position: absolute;
+  background-color: lightgrey;
+  padding: 5px 10px;
+  border-radius: 50%;
+  text-align: center;
+}
+#help:hover {
+  color: white;
+}
 
+#help:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+#help:hover{
+  background-color:grey;
+}
+
+
+#help:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 
 }
+
+#help p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #ffdabb;
+    padding: 20px;
+    width: 350px;
+    position: absolute;
+    border-radius: 5%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: black;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+#help p:before{ /* The pointer of the tooltip */
+    position: absolute;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+#help p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: absolute;
+    top:-40px;
+    left:0;
+}
+
+.header-help {
+  font-size: 22px;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.subheader-help {
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 3px;
+}
+
+.text-help {
+  font-size: 14px;
+}
+
+
+.tab-help {
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity:0;
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}
+
 
 
 .panel {
