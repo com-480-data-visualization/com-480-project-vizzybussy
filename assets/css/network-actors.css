@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
 #tooltip {
   position: absolute;
   display: inline-block;
@@ -6,16 +8,215 @@
   text-align: left;
   background: #fafafa;
   box-shadow: 2px 2px 5px rgba(0, 0, 20, 0.25);
-  pointer-events: none;
+  pointer-events: auto;
   line-height: 200%;
-  max-width: 250px;
+  max-width: 300px;
+  max-height: 450px;
+  overflow-y: auto;
   opacity: 0;
+  justify-content: space-between;
+  border-radius: 5%;
 }
 
+
+/* width */
+#tooltip::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+#tooltip::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+#tooltip::-webkit-scrollbar-thumb {
+  background: orange;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#tooltip::-webkit-scrollbar-thumb:hover {
+  background: #FF8C00;
+}
+
+#tooltip::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 10%;
+}
+
+#tooltip::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 10%;
+}
+
+#options {
+  position: absolute;
+  float:right;
+  display:inline-block;
+  padding:2px 5px;
+  background:#FFE7AE;
+  user-select: none;
+  border-radius: 10px;
+}
+
+/* Network placeholder */
+.graph {
+  width: 100%;
+  height: 800px;
+  float: left;
+}
+
+
+
+/* Tooltip title */
 .title {
   padding: 15px 10px;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   color: #666;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 15px;
+}
+
+.text {
+  font-size: 13px;
+  padding-top: 0px;
+
+  padding-left: 10px;
+  padding-bottom: 0px;
+}
+
+.header {
+  padding-bottom: 20px;
+  padding-left: 20%;
+  /* border-bottom: 4px solid #ccc; */
+  margin-left: auto;
+  margin-right: auto;
+  color: #666;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.panel {
+  display: inline-grid;
+  border-top: 5px dotted orange;
+}
+.actorpanel {
+  display: inline-grid;
+}
+
+
+.container {
+  width: 80%;
+  height: 900px;
+  margin: auto;
+  padding: 10px;
+}
+
+.reddot {
+  height: 25px;
+  width: 25px;
+  background-color: #d81b60;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bluedot {
+  height: 25px;
+  width: 25px;
+  background-color: #00429d;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.blackdot {
+  height: 25px;
+  width: 25px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+
+img.resize {
+  max-width:20%;
+  height:auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+}
+
+img.actor {
+  max-width:50%;
+  height:auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 6px;
+  left: 90%;
+  letter-spacing: 1.5px;
+  line-height: 22.5px;
+  outline: none;
+  overflow: hidden;
+  padding: 10px 0 0;
+  position: absolute;
+  text-transform: uppercase;
+  top: 25px;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease-in;
+  width: 30px;
+  border-radius: 30%
+}
+
+button::before,
+button::after {
+  background-color: #fe6100;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform-origin: center left;
+  transition: all 0.2s ease-in;
+  width: 141.4214px;
+  z-index: -1;
+}
+
+button::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+button::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+button:hover {
+  color: white;
+}
+
+button:hover::before,
+button:hover::after {
+  height: 50px;
+  transform: rotate(0deg);
+}
+
+
+.fixedPosition
+{
+   position: fixed;
 }
