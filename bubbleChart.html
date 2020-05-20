@@ -357,7 +357,7 @@
                 .attr("class", "container d-flex h-100")
                 .append("div")
                 .attr("class", "row align-self-center")
-                .html("<div style='font-size: 80%;'>BUDGET : " + usdFormatter.format(d.budget) + "<p>" + "REVENUE : " + usdFormatter.format(d.revenue) + "</div>")
+                .html("<div style='font-size: 80%;'>BUDGET : " + customCurrencyFormtter(d.budget) + "<p>" + "REVENUE : " + customCurrencyFormtter(d.revenue) + "</div>")
 
             popularityDiv
                 .append("div")
@@ -519,6 +519,16 @@
         style: 'currency',
         currency: 'USD'
     })
+
+    var customCurrencyFormtter = (value) => {
+        if(value / 1e9 > 1){
+            return usdFormatter.format(value/1e9) + "B"
+        }
+        else if(value / 1e6){
+            return usdFormatter.format(value/1e6) + "M"
+        }
+        return usdFormatter.format(value)
+    }
 
 
     var renderData = (data) => {
