@@ -121,63 +121,74 @@
                 <table style="width: 100%;">
                     <tr>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/action.png" alt="action">
+                            <img id="actionColorSel" class="card-img-top mx-auto" src="assets/img/action.png"
+                                alt="action">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/adventure.png" alt="action">
+                            <img id="adventureColorSel" class="card-img-top mx-auto" src="assets/img/adventure.png"
+                                alt="adventure">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/comedy.png" alt="action">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/crime.png" alt="action">
-                        </th>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/drama.png" alt="action">
-                        </th>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/Family.png" alt="action">
+                            <img id="comedyColorSel" class="card-img-top mx-auto" src="assets/img/comedy.png"
+                                alt="comedy">
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/fantasy.png" alt="action">
+                            <img id="crimeColorSel" class="card-img-top mx-auto" src="assets/img/crime.png" alt="crime">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/history.png" alt="action">
+                            <img id="dramaColorSel" class="card-img-top mx-auto" src="assets/img/drama.png" alt="drama">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/horror.png" alt="action">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/music.png" alt="action">
-                        </th>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/other.png" alt="action">
-                        </th>
-                        <th>
-                            <img class="card-img-top mx-auto" src="assets/img/romance.png" alt="action">
+                            <img id="familyColorSel" class="card-img-top mx-auto" src="assets/img/Family.png"
+                                alt="family">
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/scienceFiction.png" alt="action">
+                            <img id="fantasyColorSel" class="card-img-top mx-auto" src="assets/img/fantasy.png"
+                                alt="fantasy">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/thriller.png" alt="action">
+                            <img id="historyColorSel" class="card-img-top mx-auto" src="assets/img/history.png"
+                                alt="history">
                         </th>
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/war.png" alt="action">
+                            <img id="horrorColorSel" class="card-img-top mx-auto" src="assets/img/horror.png"
+                                alt="horror">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="musicColorSel" class="card-img-top mx-auto" src="assets/img/music.png" alt="music">
+                        </th>
+                        <th>
+                            <img id="otherColorSel" class="card-img-top mx-auto" src="assets/img/other.png" alt="other">
+                        </th>
+                        <th>
+                            <img id="romanceColorSel" class="card-img-top mx-auto" src="assets/img/romance.png"
+                                alt="romance">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="sciFiColorSel" class="card-img-top mx-auto" src="assets/img/scienceFiction.png"
+                                alt="SciFi">
+                        </th>
+                        <th>
+                            <img id="thrillerColorSel" class="card-img-top mx-auto" src="assets/img/thriller.png"
+                                alt="Thriller">
+                        </th>
+                        <th>
+                            <img id="warColorSel" class="card-img-top mx-auto" src="assets/img/war.png" alt="War">
                         </th>
                     </tr>
                     <tr>
 
                         <th>
-                            <img class="card-img-top mx-auto" src="assets/img/western.png" alt="action">
+                            <img id="westernColorSel" class="card-img-top mx-auto" src="assets/img/western.png"
+                                alt="Western">
                         </th>
                     </tr>
                 </table>
@@ -244,7 +255,7 @@
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 50, left: 70 },
         width = $("#graphContainer").width() - margin.left - margin.right,
-        height = $("#graphContainer").width() * 0.66 - 170 - margin.top - margin.bottom;
+        height = 700 - 170 - margin.top - margin.bottom;
 
     var config = {
         opacity_data_point_hover: "0.9",
@@ -275,8 +286,9 @@
         Western: "#535c68"
     }
 
-    https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg
+    //https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-7de7dfcae838579a18f4eebc5b8847230d154718e481c5cd01c477cfcbc85993.svg
 
+    //timer for auto advance of timeliine
     $("#timelineControl").attr("onclick", "timelineAction()")
 
     var myTimelineTimer = null
@@ -339,6 +351,7 @@
         .domain([7000, 1000000000])
         .range([1, 60]);
 
+    //title
     svg.append("text")
         .attr("class", "text")
         .attr("transform", "translate(" + (width / 2.5) + ",-" + margin.top / 2 + ")")
@@ -346,6 +359,7 @@
         .style("font-size", "25px")
         .text("Popularity vs Revenue")
 
+    //x-axis label
     svg.append("text")
         .attr("class", "text")
         .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
@@ -353,6 +367,7 @@
         .style("font-size", "20px")
         .text("Revenue");
 
+    //y-axis label
     svg.append("text")
         .attr("class", "text")
         .attr("transform", "translate(" + (0 - 40) + "," + (height / 2) + ")rotate(-90)")
@@ -377,6 +392,7 @@
                 .append("div")
                 .attr("class", "overflow-auto")
                 .attr("style", "height:" + (height + margin.top + margin.bottom) + "px;")
+                //.attr("style","border: 8px solid #f7f7f7;")
                 .append("div")
                 .attr("style", "overflow-x: hidden;")
 
@@ -461,7 +477,7 @@
                 .attr("class", "container d-flex h-100")
                 .append("div")
                 .attr("class", "row align-self-center")
-                .html("<div style='font-size: 80%;'>BUDGET : " + customCurrencyFormtter(d.budget) + "<p>" + "REVENUE : " + customCurrencyFormtter(d.revenue) + "</div>")
+                .html("<div style='font-size: 80%;'>BUDGET : " + customCurrencyFormatter(d.budget) + "<p>" + "REVENUE : " + customCurrencyFormatter(d.revenue) + "</div>")
 
             popularityDiv
                 .append("div")
@@ -493,97 +509,105 @@
             d3.select("#movie_info") //redisplaying the tutorial
                 .html(`
                 <div class="row">
-            <div class="col-sm-4">
-                <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
+                <div class="col-sm-4">
+                    <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
+                </div>
+                <div class="col-sm-8">
+                    Hover over any of the bubbles to get more information about the movie. Click to select it.
+                </div>
             </div>
-            <div class="col-sm-8">
-                Hover over any of the bubbles to get more information about the movie. Click to select it.
+            <p></p>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="https://img.icons8.com/ios/100/000000/video.png" style="width: 100%;max-width: 75px;" />
+                </div>
+                <div class="col-sm-8">
+                    If you want to watch the movie trailer click on the thumbnail and start watching.
+                </div>
             </div>
-        </div>
-        <p></p>
-        <div class="row">
-            <div class="col-sm-4">
-                <img src="https://img.icons8.com/ios/100/000000/video.png" style="width: 100%;max-width: 75px;" />
+            <div class="row" style="padding-top: 1em;">
+                <h5>Genres color code</h5>
+                <!--<img class="card-img-top mx-auto" src="assets/img/combined.png" style="width: 50vw;" alt="action">-->
+                <table style="width: 100%;">
+                    <tr>
+                        <th>
+                            <img id="actionColorSel" class="card-img-top mx-auto" src="assets/img/action.png"
+                                alt="action">
+                        </th>
+                        <th>
+                            <img id="adventureColorSel" class="card-img-top mx-auto" src="assets/img/adventure.png" alt="adventure">
+                        </th>
+                        <th>
+                            <img id="comedyColorSel" class="card-img-top mx-auto" src="assets/img/comedy.png" alt="comedy">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="crimeColorSel" class="card-img-top mx-auto" src="assets/img/crime.png" alt="crime">
+                        </th>
+                        <th>
+                            <img id="dramaColorSel" class="card-img-top mx-auto" src="assets/img/drama.png" alt="drama">
+                        </th>
+                        <th>
+                            <img id="familyColorSel" class="card-img-top mx-auto" src="assets/img/Family.png" alt="family">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="fantasyColorSel" class="card-img-top mx-auto" src="assets/img/fantasy.png" alt="fantasy">
+                        </th>
+                        <th>
+                            <img id="historyColorSel" class="card-img-top mx-auto" src="assets/img/history.png" alt="history">
+                        </th>
+                        <th>
+                            <img id="horrorColorSel" class="card-img-top mx-auto" src="assets/img/horror.png" alt="horror">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="musicColorSel" class="card-img-top mx-auto" src="assets/img/music.png" alt="music">
+                        </th>
+                        <th>
+                            <img id="otherColorSel" class="card-img-top mx-auto" src="assets/img/other.png" alt="other">
+                        </th>
+                        <th>
+                            <img id="romanceColorSel" class="card-img-top mx-auto" src="assets/img/romance.png" alt="romance">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <img id="sciFiColorSel" class="card-img-top mx-auto" src="assets/img/scienceFiction.png" alt="SciFi">
+                        </th>
+                        <th>
+                            <img id="thrillerColorSel" class="card-img-top mx-auto" src="assets/img/thriller.png" alt="Thriller">
+                        </th>
+                        <th>
+                            <img id="warColorSel" class="card-img-top mx-auto" src="assets/img/war.png" alt="War">
+                        </th>
+                    </tr>
+                    <tr>
+
+                        <th>
+                            <img id="westernColorSel" class="card-img-top mx-auto" src="assets/img/western.png" alt="Western">
+                        </th>
+                    </tr>
+                </table>
             </div>
-            <div class="col-sm-8">
-                If you want to watch the movie trailer click on the thumbnail and start watching.
-            </div>
-        </div>
-        <div class="row" style="padding-top: 1em;">
-            <h5>Genres color code</h5>
-            <!--<img class="card-img-top mx-auto" src="assets/img/combined.png" style="width: 50vw;" alt="action">-->
-            <table style="width: 100%;">
-                <tr>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/action.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/adventure.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/comedy.png" alt="action">
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/crime.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/drama.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/Family.png" alt="action">
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/fantasy.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/history.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/horror.png" alt="action">
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/music.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/other.png" alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/romance.png" alt="action">
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/scienceFiction.png"  alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/thriller.png"  alt="action">
-                    </th>
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/war.png"  alt="action">
-                    </th>
-                </tr>
-                <tr>
-                   
-                    <th>
-                        <img class="card-img-top mx-auto" src="assets/img/western.png"  alt="action">
-                    </th>
-                </tr>
-            </table>
-        </div>
+
             `)
 
 
             d3.selectAll(("#data_uid_" + d.id))
                 .style("opacity", config.opacity_data_point_no_hover)
                 .attr("stroke", "none")
+
+
         }
     }
+
+
+
+
 
     var permanentMovieDisplay = (d) => {
         if (d.datum != null) { d = d.datum }
@@ -610,6 +634,36 @@
     //Read the data
     d3.csv("data/bubbleData.csv", function (data) {
 
+
+        //genre change when clicking on color selector
+        function setGenre(genreSelected) {
+            $("#genre-select").val(genreSelected)
+            renderData(data)
+        }
+
+        //On click listeners for color selectors
+        function addOnClickGenreListeners() {
+            $("#actionColorSel").click(() => { setGenre("Action") })
+            $("#adventureColorSel").click(() => { setGenre("Adventure") })
+            $("#comedyColorSel").click(() => { setGenre("Comedy") })
+            $("#crimeColorSel").click(() => { setGenre("Crime") })
+            $("#dramaColorSel").click(() => { setGenre("Drama") })
+            $("#familyColorSel").click(() => { setGenre("Family") })
+            $("#fantasyColorSel").click(() => { setGenre("Fantasy") })
+            $("#historyColorSel").click(() => { setGenre("History") })
+            $("#horrorColorSel").click(() => { setGenre("Horror") })
+            $("#musicColorSel").click(() => { setGenre("Music") })
+            $("#otherColorSel").click(() => { setGenre("all") })
+            $("#romanceColorSel").click(() => { setGenre("Romance") })
+            $("#sciFiColorSel").click(() => { setGenre("Science Fiction") })
+            $("#thrillerColorSel").click(() => { setGenre("Thriller") })
+            $("#warColorSel").click(() => { setGenre("War") })
+            $("#westernColorSel").click(() => { setGenre("Western") })
+        }
+        addOnClickGenreListeners()
+
+
+        //year slider
         $(function () {
             var handle = $("#custom-handle");
             $("#year_selector").slider({
@@ -637,11 +691,15 @@
 
 
 
+
+
+        //list of all movies in dataset
         var movies = []
         for (const d in data) {
             movies.push({ label: data[d].original_title, data: data[d] })
         }
 
+        //auto complete search bar
         $(function () {
             var updateFunc = function (event, ui) {
                 if (ui.item == null) {
@@ -668,13 +726,7 @@
         });
 
 
-
-        // Color scale: give me a specie name, I return a color
-        var color = d3.scaleOrdinal()
-            .domain(["setosa", "versicolor", "virginica"])
-            .range(["#440154ff", "#21908dff", "#fde725ff"])
-
-
+        //drop down genre selection
         d3.select('#genre-select').on('change', function () {
             var f = document.getElementById('genre-select')
             selected_genre = f.options[f.selectedIndex].value
@@ -686,12 +738,14 @@
         renderData(data)
     })
 
+    //currency formater
     const usdFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD'
     })
 
-    var customCurrencyFormtter = (value) => {
+    //Million and billion detector and shortener
+    var customCurrencyFormatter = (value) => {
         if (value / 1e9 > 1) {
             return usdFormatter.format(value / 1e9) + "B"
         }
@@ -735,7 +789,7 @@
             .attr("class", "text")
             .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")")
             .style("text-anchor", "middle")
-            .style("font-size", width / 8)
+            .style("font-size", "10em")
             .style("opacity", "0.2")
             .text(fromYear);
 
