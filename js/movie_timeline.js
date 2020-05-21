@@ -282,12 +282,13 @@ $(function () {
                     }
 
                 })
-                .on("mouseover", function(d, i) {
+                .on("mouseover", function (d, i) {
                     svg.selectAll(".layer").transition()
-                    .duration(250)
-                    .attr("opacity", function(d, j) {
-                      return j != i ? 0.8 : 1;
-                  })})
+                        .duration(250)
+                        .attr("opacity", function (d, j) {
+                            return j != i ? 0.8 : 1;
+                        })
+                })
                 .on("mouseout", function (d, i) {
                     svg.selectAll(".layer")
                         .transition()
@@ -370,7 +371,7 @@ $(function () {
     function showProductionHousesLabels(svg, width) {
         var phLabels = [
             //{ "percWidth": 0.65, "cx": "800", "cy": "9em", "text": "Drama" },
-            { "percWidth": 0.45,  "cy": "9.7em", "text": "Paramount Pictures", fontsize: "20px" },
+            { "percWidth": 0.45, "cy": "9.7em", "text": "Paramount Pictures", fontsize: "20px" },
             { "percWidth": 0.57, "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
             { "percWidth": 0.55, "cy": "16.5em", "text": "Columbia Pictures", fontsize: "18px" },
             { "percWidth": 0.86, "cy": "10.8em", "text": "Relativity Media", fontsize: "16px" },
@@ -387,6 +388,7 @@ $(function () {
                 .attr("y", ph.cy)
                 .attr("text-anchor", "middle")
                 .style("font-size", ph.fontsize)
+                .style("pointer-events", "none")
                 .text(ph.text);
         })
     }
@@ -416,7 +418,7 @@ $(function () {
     }
 
 
-    function changeMovieDisplay(key,color) {
+    function changeMovieDisplay(key, color) {
 
         if (currentChartProperties.typeGenre) {
             currentData = most_popular_movies_per_genre[key]
@@ -425,26 +427,26 @@ $(function () {
         }
         for (var i = 0; i < 5; i++) {
             var movie = currentData[i];
-            populateMovieDiv(i,key,movie,color)
+            populateMovieDiv(i, key, movie, color)
         }
-          
+
     };
 
-    function setInitialMovieDisplay(){
+    function setInitialMovieDisplay() {
         currentData = most_popular_movies_per_genre
         for (var i = 0; i < 5; i++) {
             // get random genre
-            var colorKey = genreColors[Math.floor(Math.random()*genreColors.length)]
+            var colorKey = genreColors[Math.floor(Math.random() * genreColors.length)]
             var key = colorKey.name
             var color = colorKey.color
             // get random movie from that genre
-            var movie = currentData[key][Math.floor(Math.random()*currentData[key].length)]
-            populateMovieDiv(i,key,movie,color)        
+            var movie = currentData[key][Math.floor(Math.random() * currentData[key].length)]
+            populateMovieDiv(i, key, movie, color)
 
         }
     }
 
-    function populateMovieDiv(i,key, movie, color){
+    function populateMovieDiv(i, key, movie, color) {
         var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
         currentCard.getElementsByClassName('card-header')[0].style.backgroundColor = color;
         currentCard.style.borderColor = color;
@@ -453,8 +455,8 @@ $(function () {
         currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
         currentCard.getElementsByClassName('timeline-movie-year')[0].innerHTML = new Date(movie.release_date).getFullYear()
         currentCard.getElementsByClassName('timeline-movie-year')[0].style.display = "block"
-        var posterDivId = "#timeline_movie_poster_"+(i+1)
-        setMovieImage(posterDivId,movie.id)
+        var posterDivId = "#timeline_movie_poster_" + (i + 1)
+        setMovieImage(posterDivId, movie.id)
     }
 
     // function to decide whether to pluralize the word "movie" in the tooltip
@@ -502,8 +504,8 @@ $(function () {
         return y;
     }
 
-    var genreColors; 
-    
+    var genreColors;
+
     $.getJSON('data/colors.json', function (data) {
         genreColors = data
     });
@@ -520,13 +522,16 @@ $(function () {
     });
 
     $("#movieTimelineProductionHousesButton").click(() => {
-
-        $('.legend').fadeOut();
-        $("#movieTimeline").children().last().fadeOut(400, function () {
-            currentChartProperties = chartPropertiesPHFirstLevel
-            chart("all_data_stream.csv");
-            $("#movieTimelineHeading").html("Movie Timeline");
-        });
+        if (!loading) {
+            loading = true
+            $('.legend').fadeOut();
+            $("#movieTimeline").children().last().fadeOut(400, function () {
+                loading = false
+                currentChartProperties = chartPropertiesPHFirstLevel
+                chart("all_data_stream.csv");
+                $("#movieTimelineHeading").html("Movie Timeline");
+            });
+        }
         //$("#movieTimeline").html("")
         //currentChartProperties = chartPropertiesPHFirstLevel
         //console.log(currentChartProperties)
@@ -534,12 +539,16 @@ $(function () {
         //$("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
-        $('.legend').fadeOut();
-        $("#movieTimeline").children().last().fadeOut(400, function () {
-            currentChartProperties = chartPropertiesGenreFirstLevel
-            chart("all_data_stream.csv");
-            $("#movieTimelineHeading").html("Movie Timeline");
-        });
+        if (!loading) {
+            loading = true
+            $('.legend').fadeOut();
+            $("#movieTimeline").children().last().fadeOut(400, function () {
+                loading = false
+                currentChartProperties = chartPropertiesGenreFirstLevel
+                chart("all_data_stream.csv");
+                $("#movieTimelineHeading").html("Movie Timeline");
+            });
+        }
         //$("#movieTimeline").html("")
         //currentChartProperties = chartPropertiesGenreFirstLevel
         //chart("all_data_stream.csv");
@@ -554,6 +563,7 @@ $(function () {
         });
     })
 
+    var loading = false
     currentChartProperties = chartPropertiesGenreFirstLevel
     chart("all_data_stream.csv");
     $("#movieTimelineHeading").html("Movie Timeline");
