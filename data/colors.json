@@ -1,0 +1,61 @@
+[{
+            "name": "Adventure",
+            "color": "#f0932b"
+        },
+        {
+            "name": "Action",
+            "color": "#f9ca24"
+        },
+        {
+            "name": "Comedy",
+            "color": "#6ab04c"
+        },
+        {
+            "name": "Crime",
+            "color": "#22a6b3"
+        },
+        {
+            "name": "Drama",
+            "color": "#7ed6df"
+        },{
+            "name": "Family",
+            "color": "#badc58"
+        },
+        {
+            "name": "Fantasy",
+            "color": "#c7ecee"
+        },
+        {
+            "name": "History",
+            "color": "#95afc0"
+        },
+        {
+            "name": "Horror",
+            "color": "#686de0"
+        },
+        {
+            "name": "Music",
+            "color": "#dff9fb"
+        },
+        {
+            "name": "Romance",
+            "color": "#ff7979"
+        },
+        {
+            "name": "Science Fiction",
+            "color": "#ffbe76"
+        },
+        {
+            "name": "Thriller",
+            "color": "#eb4d4b"
+        },
+        {
+            "name": "War",
+            "color": "#f6e58d"
+        },
+        {
+            "name": "Western",
+            "color": "#535c68"
+        }
+    
+    ]
