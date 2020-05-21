@@ -105,7 +105,14 @@
 }
 
 .card-img-top {
+    height: 100% !important;
+    object-fit: fill;
+}
+/*
+Old card style
+.card-img-top {
     width: 100%;
     height: 20vw;
     object-fit: cover;
 }
+*/

@@ -563,6 +563,30 @@ $(function () {
         });
     })
 
+    $("#movieTimelineColorblindPalette").click(() => {
+        if (!loading & !colorBlindChecked) {
+            loading = true
+        colorBlindChecked = !colorBlindChecked
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            loading = false
+            //$(this).html("")
+            chart("all_data_stream.csv")
+        });
+    }
+    })
+
+    $("#movieTimelineDefaultPalette").click(() => {
+        if (!loading & colorBlindChecked) {
+            loading = true
+        colorBlindChecked = !colorBlindChecked
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            loading = false
+            //$(this).html("")
+            chart("all_data_stream.csv")
+        });
+    }
+    })
+
     var loading = false
     currentChartProperties = chartPropertiesGenreFirstLevel
     chart("all_data_stream.csv");
