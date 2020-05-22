@@ -11,8 +11,8 @@ var theMovieDb = {};
 
 theMovieDb.common = {
   api_key: "25b56c9579df9e0203dc5f378ecd8ab9",
-  base_uri: "http://api.themoviedb.org/3/",
-  images_uri: "http://image.tmdb.org/t/p/",
+  base_uri: "https://api.themoviedb.org/3/",
+  images_uri: "https://image.tmdb.org/t/p/",
   timeout: 5000,
   language: "en-US",
   generateQuery: function(options) {
@@ -29,6 +29,7 @@ theMovieDb.common = {
         }
       }
     }
+    console.log(query)
     return query;
   },
   validateCallbacks: function(success, error) {

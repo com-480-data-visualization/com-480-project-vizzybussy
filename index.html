@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="assets/css/Team-Boxed.css">
 </head>
 
+
 <body id="page-top">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
         <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">VizzybuSSy</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false"
@@ -87,7 +88,7 @@
                 <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <!-- Start: Intro -->
                     <div class="intro">
-                        <h1 class="text-center" data-toggle="tooltip" data-bs-tooltip="" id="first_article_header" title="blablabla">What is popular</h1>
+                        <h1 class="text-center" id="first_article_header">What is popular</h1>
                     </div>
                     <!-- End: Intro -->
                 </div>
@@ -96,16 +97,46 @@
                 <div class="col">
                     <!-- Start: Text -->
                     <div class="text">
-                        <p class="text-justify">This chart&nbsp;shows how the movie industry evolved during the previous half of the century. We want to enable the user to see which movies were most popular for each year, which movies earned the most and does high budget imply
-                            high revenue, which genres were most popular and which production houses make the most successful movies.</p>
+                        <p class="text-justify">Ever wanted to see all of the most popular movies in the last 80 years,
+                            this visualization is meant for you. In the graph below you will be able to dive into the
+                            history of movies an see what movies were the most popular, how much they earned, and how
+                            much was the budget to make them. </p>
+                            <p class="text-justify">    Here are a few ideas of interesting things to look at. Let’s start with the launch of the
+                            largest grossing franchise in history: “Star Wars”. Go to the year 1977, and try to find
+                            this historical hit. Incredibly popular right, but the budget (size of the dot) isn’t a lot
+                            bigger than the flops of that year. You can observe the same trend with the next star wars
+                            movie in 1980. Let’s move on to another classic franchise that started in 1981. Do you have
+                            an idea which one I am thinking of? If you had Indiana Jones, you were right. Look at the
+                            budget, it’s not the most expensive movie that was made that year but it grossed almost
+                            double the revenue in the box office.</p>
+                            <p class="text-justify">   Now let’s have a look at some of the biggest hits of all times. Let’s start with E.T in
+                            1982, you'll notice that it didn’t have an extravagant budget but that it manage to gross
+                            more than 4 times the revenue second best movie that year in the boy office. Let’s finish
+                            off with James Cameron legendary hit, Titanic. If you don’t remember the year use the search
+                            bar to find it. Titanic shows a different trend than what we observed before. The budget to
+                            produce the movie was astronomical, but the return revenue made it the first movie ever to
+                            break the 1B$ mark.</p>
+                            <p class="text-justify">    We can see that in the 20th century a good movie didn’t have a huge budget.
+                            Let’s now look at how things have evolved in the 21st century. Use the timeline control to
+                            play through time. We can see a clear trend that the smaller budget movies tend to be less
+                            popular and yield les return. To take another great hit made by James Cameron, Avatar,
+                            released in 2009. We can observe that it is production budget was one of the largest that
+                            year. It was also the first movie ever to gross more than 2B$.</p>
+
+                            <p class="text-justify">    To summarize what we have learned by travelling through time we can see that high grossing
+                            movies now days have high budgets but that back in the 20th century there hasn’t any obvious
+                            trend where large a large production budget meant a large revenue.</p>
+                        </p>
                     </div>
                     <!-- End: Text -->
                 </div>
             </div>
-            <div class="row"><div class="embed-responsive" style="height:70vh; pading:1em">
-  <iframe id="bubbleChart" class="embed-responsive-item" src="bubbleChart.html" style="border: 0px;" scrolling="no"
-  width="100%"></iframe>
-</div></div>
+            <div class="row">
+                <div class="embed-responsive" style="height:900px; pading:1em">
+                    <iframe id="bubbleChart" class="embed-responsive-item" src="bubbleChart.html" style="border: 0px;"
+                        scrolling="no" width="100%"></iframe>
+                </div>
+            </div>
         </div>
     </div>
     <!-- End: Article Clean -->
@@ -130,7 +161,7 @@
                     <!-- End: Text -->
                 </div>
             </div>
-            <div class="row"><div class="embed-responsive" style="height:650px; pading:1em">
+            <div class="row"><div class="embed-responsive" style="height:1000px; pading:1em">
   <iframe class="embed-responsive-item" src="timeline.html" style="border: 0px;" scrolling="no"
   width="100%"></iframe>
 </div></div>
@@ -208,20 +239,6 @@
         </div>
     </div>
     <!-- End: Team Boxed -->
-    <div class="article-list">
-        <div class="container my-auto">
-            <div class="media article-list">
-                <div class="media-body">
-                    <h2 class="text-center">Data sources</h2>
-                    <hr data-aos="zoom-in" data-aos-duration="200" class="dark my-4">
-                    <p class="text-center">This product uses the TMDb API but is not endorsed or certified by TMDb.<br></p>
-                    <div class="row">
-                        <div class="col text-center"><img src="assets/img/tmdb.svg" style="max-width: 18vw;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -238,16 +255,33 @@
             </div>
         </div>
     </section>
+    <div class="article-list" style="padding-bottom: 8em;">
+        <div class="container my-auto">
+            <div class="media article-list">
+                <div class="media-body">
+                    <h2 class="text-center">Data sources</h2>
+                    <hr data-aos="zoom-in" data-aos-duration="200" class="dark my-4">
+                    <p class="text-center">This product uses the TMDb API but is not endorsed or certified by TMDb.<br></p>
+                    <div class="row">
+                        <div class="col text-center"><img id="testImgLocation" src="assets/img/tmdb.svg" style="max-width: 12vw;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="assets/js/autoresize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/creative.js"></script>
     <script src="assets/js/d3.js"></script>
     <script src="assets/js/d3.layout.js"></script>
+    <script src="assets/js/themoviedb.js"></script>
+    <script src="assets/js/autoresize.js"></script>
+    <script src="assets/js/tmdb_helpers.js"></script>
+    <!--<script src="assets/js/iframeResizer.min.js"></script>-->
 </body>
 
 </html>
