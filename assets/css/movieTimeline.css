@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body{
+   font-family: 'Open Sans',serif;
+}
+h1, h2, h3, h4, h5 {
+    font-family: "Raleway";
+    font-weight: 700;
+}
 #movieTimelineMoviesDisplay {
     display: flex;
     justify-content: space-between;
@@ -105,7 +115,27 @@
 }
 
 .card-img-top {
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.fitin {
+    height: 150px;
+    overflow: hidden;
+}
+
+.fitin h5 {
+    font-size: inherit;
+}
+.fitin h6 {
+    font-size: small;
+}
+
+/*
+Old card style
+.card-img-top {
     width: 100%;
     height: 20vw;
     object-fit: cover;
 }
+*/

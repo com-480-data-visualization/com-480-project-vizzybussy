@@ -318,8 +318,8 @@
 
     var myTimerSpeed = 450;
     var myTimelineTimer = null
-    $("#speedIncrease").click(() => { myTimerSpeed = Math.max(myTimerSpeed - 100, 100); })
-    $("#speedDecrease").click(() => { myTimerSpeed += Math.min(myTimerSpeed + 100, 5000); })
+    $("#speedIncrease").click(() => { myTimerSpeed = Math.max(myTimerSpeed - 100, 100);  })
+    $("#speedDecrease").click(() => { myTimerSpeed = Math.min(myTimerSpeed + 100, 1000); })
 
 
     var startTimelineTimer = () => {
@@ -676,8 +676,8 @@
                     delete keepMovieInfoDisplayed.d
                     keepMovieInfoDisplayed.display = false
                     $("div[id^='selectedMovieInfoDisplay']").each(function () {
-                this.remove()
-            });
+                        this.remove()
+                    });
                     displayMovieInfo(ui.item.data)
                     permanentMovieDisplay(ui.item.data)
                 }
