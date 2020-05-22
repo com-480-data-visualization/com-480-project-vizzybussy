@@ -1,7 +1,6 @@
 ;(function () {
   // We use a IIFE wrapping to hide the code from adversary
   // Setup config variables and start the program
-  // Credits: Johan Barthas, https://github.com/cweo
   function init () {
     graphCanvas = d3.select('#graphDiv').append('canvas')
                    .attr('id', 'main-canvas')
@@ -44,7 +43,6 @@
   var actor_selected = false,
       actor_selected_name = "";
 
-
   updateBB();
   function updateBB(){
     elem = document.getElementById("graphDiv");
@@ -52,7 +50,7 @@
        var rect = elem.getBoundingClientRect();
        height = rect.height;
        graphWidth = rect.width;
-       //console.log(rect.height);
+       console.log(rect.height);
     }
   }
 
@@ -90,7 +88,6 @@
     hideTooltip();
     keepOpacity = [];
     overnode = false;
-    overedge = false;
     current_node_name = "";
     simulationUpdate();
     min_x = graphWidth; min_y = height; max_x = 0; max_y = 0;
@@ -112,7 +109,6 @@
   var keepOpacity = [];
   var overnode = false;
   var current_node_name;
-  var overedge = false;
 
   function highlightPicking() {
     var pos = d3.mouse(this); // get the mouse pixel positions
@@ -124,9 +120,8 @@
       var is_edge = object[1];
       if (is_edge) {
         if (!actor_selected) {
-          //console.log(selected_object[0])
+          console.log(selected_object[0])
           keepOpacity = [selected_object[0].source['id'], selected_object[0].target['id']];
-          overedge = true;
           overnode = true;
           simulationUpdate();
         }
@@ -137,7 +132,7 @@
           overnode = true;
           current_node_name = node.id;
           // showTooltipActor(pos, node);
-          //console.log(node)
+          console.log(node)
         }
 
         simulationUpdate();
@@ -146,8 +141,8 @@
       //hideTooltip();
       if (!actor_selected) keepOpacity = [];
       overnode = false;
-      overedge = false;
       current_node_name = "";
+      keepOpacity = [];
       simulationUpdate();
     }
   }
@@ -252,18 +247,16 @@
         .append('div')
         .attr("class", "")
         .html('<p class="header">Common movies</p>'+
-              "<div class='panel'>" +
+            "<div class='panel'>" +
               "<button id='close'>Close</button>" +
-              "<div class='containermovie'>"+
-              "<img class='movie' src='"+image_url+"'>" +
               '<span class="title">'+title+'</span>' +
-              "</div>"+
-              '<span class="text"> <b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</span>" +
-              '<span class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</span>"+
-              '<span class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</span>"+
-              '<a class="imdb" href="'+ link +'" target="_blank">'+"<img class='imdb' src='assets/img/fullsize/imdb.png' alt='IMDb link'>"+'</a>'+
+              "<img class='resize' src='"+image_url+"'>" +
+              '<p class="text"> <b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
+              '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
+              '<p class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</p>"+
+              '<p class="text"> <b>Browse on IMDb:</b> ' + '<a href="'+link+'" target="_blank">'+link+'</a>' + "</p>"+
               "<br> " +
-              "</div>")
+            "</div>")
             first_element = false;
             document.getElementById('close').onclick = hideTooltip;
 
@@ -272,17 +265,15 @@
         .append('div')
         .attr("class", "")
         .html("<div class='panel'>" +
-              "<div class='containermovie'>"+
-              "<img class='movie' src='"+image_url+"'>" +
-              '<span class="title">'+title+'</span>' +
-              "</div>"+
-              '<span class="text"><b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</span>" +
-              '<span class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</span>"+
-              '<span class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</span>"+
-              '<a class="imdb" href="'+ link +'" target="_blank">'+"<img class='imdb' src='assets/img/fullsize/imdb.png' alt='IMDb link'>"+'</a>'+
-              "<br> " +
-              "</div>")
-      //console.log(document.getElementById("graphDiv").getBoundingClientRect())
+            '<span class="title">'+title+'</span>' +
+            "<img class='resize' src='"+image_url+"'>" +
+            '<p class="text"><b>Genres:</b> ' + genres.toString().replace(/,/g, ", ") + "</p>" +
+            '<p class="text"> <b>Release date:</b> ' + parseDate(release_date) + "</p>"+
+            '<p class="text"> <b>Prod. companies:</b> ' + production_companies.toString().replace(/,/g, ", ") + "</p>"+
+            '<p class="text"> <b>Browse on IMDb:</b> ' + '<a href="'+link+'" target="_blank">'+link+'</a>' + "</p>"+
+            "<br> " +
+          "</div>")
+      console.log(document.getElementById("graphDiv").getBoundingClientRect())
     }
   }
 
@@ -312,21 +303,21 @@
             }
           },
         (d) => {
-            console.log("[ERROR]: TMDB not reachable, data: ",d)})
+            console.log(d)})
   }
 
   function drawTooltipActor(actor_info) {
-    var bday = actor_info.birthday == undefined? "":'<p class="textactor"> <b>Birthday:</b> ' + parseDate(actor_info.birthday) + "</p>";
+    var bday = actor_info.birthday == undefined? "":'<p class="text"> <b>Birthday:</b> ' + parseDate(actor_info.birthday) + "</p>";
     var picture = actor_info.profile_path == undefined ? "": "<img class='actor' src='"+"https://image.tmdb.org/t/p/w500"+actor_info.profile_path+"' alt='No picture found for this actor.'>";
-    //console.log(actor_info.profile_path)
+    console.log(actor_info.profile_path)
     var html_content =
         "<div class='actorpanel'>" +
-        '<span class="titleactor">'+actor_info.id+'</span>' +
+        '<span class="title">'+actor_info.id+'</span>' +
         "<button id='close'>Close</button>" +
         picture +
         bday +
-        '<a class="imdb" href="'+"https://www.imdb.com/name/"+ actor_info.imdb_id +'" target="_blank">'+"<img class='imdb' src='assets/img/fullsize/imdb.png' alt='IMDb link'>"+'</a>'+
-        "</br>"+
+        '<p class="text"> <b>IMDb profile:</b> ' + '<a href="'+"https://www.imdb.com/name/"+ actor_info.imdb_id +'" target="_blank">'+"https://www.imdb.com/name/"+ actor_info.imdb_id+'</a>' + "</p>"+
+        "<br> " +
         "</div>"
     d3.select('#tooltip')
       .append('div')
@@ -358,14 +349,14 @@
         if (mouse[0] > (Math.floor(graphWidth/2))) {
           d3.select('#tooltip')
             .style('left', (mouse[0] - 300 - 15) + 'px')
-            .style('top', Math.min(300, Math.max(80, mouse[1] + 15)) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
             .transition().duration(100)
             .style('opacity', 0.98);
         } else {
           d3.select('#tooltip')
             .transition().duration(100)
             .style('left', (mouse[0] + 30) + 'px')
-            .style('top', Math.min(300, Math.max(80, mouse[1] + 15)) + 'px')
+            .style('top', Math.min(400, Math.max(80, mouse[1] + 15)) + 'px')
             .transition().duration(100)
             .style('opacity', 0.98);
         }
@@ -493,7 +484,7 @@
           context.moveTo(d.source.x, d.source.y);
           context.lineTo(d.target.x, d.target.y);
           context.strokeStyle = "grey";
-          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id && !(keepOpacity.includes(d.source.id) && keepOpacity.includes(d.target.id) && overedge)) {
+          if ((actor_selected || overnode) && current_node_name != d.source.id && current_node_name != d.target.id && actor_selected_name != d.source.id && actor_selected_name != d.target.id && !(keepOpacity.includes(d.source.id) && keepOpacity.includes(d.target.id))) {
             context.globalAlpha = 0.1;
           } else {
             context.globalAlpha = 1;
@@ -590,7 +581,7 @@
             if (person_dict['profile_path'] != null) {
               d.profile_path = person_dict['profile_path']
             }
-          }, (person) => console.log("[ERROR]: TMDB unreachable, data: ", person))
+          }, (person) => console.log(person))
         });
 
         // Get the neighbors of each nodes
@@ -611,8 +602,7 @@
 
 
 
-          function autocomplete
-          ($ctl, data, cb, freeInput) {
+          function autocomplete($ctl, data, cb, freeInput) {
             // Ref: http://jsfiddle.net/jlowery2663/o4n29wn3/
             $ctl.autocomplete({
               minLength: 1,
@@ -634,7 +624,7 @@
                     actor_selected_name = "";
                     hideTooltip(100);
                     keepOpacity = [];
-                    // console.log("No actor selected: ", actor_selected, actor_selected_name);
+                    console.log("No actor selected: ", actor_selected, actor_selected_name);
                     simulationUpdate()
                   }
               }
@@ -646,7 +636,7 @@
             actor_selected_name = ui.item.value;
             update_once = true;
             keepOpacity = node2neighbors[actor_selected_name];
-            // console.log("Actor selected: ", actor_selected, actor_selected_name)
+            console.log("Actor selected: ", actor_selected, actor_selected_name)
             simulationUpdate()
           });
 

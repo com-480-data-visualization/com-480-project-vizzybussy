@@ -55,7 +55,7 @@
   float:right;
   display:inline-block;
   padding:2px 5px;
-  background:#f1f2f6;
+  background:#FFE7AE;
   user-select: none;
   border-radius: 10px;
 }
@@ -68,52 +68,22 @@
 }
 
 
-.containermovie {
-	width:90%;
-	height:auto;
-	padding-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
 
 /* Tooltip title */
 .title {
-  padding-left: 5px;
+  padding: 15px 10px;
+  /* border-bottom: 1px solid #ccc; */
   color: #666;
   font-weight: bold;
   font-size: 15px;
 }
 
-.titleactor {
-  margin-left: auto;
-  margin-right: auto;
-  color: #666;
-  font-weight: bold;
-  font-size: 20px;
-  padding-bottom: 20px;
-  padding-top: 10px;
-}
-
-
 .text {
   font-size: 13px;
   padding-top: 0px;
+
   padding-left: 10px;
   padding-bottom: 0px;
-}
-
-.textactor {
-  font-size: 13px;
-  padding-top: 0px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-.imdb {
-  padding-top:5px;
 }
 
 .header {
@@ -127,121 +97,9 @@
   font-size: 20px;
 }
 
-#help {
-  right:2%;
-  position: absolute;
-  background-color: lightgrey;
-  padding: 5px 10px;
-  border-radius: 50%;
-  text-align: center;
-}
-#help:hover {
-  color: white;
-}
-
-#help:before{
-    content:'?';
-    font-weight: bold;
-    color:#fff;
-}
-
-#help:hover{
-  background-color:grey;
-}
-
-
-#help:hover p{
-    display:block;
-    transform-origin: 100% 0%;
-
-    -webkit-animation: fadeIn 0.3s ease-in-out;
-    animation: fadeIn 0.3s ease-in-out;
-
-}
-
-#help p{    /* The tooltip */
-    display: none;
-    text-align: left;
-    background-color: #ffdabb;
-    padding: 20px;
-    width: 350px;
-    position: absolute;
-    border-radius: 5%;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-    right: -4px;
-    color: black;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-#help p:before{ /* The pointer of the tooltip */
-    position: absolute;
-    content: '';
-    width:0;
-    height: 0;
-    border:6px solid transparent;
-    border-bottom-color:#1E2021;
-    right:10px;
-    top:-12px;
-}
-
-#help p:after{ /* Prevents the tooltip from being hidden */
-    width:100%;
-    height:40px;
-    content:'';
-    position: absolute;
-    top:-40px;
-    left:0;
-}
-
-.header-help {
-  font-size: 22px;
-  padding-bottom: 5px;
-  font-weight: bold;
-}
-
-.subheader-help {
-    font-weight: bold;
-    font-size: 18px;
-    padding-bottom: 3px;
-}
-
-.text-help {
-  font-size: 14px;
-}
-
-
-.tab-help {
-  font-size: 12px;
-  padding-left: 10px;
-}
-
-
-
-/* CSS animation */
-
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity:0;
-        transform: scale(0.6);
-    }
-
-    100% {
-        opacity:100%;
-        transform: scale(1);
-    }
-}
-
-@keyframes fadeIn {
-    0% { opacity:0; }
-    100% { opacity:100%; }
-}
-
-
-
 .panel {
   display: inline-grid;
-  border-top: 5px solid orange;
+  border-top: 5px dotted orange;
 }
 .actorpanel {
   display: inline-grid;
@@ -281,28 +139,17 @@
 
 
 
-img.movie {
-  max-width:30%;
+img.resize {
+  max-width:20%;
   height:auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  float: left;
-  border-radius: 5%;
-  padding-right:5px;
+  float: right;
 }
 
 img.actor {
-  max-width:40%;
-  height:auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 5%;
-}
-
-img.imdb {
-  max-width:20%;
+  max-width:50%;
   height:auto;
   display: block;
   margin-left: auto;
