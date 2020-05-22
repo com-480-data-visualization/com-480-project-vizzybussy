@@ -708,12 +708,17 @@
 
 
         var genre_selected = $("select#genre-select").val();
+
         var filterFuncGenre = (dat) => { return dat }
         if (genre_selected != "all") {
             filterFuncGenre = (dat) => { return dat.filter((d) => { return d.genres === genre_selected }) }
         }
+
+        var filterFuncYear = (d) => { return d.realease_year == fromYear }
+        var filterWithinDisplayRangs = (d) => {return d.revenue > config.xaxis_min && d.revenue < config.xaxis_max && d.popularity > config.yaxis_min && d.popularity < config.yaxis_max}
+
         var fromYear = $("#year_selector").slider("option", "value")
-        var filterFunc = (dat) => { return filterFuncGenre(dat).filter((d) => { return d.realease_year == fromYear }) }
+        var filterFunc = (dat) => { return filterFuncGenre(dat).filter(filterFuncYear).filter(filterWithinDisplayRangs) }
 
 
         local_config = {
