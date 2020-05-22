@@ -363,6 +363,9 @@ $(function () {
                 .attr("y", genre.cy)
                 .attr("text-anchor", "middle")
                 .style("font-size", genre.fontsize)
+                .style("font-family", "Raleway")              
+                .style("font-style","italic")
+                .style("font-weight",500)
                 .style("pointer-events", "none")
                 .text(genre.text);
         })
@@ -388,6 +391,9 @@ $(function () {
                 .attr("y", ph.cy)
                 .attr("text-anchor", "middle")
                 .style("font-size", ph.fontsize)
+                .style("font-family", "Raleway")
+                .style("font-style","italic")
+                .style("font-weight",500)
                 .style("pointer-events", "none")
                 .text(ph.text);
         })

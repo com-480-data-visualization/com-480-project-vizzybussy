@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+body{
+   font-family: 'Open Sans',serif;
+}
+h1, h2, h3, h4, h5 {
+    font-family: "Raleway";
+    font-weight: 700;
+}
 #movieTimelineMoviesDisplay {
     display: flex;
     justify-content: space-between;
@@ -106,7 +116,7 @@
 
 .card-img-top {
     height: 100% !important;
-    object-fit: fill;
+    object-fit: cover;
 }
 /*
 Old card style
