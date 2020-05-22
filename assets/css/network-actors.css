@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+
+
+#body{
+  font-family: 'Open Sans', sans-serif;
+}
+
 
 #tooltip {
   position: absolute;
@@ -13,6 +22,7 @@
   max-width: 300px;
   max-height: 450px;
   overflow-y: auto;
+  font-family: 'Open Sans', sans-serif;
   opacity: 0;
   justify-content: space-between;
   border-radius: 5%;
