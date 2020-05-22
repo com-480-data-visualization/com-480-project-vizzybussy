@@ -46,8 +46,22 @@
 <body>
     <div class="row">
         <div class="col-4 text-center align-bottom">
-            Timeline control:
-            <button type="button" class="btn btn-light" id="timelineControl">Play</button>
+            <table style="width: 100%;">
+                <tr>
+                    <th>
+                        Timeline control:
+                        <button type="button" class="btn btn-light" id="timelineControl">Play</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Timeline control:
+                        <button type="button" class="btn btn-light" id="speedIncrease">+</button>
+                        <button type="button" class="btn btn-light" id="speedDecrease">-</button>
+                    </th>
+                </tr>
+            </table>
+
         </div>
         <div class="col-4">
             <label for="genre-select">Genre</label>
@@ -215,8 +229,6 @@
         font-family: 'Open Sans', sans-serif;
     }
 
-
-
     #custom-handle {
         width: 3em;
         height: 1.6em;
@@ -271,7 +283,14 @@
         slider_max_year: 2016,
         slider_min_year: 1966,
 
-        graph_background_color: "#FFFFFF"
+        graph_background_color: "#FFFFFF",
+
+        xaxis_min: 1000000,
+        xaxis_max: 10000000000,
+        yaxis_min: 1,
+        yaxis_max: 1000,
+        zaxis_min: 7000,
+        zaxis_max: 1000000000,
     }
 
     genreColors = {
@@ -297,25 +316,33 @@
     //timer for auto advance of timeliine
     $("#timelineControl").attr("onclick", "timelineAction()")
 
+    var myTimerSpeed = 450;
     var myTimelineTimer = null
+    $("#speedIncrease").click(() => { myTimerSpeed = Math.max(myTimerSpeed - 100, 100); })
+    $("#speedDecrease").click(() => { myTimerSpeed += Math.min(myTimerSpeed + 100, 5000); })
+
+
+    var startTimelineTimer = () => {
+        myTimelineTimer = setInterval(() => {
+            $("#year_selector").slider("value", $("#year_selector").slider("value") + 1);
+            clearInterval(myTimelineTimer)
+            if ($("#year_selector").slider("value") == config.slider_max_year) {
+                myTimelineTimer = null
+                $("#timelineControl").text("Start")
+            }else{
+                startTimelineTimer()
+            }
+        }, myTimerSpeed)
+    }
     var timelineAction = () => {
         if (myTimelineTimer == null) {
             $("#timelineControl").text("Stop")
-            myTimelineTimer = setInterval(() => {
-                $("#year_selector").slider("value", $("#year_selector").slider("value") + 1);
-                if ($("#year_selector").slider("value") == config.slider_max_year) {
-                    clearInterval(myTimelineTimer)
-                    myTimelineTimer = null
-                    $("#timelineControl").text("Start")
-                }
-            }, 450)
+            startTimelineTimer();
         } else {
             clearInterval(myTimelineTimer)
             myTimelineTimer = null
             $("#timelineControl").text("Start")
         }
-
-
     }
 
 
@@ -339,7 +366,7 @@
 
     // Add X axis
     var x = d3.scaleLog()
-        .domain([3000000, 3000000000]).nice()
+        .domain([config.xaxis_min, config.xaxis_max]).nice()
         .range([0, width]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -347,14 +374,14 @@
 
     // Add Y axis
     var y = d3.scaleLog()
-        .domain([1, 1000]).nice()
+        .domain([config.yaxis_min, config.yaxis_max]).nice()
         .range([height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
 
     // Add a scale for bubble size
     var z = d3.scaleSqrt()
-        .domain([7000, 1000000000])
+        .domain([config.zaxis_min, config.zaxis_max])
         .range([1, 60]);
 
     //title
