@@ -98,102 +98,108 @@
             <div id="my_dataviz"></div>
         </div>
         <div class="col-md-3" id="movie_info">
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
+            <div id="tutorialDisplay">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
+                    </div>
+                    <div class="col-sm-8">
+                        Hover over any of the bubbles to get more information about the movie. Click to select it.
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    Hover over any of the bubbles to get more information about the movie. Click to select it.
+                <p></p>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="https://img.icons8.com/ios/100/000000/video.png"
+                            style="width: 100%;max-width: 75px;" />
+                    </div>
+                    <div class="col-sm-8">
+                        If you want to watch the movie trailer click on the thumbnail and start watching.
+                    </div>
                 </div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="https://img.icons8.com/ios/100/000000/video.png" style="width: 100%;max-width: 75px;" />
-                </div>
-                <div class="col-sm-8">
-                    If you want to watch the movie trailer click on the thumbnail and start watching.
-                </div>
-            </div>
-            <div class="row" style="padding-top: 1em;">
-                <h5>Genres color code</h5>
-                <!--<img class="card-img-top mx-auto" src="assets/img/combined.png" style="width: 50vw;" alt="action">-->
-                <table style="width: 100%;">
-                    <tr>
-                        <th>
-                            <img id="actionColorSel" class="card-img-top mx-auto" src="assets/img/action.png"
-                                alt="action">
-                        </th>
-                        <th>
-                            <img id="adventureColorSel" class="card-img-top mx-auto" src="assets/img/adventure.png"
-                                alt="adventure">
-                        </th>
-                        <th>
-                            <img id="comedyColorSel" class="card-img-top mx-auto" src="assets/img/comedy.png"
-                                alt="comedy">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="crimeColorSel" class="card-img-top mx-auto" src="assets/img/crime.png" alt="crime">
-                        </th>
-                        <th>
-                            <img id="dramaColorSel" class="card-img-top mx-auto" src="assets/img/drama.png" alt="drama">
-                        </th>
-                        <th>
-                            <img id="familyColorSel" class="card-img-top mx-auto" src="assets/img/Family.png"
-                                alt="family">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="fantasyColorSel" class="card-img-top mx-auto" src="assets/img/fantasy.png"
-                                alt="fantasy">
-                        </th>
-                        <th>
-                            <img id="historyColorSel" class="card-img-top mx-auto" src="assets/img/history.png"
-                                alt="history">
-                        </th>
-                        <th>
-                            <img id="horrorColorSel" class="card-img-top mx-auto" src="assets/img/horror.png"
-                                alt="horror">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="musicColorSel" class="card-img-top mx-auto" src="assets/img/music.png" alt="music">
-                        </th>
-                        <th>
-                            <img id="otherColorSel" class="card-img-top mx-auto" src="assets/img/other.png" alt="other">
-                        </th>
-                        <th>
-                            <img id="romanceColorSel" class="card-img-top mx-auto" src="assets/img/romance.png"
-                                alt="romance">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="sciFiColorSel" class="card-img-top mx-auto" src="assets/img/scienceFiction.png"
-                                alt="SciFi">
-                        </th>
-                        <th>
-                            <img id="thrillerColorSel" class="card-img-top mx-auto" src="assets/img/thriller.png"
-                                alt="Thriller">
-                        </th>
-                        <th>
-                            <img id="warColorSel" class="card-img-top mx-auto" src="assets/img/war.png" alt="War">
-                        </th>
-                    </tr>
-                    <tr>
+                <div class="row" style="padding-top: 1em;">
+                    <h5>Genres color code</h5>
+                    <!--<img class="card-img-top mx-auto" src="assets/img/combined.png" style="width: 50vw;" alt="action">-->
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>
+                                <img id="actionColorSel" class="card-img-top mx-auto" src="assets/img/action.png"
+                                    alt="action">
+                            </th>
+                            <th>
+                                <img id="adventureColorSel" class="card-img-top mx-auto" src="assets/img/adventure.png"
+                                    alt="adventure">
+                            </th>
+                            <th>
+                                <img id="comedyColorSel" class="card-img-top mx-auto" src="assets/img/comedy.png"
+                                    alt="comedy">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img id="crimeColorSel" class="card-img-top mx-auto" src="assets/img/crime.png"
+                                    alt="crime">
+                            </th>
+                            <th>
+                                <img id="dramaColorSel" class="card-img-top mx-auto" src="assets/img/drama.png"
+                                    alt="drama">
+                            </th>
+                            <th>
+                                <img id="familyColorSel" class="card-img-top mx-auto" src="assets/img/Family.png"
+                                    alt="family">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img id="fantasyColorSel" class="card-img-top mx-auto" src="assets/img/fantasy.png"
+                                    alt="fantasy">
+                            </th>
+                            <th>
+                                <img id="historyColorSel" class="card-img-top mx-auto" src="assets/img/history.png"
+                                    alt="history">
+                            </th>
+                            <th>
+                                <img id="horrorColorSel" class="card-img-top mx-auto" src="assets/img/horror.png"
+                                    alt="horror">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img id="musicColorSel" class="card-img-top mx-auto" src="assets/img/music.png"
+                                    alt="music">
+                            </th>
+                            <th>
+                                <img id="otherColorSel" class="card-img-top mx-auto" src="assets/img/other.png"
+                                    alt="other">
+                            </th>
+                            <th>
+                                <img id="romanceColorSel" class="card-img-top mx-auto" src="assets/img/romance.png"
+                                    alt="romance">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <img id="sciFiColorSel" class="card-img-top mx-auto" src="assets/img/scienceFiction.png"
+                                    alt="SciFi">
+                            </th>
+                            <th>
+                                <img id="thrillerColorSel" class="card-img-top mx-auto" src="assets/img/thriller.png"
+                                    alt="Thriller">
+                            </th>
+                            <th>
+                                <img id="warColorSel" class="card-img-top mx-auto" src="assets/img/war.png" alt="War">
+                            </th>
+                        </tr>
+                        <tr>
 
-                        <th>
-                            <img id="westernColorSel" class="card-img-top mx-auto" src="assets/img/western.png"
-                                alt="Western">
-                        </th>
-                    </tr>
-                </table>
+                            <th>
+                                <img id="westernColorSel" class="card-img-top mx-auto" src="assets/img/western.png"
+                                    alt="Western">
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-
         </div>
     </div>
 
@@ -386,13 +392,16 @@
                 .style("opacity", config.opacity_data_point_hover)
                 .attr("stroke", "black")
 
-            d3.select("#movie_info")
-                .html("")
+            $("#tutorialDisplay").hide()
+
+            d3.select("#tutorialDisplay")
+                .attr("style", "display: none;")
             var movieDivInfo = d3.select("#movie_info")
                 .append("div")
                 .attr("class", "overflow-auto")
                 .attr("style", "height:" + (height + margin.top + margin.bottom) + "px;")
                 //.attr("style","border: 8px solid #f7f7f7;")
+                .attr("id", "selectedMovieInfoDisplay")
                 .append("div")
                 .attr("style", "overflow-x: hidden;")
 
@@ -506,96 +515,8 @@
 
         if (!keepMovieInfoDisplayed.display) {
 
-            d3.select("#movie_info") //redisplaying the tutorial
-                .html(`
-                <div class="row">
-                <div class="col-sm-4">
-                    <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
-                </div>
-                <div class="col-sm-8">
-                    Hover over any of the bubbles to get more information about the movie. Click to select it.
-                </div>
-            </div>
-            <p></p>
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="https://img.icons8.com/ios/100/000000/video.png" style="width: 100%;max-width: 75px;" />
-                </div>
-                <div class="col-sm-8">
-                    If you want to watch the movie trailer click on the thumbnail and start watching.
-                </div>
-            </div>
-            <div class="row" style="padding-top: 1em;">
-                <h5>Genres color code</h5>
-                <!--<img class="card-img-top mx-auto" src="assets/img/combined.png" style="width: 50vw;" alt="action">-->
-                <table style="width: 100%;">
-                    <tr>
-                        <th>
-                            <img id="actionColorSel" class="card-img-top mx-auto" src="assets/img/action.png"
-                                alt="action">
-                        </th>
-                        <th>
-                            <img id="adventureColorSel" class="card-img-top mx-auto" src="assets/img/adventure.png" alt="adventure">
-                        </th>
-                        <th>
-                            <img id="comedyColorSel" class="card-img-top mx-auto" src="assets/img/comedy.png" alt="comedy">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="crimeColorSel" class="card-img-top mx-auto" src="assets/img/crime.png" alt="crime">
-                        </th>
-                        <th>
-                            <img id="dramaColorSel" class="card-img-top mx-auto" src="assets/img/drama.png" alt="drama">
-                        </th>
-                        <th>
-                            <img id="familyColorSel" class="card-img-top mx-auto" src="assets/img/Family.png" alt="family">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="fantasyColorSel" class="card-img-top mx-auto" src="assets/img/fantasy.png" alt="fantasy">
-                        </th>
-                        <th>
-                            <img id="historyColorSel" class="card-img-top mx-auto" src="assets/img/history.png" alt="history">
-                        </th>
-                        <th>
-                            <img id="horrorColorSel" class="card-img-top mx-auto" src="assets/img/horror.png" alt="horror">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="musicColorSel" class="card-img-top mx-auto" src="assets/img/music.png" alt="music">
-                        </th>
-                        <th>
-                            <img id="otherColorSel" class="card-img-top mx-auto" src="assets/img/other.png" alt="other">
-                        </th>
-                        <th>
-                            <img id="romanceColorSel" class="card-img-top mx-auto" src="assets/img/romance.png" alt="romance">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <img id="sciFiColorSel" class="card-img-top mx-auto" src="assets/img/scienceFiction.png" alt="SciFi">
-                        </th>
-                        <th>
-                            <img id="thrillerColorSel" class="card-img-top mx-auto" src="assets/img/thriller.png" alt="Thriller">
-                        </th>
-                        <th>
-                            <img id="warColorSel" class="card-img-top mx-auto" src="assets/img/war.png" alt="War">
-                        </th>
-                    </tr>
-                    <tr>
-
-                        <th>
-                            <img id="westernColorSel" class="card-img-top mx-auto" src="assets/img/western.png" alt="Western">
-                        </th>
-                    </tr>
-                </table>
-            </div>
-
-            `)
-
+            $("#selectedMovieInfoDisplay").remove()
+            $("#tutorialDisplay").show() //redisplaying the tutorial
 
             d3.selectAll(("#data_uid_" + d.id))
                 .style("opacity", config.opacity_data_point_no_hover)
