@@ -118,6 +118,19 @@ h1, h2, h3, h4, h5 {
     height: 100% !important;
     object-fit: cover;
 }
+
+.fitin {
+    height: 150px;
+    overflow: hidden;
+}
+
+.fitin h5 {
+    font-size: inherit;
+}
+.fitin h6 {
+    font-size: small;
+}
+
 /*
 Old card style
 .card-img-top {

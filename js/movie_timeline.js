@@ -435,6 +435,7 @@ $(function () {
             var movie = currentData[i];
             populateMovieDiv(i, key, movie, color)
         }
+        shrinkTextWhenTooBig()
 
     };
 
@@ -450,6 +451,7 @@ $(function () {
             populateMovieDiv(i, key, movie, color)
 
         }
+        shrinkTextWhenTooBig()
     }
 
     function populateMovieDiv(i, key, movie, color) {
@@ -463,6 +465,21 @@ $(function () {
         currentCard.getElementsByClassName('timeline-movie-year')[0].style.display = "block"
         var posterDivId = "#timeline_movie_poster_" + (i + 1)
         setMovieImage(posterDivId, movie.id)
+    }
+
+    function shrinkTextWhenTooBig(){
+        var allCardBodies = $('.fitin')
+        allCardBodies.each((i,elem)=>{
+            var divHeight = elem.clientHeight
+            var titleHeight = elem.getElementsByClassName('card-title')[0].clientHeight
+            var subtitleHeight = elem.getElementsByClassName('card-subtitle')[0].clientHeight
+            var genreDivHeight = $('.card-header').children()[0].clientHeight
+            //console.log(genreDivHeight)
+            //console.log(titleHeight + subtitleHeight, divHeight,titleHeight + subtitleHeight > divHeight)
+            if( titleHeight + subtitleHeight > divHeight - genreDivHeight ) {
+                console.log("Enter")
+                elem.getElementsByClassName('card-subtitle')[0].innerHTML = ""
+        }})
     }
 
     // function to decide whether to pluralize the word "movie" in the tooltip
