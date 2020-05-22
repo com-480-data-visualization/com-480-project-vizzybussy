@@ -272,7 +272,7 @@ $(function () {
                         .style("stroke-width", "2px");
 
                     if (currentChartProperties.firstLevel) {
-                        $("#movieTimelineMoviesDisplay").css("visibility","visible")
+                        //$("#movieTimelineMoviesDisplay").css("visibility","visible")
                         changeMovieDisplay(d.key, color)
                     }
                     if (!currentChartProperties.firstLevel) {
@@ -282,12 +282,13 @@ $(function () {
                     }
 
                 })
-                .on("mouseover", function(d, i) {
+                .on("mouseover", function (d, i) {
                     svg.selectAll(".layer").transition()
-                    .duration(250)
-                    .attr("opacity", function(d, j) {
-                      return j != i ? 0.8 : 1;
-                  })})
+                        .duration(250)
+                        .attr("opacity", function (d, j) {
+                            return j != i ? 0.8 : 1;
+                        })
+                })
                 .on("mouseout", function (d, i) {
                     svg.selectAll(".layer")
                         .transition()
@@ -362,6 +363,10 @@ $(function () {
                 .attr("y", genre.cy)
                 .attr("text-anchor", "middle")
                 .style("font-size", genre.fontsize)
+                .style("font-family", "Raleway")              
+                .style("font-style","italic")
+                .style("font-weight",500)
+                .style("pointer-events", "none")
                 .text(genre.text);
         })
     }
@@ -369,7 +374,7 @@ $(function () {
     function showProductionHousesLabels(svg, width) {
         var phLabels = [
             //{ "percWidth": 0.65, "cx": "800", "cy": "9em", "text": "Drama" },
-            { "percWidth": 0.45,  "cy": "9.7em", "text": "Paramount Pictures", fontsize: "20px" },
+            { "percWidth": 0.45, "cy": "9.7em", "text": "Paramount Pictures", fontsize: "20px" },
             { "percWidth": 0.57, "cy": "1.7em", "text": "Warner Bros.", fontsize: "20px" },
             { "percWidth": 0.55, "cy": "16.5em", "text": "Columbia Pictures", fontsize: "18px" },
             { "percWidth": 0.86, "cy": "10.8em", "text": "Relativity Media", fontsize: "16px" },
@@ -386,6 +391,10 @@ $(function () {
                 .attr("y", ph.cy)
                 .attr("text-anchor", "middle")
                 .style("font-size", ph.fontsize)
+                .style("font-family", "Raleway")
+                .style("font-style","italic")
+                .style("font-weight",500)
+                .style("pointer-events", "none")
                 .text(ph.text);
         })
     }
@@ -415,7 +424,7 @@ $(function () {
     }
 
 
-    function changeMovieDisplay(key,color) {
+    function changeMovieDisplay(key, color) {
 
         if (currentChartProperties.typeGenre) {
             currentData = most_popular_movies_per_genre[key]
@@ -424,21 +433,54 @@ $(function () {
         }
         for (var i = 0; i < 5; i++) {
             var movie = currentData[i];
-            var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
-            currentCard.getElementsByClassName('card-header')[0].style.backgroundColor = color;
-            currentCard.style.borderColor = color;
-            currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = key
-            currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
-            currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
-            currentCard.getElementsByClassName('timeline-movie-year')[0].innerHTML = new Date(movie.release_date).getFullYear()
-            currentCard.getElementsByClassName('timeline-movie-year')[0].style.display = "block"
-            var posterDivId = "#timeline_movie_poster_"+(i+1)
-            setMovieImage(posterDivId,movie.id)
-                    
+            populateMovieDiv(i, key, movie, color)
+        }
+        shrinkTextWhenTooBig()
+
+    };
+
+    function setInitialMovieDisplay() {
+        currentData = most_popular_movies_per_genre
+        for (var i = 0; i < 5; i++) {
+            // get random genre
+            var colorKey = genreColors[Math.floor(Math.random() * genreColors.length)]
+            var key = colorKey.name
+            var color = colorKey.color
+            // get random movie from that genre
+            var movie = currentData[key][Math.floor(Math.random() * currentData[key].length)]
+            populateMovieDiv(i, key, movie, color)
 
         }
-          
-    };
+        shrinkTextWhenTooBig()
+    }
+
+    function populateMovieDiv(i, key, movie, color) {
+        var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
+        currentCard.getElementsByClassName('card-header')[0].style.backgroundColor = color;
+        currentCard.style.borderColor = color;
+        currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = key
+        currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
+        currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
+        currentCard.getElementsByClassName('timeline-movie-year')[0].innerHTML = new Date(movie.release_date).getFullYear()
+        currentCard.getElementsByClassName('timeline-movie-year')[0].style.display = "block"
+        var posterDivId = "#timeline_movie_poster_" + (i + 1)
+        setMovieImage(posterDivId, movie.id)
+    }
+
+    function shrinkTextWhenTooBig(){
+        var allCardBodies = $('.fitin')
+        allCardBodies.each((i,elem)=>{
+            var divHeight = elem.clientHeight
+            var titleHeight = elem.getElementsByClassName('card-title')[0].clientHeight
+            var subtitleHeight = elem.getElementsByClassName('card-subtitle')[0].clientHeight
+            var genreDivHeight = $('.card-header').children()[0].clientHeight
+            //console.log(genreDivHeight)
+            //console.log(titleHeight + subtitleHeight, divHeight,titleHeight + subtitleHeight > divHeight)
+            if( titleHeight + subtitleHeight > divHeight - genreDivHeight ) {
+                console.log("Enter")
+                elem.getElementsByClassName('card-subtitle')[0].innerHTML = ""
+        }})
+    }
 
     // function to decide whether to pluralize the word "movie" in the tooltip
     function moviePlural(x) {
@@ -485,65 +527,34 @@ $(function () {
         return y;
     }
 
+    var genreColors;
+
+    $.getJSON('data/colors.json', function (data) {
+        genreColors = data
+    });
+
     var most_popular_movies_per_genre;
     $.getJSON('data/most_popular_movies_per_genre.json', function (data) {
         most_popular_movies_per_genre = data
-        //console.log(data)
-        Object.keys(data).forEach(function (k) {
-            var div = document.createElement("div");
-            var genreDivId = "movies-" + k
-            div.id = genreDivId;
-            div.style.display = 'none'; // hide
-            //console.log(div)
-            document.getElementById("movieTimelineMoviesDisplay").appendChild(div);
-            //console.log(k);
-
-            $.each(data[k], function (index, value) {
-                var movieDiv = document.createElement("div");
-                movieDiv.id = genreDivId + "-movie-" + index;
-                movieDiv.className = "movieDiv";
-                //movieDiv.style.display = "inline-block"
-                //movieDiv.style.border = "thick solid #0000FF"
-
-                //movieDiv.innerHTML = value.original_title
-                movieDiv.innerHTML = "<div class='tip'><div class='year'>" + value.original_title + "</div><div class='key'>" + value.tagline + "</div><div class='value'> Rating:" + value.popularity + "</div></div>";
-                //div.style.display = 'none'; // hide
-                //console.log(div)
-                document.getElementById(genreDivId).appendChild(movieDiv);
-            });
-        });
-
-    });
+        setInitialMovieDisplay()
+    })
 
     var most_popular_movies_per_pc;
     $.getJSON('data/most_popular_movies_per_pc.json', function (data) {
         most_popular_movies_per_pc = data
-        Object.keys(data).forEach(function (k) {
-            var div = document.createElement("div");
-            var pcDivId = "movies-" + k
-            div.id = pcDivId;
-            div.style.display = 'none'; // hide
-            document.getElementById("movieTimelineMoviesDisplay").appendChild(div);
-
-            $.each(data[k], function (index, value) {
-                var movieDiv = document.createElement("div");
-                movieDiv.id = pcDivId + "-movie-" + index;
-                movieDiv.className = "movieDiv";
-                movieDiv.innerHTML = "<div class='tip'><div class='year'>" + value.original_title + "</div><div class='key'>" + value.tagline + "</div><div class='value'> Rating:" + value.popularity + "</div></div>";
-                document.getElementById(pcDivId).appendChild(movieDiv);
-            });
-        });
-
     });
 
     $("#movieTimelineProductionHousesButton").click(() => {
-
-        $('.legend').fadeOut();
-        $("#movieTimeline").children().last().fadeOut(400, function () {
-            currentChartProperties = chartPropertiesPHFirstLevel
-            chart("data/all_data_stream.csv");
-            $("#movieTimelineHeading").html("Movie Timeline");
-        });
+        if (!loading) {
+            loading = true
+            $('.legend').fadeOut();
+            $("#movieTimeline").children().last().fadeOut(400, function () {
+                loading = false
+                currentChartProperties = chartPropertiesPHFirstLevel
+                chart("data/all_data_stream.csv");
+                $("#movieTimelineHeading").html("Movie Timeline");
+            });
+        }
         //$("#movieTimeline").html("")
         //currentChartProperties = chartPropertiesPHFirstLevel
         //console.log(currentChartProperties)
@@ -551,12 +562,16 @@ $(function () {
         //$("#movieTimelineHeading").html("Movie Timeline");
     })
     $("#movieTimelineGenreButton").click(() => {
-        $('.legend').fadeOut();
-        $("#movieTimeline").children().last().fadeOut(400, function () {
-            currentChartProperties = chartPropertiesGenreFirstLevel
-            chart("data/all_data_stream.csv");
-            $("#movieTimelineHeading").html("Movie Timeline");
-        });
+        if (!loading) {
+            loading = true
+            $('.legend').fadeOut();
+            $("#movieTimeline").children().last().fadeOut(400, function () {
+                loading = false
+                currentChartProperties = chartPropertiesGenreFirstLevel
+                chart("data/all_data_stream.csv");
+                $("#movieTimelineHeading").html("Movie Timeline");
+            });
+        }
         //$("#movieTimeline").html("")
         //currentChartProperties = chartPropertiesGenreFirstLevel
         //chart("all_data_stream.csv");
@@ -571,8 +586,34 @@ $(function () {
         });
     })
 
+    $("#movieTimelineColorblindPalette").click(() => {
+        if (!loading & !colorBlindChecked) {
+            loading = true
+        colorBlindChecked = !colorBlindChecked
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            loading = false
+            //$(this).html("")
+            chart("data/all_data_stream.csv")
+        });
+    }
+    })
+
+    $("#movieTimelineDefaultPalette").click(() => {
+        if (!loading & colorBlindChecked) {
+            loading = true
+        colorBlindChecked = !colorBlindChecked
+        $("#movieTimeline").children().last().fadeOut(400, function () {
+            loading = false
+            //$(this).html("")
+            chart("data/all_data_stream.csv")
+        });
+    }
+    })
+
+    var loading = false
     currentChartProperties = chartPropertiesGenreFirstLevel
     chart("data/all_data_stream.csv");
     $("#movieTimelineHeading").html("Movie Timeline");
+    //setInitialMovieDisplay();
 
 });
