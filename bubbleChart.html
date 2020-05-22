@@ -271,9 +271,9 @@
 <script>
     //https://observablehq.com/@will-r-chase/scatter-plot
     // set the dimensions and margins of the graph
-    var margin = { top: 40, right: 30, bottom: 50, left: 70 },
+    var margin = { top: 40, right: 30, bottom: 80, left: 70 },
         width = $("#graphContainer").width() - margin.left - margin.right,
-        height = 700 - 170 - margin.top - margin.bottom;
+        height = 900 - 170 - margin.top - margin.bottom;
 
     var config = {
         opacity_data_point_hover: "0.9",
@@ -286,7 +286,7 @@
         graph_background_color: "#FFFFFF",
 
         xaxis_min: 1000000,
-        xaxis_max: 10000000000,
+        xaxis_max: 4000000000,
         yaxis_min: 1,
         yaxis_max: 1000,
         zaxis_min: 7000,
@@ -329,7 +329,7 @@
             if ($("#year_selector").slider("value") == config.slider_max_year) {
                 myTimelineTimer = null
                 $("#timelineControl").text("Start")
-            }else{
+            } else {
                 startTimelineTimer()
             }
         }, myTimerSpeed)
@@ -366,18 +366,27 @@
 
     // Add X axis
     var x = d3.scaleLog()
-        .domain([config.xaxis_min, config.xaxis_max]).nice()
+        .domain([config.xaxis_min, config.xaxis_max])//.nice()
         .range([0, width]);
+
+
+
+    let tickLabels = ['1M', '2M', '3M', '4M', '5M', '6M', '7M', '8M', '9M', '10M', '20M', '30M', '40M', '50M', '60M', '70M', '80M', '90M', '100M', '200M', '300M', '400M', '500M', '600M', '700M', '800M', '900M', '1B', '2B', '3B'];
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x).tickFormat((d, i) => tickLabels[i]))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");;
 
     // Add Y axis
     var y = d3.scaleLog()
         .domain([config.yaxis_min, config.yaxis_max]).nice()
         .range([height, 0]);
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).tickFormat(d3.format(",d")));
 
     // Add a scale for bubble size
     var z = d3.scaleSqrt()
@@ -392,10 +401,13 @@
         .style("font-size", "25px")
         .text("Popularity vs Revenue")
 
+
+
+
     //x-axis label
     svg.append("text")
         .attr("class", "text")
-        .attr("transform", "translate(" + (width / 2) + "," + (height + 40) + ")")
+        .attr("transform", "translate(" + (width / 2) + "," + (height + 60) + ")")
         .style("text-anchor", "middle")
         .style("font-size", "20px")
         .text("Revenue");
@@ -542,7 +554,10 @@
 
         if (!keepMovieInfoDisplayed.display) {
 
-            $("#selectedMovieInfoDisplay").remove()
+            $("div[id^='selectedMovieInfoDisplay']").each(function () {
+                this.remove()
+            });
+
             $("#tutorialDisplay").show() //redisplaying the tutorial
 
             d3.selectAll(("#data_uid_" + d.id))
@@ -660,6 +675,9 @@
                     $("#custom-handle").text(ui.item.data.realease_year)
                     delete keepMovieInfoDisplayed.d
                     keepMovieInfoDisplayed.display = false
+                    $("div[id^='selectedMovieInfoDisplay']").each(function () {
+                this.remove()
+            });
                     displayMovieInfo(ui.item.data)
                     permanentMovieDisplay(ui.item.data)
                 }
@@ -715,7 +733,7 @@
         }
 
         var filterFuncYear = (d) => { return d.realease_year == fromYear }
-        var filterWithinDisplayRangs = (d) => {return d.revenue > config.xaxis_min && d.revenue < config.xaxis_max && d.popularity > config.yaxis_min && d.popularity < config.yaxis_max}
+        var filterWithinDisplayRangs = (d) => { return d.revenue > config.xaxis_min && d.revenue < config.xaxis_max && d.popularity > config.yaxis_min && d.popularity < config.yaxis_max }
 
         var fromYear = $("#year_selector").slider("option", "value")
         var filterFunc = (dat) => { return filterFuncGenre(dat).filter(filterFuncYear).filter(filterWithinDisplayRangs) }
