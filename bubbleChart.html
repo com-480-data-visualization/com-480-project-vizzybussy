@@ -215,6 +215,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 </body>
@@ -238,29 +239,29 @@
         line-height: 1.6em;
     }
 
-    #tooltip::-webkit-scrollbar {
+    #movie_info::-webkit-scrollbar {
         width: 20px;
     }
 
-    #tooltip::-webkit-scrollbar-track {
+    #movie_info::-webkit-scrollbar-track {
         border-radius: 10px;
     }
 
-    #tooltip::-webkit-scrollbar-thumb {
+    #movie_info::-webkit-scrollbar-thumb {
         background: orange;
         border-radius: 10px;
     }
 
-    #tooltip::-webkit-scrollbar-thumb:hover {
+    #movie_info::-webkit-scrollbar-thumb:hover {
         background: #FF8C00;
     }
 
-    #tooltip::-webkit-scrollbar-track-piece:end {
+    #movie_info::-webkit-scrollbar-track-piece:end {
         background: transparent;
         margin-bottom: 10%;
     }
 
-    #tooltip::-webkit-scrollbar-track-piece:start {
+    #movie_info::-webkit-scrollbar-track-piece:start {
         background: transparent;
         margin-top: 10%;
     }
@@ -273,7 +274,8 @@
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 80, left: 70 },
         width = $("#graphContainer").width() - margin.left - margin.right,
-        height = 900 - 170 - margin.top - margin.bottom;
+        height = Math.max($("#movie_info").height()+margin.top+margin.bottom+170,Math.min($(window).height(), $("#graphContainer").width()*0.5 ))- 170 - margin.top - margin.bottom;
+        console.log("WINDOW HIEGHT:"+$(window).height())
 
     var config = {
         opacity_data_point_hover: "0.9",
@@ -318,7 +320,7 @@
 
     var myTimerSpeed = 450;
     var myTimelineTimer = null
-    $("#speedIncrease").click(() => { myTimerSpeed = Math.max(myTimerSpeed - 100, 100);  })
+    $("#speedIncrease").click(() => { myTimerSpeed = Math.max(myTimerSpeed - 100, 100); })
     $("#speedDecrease").click(() => { myTimerSpeed = Math.min(myTimerSpeed + 100, 1000); })
 
 
