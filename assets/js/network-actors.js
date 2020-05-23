@@ -519,7 +519,7 @@
     tempData.nodes.forEach(function(d) {
         context.beginPath();
         context.arc(d.x, d.y, radius, 0, 2 * Math.PI, true);
-        context.fillStyle = d.gender == 2 ? "#00429d": (d.gender == 1 ? "#d81b60":"black" );
+        context.fillStyle = d.gender == 2 ? "#686de0": (d.gender == 1 ? "#eb4d4b":"#535c68" );
         if ((actor_selected || overnode) && current_node_name != d.id && actor_selected_name != d.id && !keepOpacity.includes(d.id)) {
           context.globalAlpha = 0.1;
         } else {
@@ -542,7 +542,7 @@
         if (printText) {
           context.beginPath();
           context.font = '4pt Calibri';
-          context.fillStyle = d.gender == 2 ? "#00429d": (d.gender == 1 ? "#d81b60":"black" );
+          context.fillStyle = d.gender == 2 ? "#686de0": (d.gender == 1 ? "#eb4d4b":"#535c68" );
           context.textAlign = 'center';
           context.fillText(d.id, d.x, d.y-5);
           printText = false;
