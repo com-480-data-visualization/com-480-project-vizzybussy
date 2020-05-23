@@ -17,10 +17,11 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                 $(destIDLocation).attr("src", "assets/img/black-chairs-in-front-of-white-projector-screen-3709369.jpg")
             }
             if(data.videos.results.length != 0 && movieInfoImgLink!=null){
-                $(movieInfoImgLink).attr("href", "https://www.youtube.com/watch?v="+data.videos.results[0].key).attr("target","_blank")
+                $(movieInfoImgLink).attr("href", "https://www.themoviedb.org/movie/"+movieID).attr("target","_blank")
                 $(movieInfoYoutubeLink).attr("href", "https://www.youtube.com/watch?v="+data.videos.results[0].key).attr("target","_blank")
             }
             if(data.credits != null && data.credits.cast != null && data.credits.cast.length>0 && creditMovieDiv != null){
+                $(creditMovieDiv).empty()
                 for(i = 0; i< 6 && data.credits.cast.length > i; i++){
                     $(creditMovieDiv).append("<div class='col-4'> <a href='https://www.themoviedb.org/person/"
                     +data.credits.cast[i].id
