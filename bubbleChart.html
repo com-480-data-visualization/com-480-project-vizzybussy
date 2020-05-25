@@ -45,26 +45,24 @@
 
 <body>
     <div class="row">
-        <div class="col-4 text-center align-bottom">
-            <table style="width: 100%;">
-                <tr>
-                    <th>
-                        Timeline control:
-                        <button type="button" class="btn btn-light" id="timelineControl">Play</button>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Timeline control:
-                        <button type="button" class="btn btn-light" id="speedIncrease">+</button>
-                        <button type="button" class="btn btn-light" id="speedDecrease">-</button>
-                    </th>
-                </tr>
-            </table>
-
+        <div class="col-4 text-center">
+            Timeline control:
+            <button type="button" class="btn btn-light" id="timelineControl">Play</button>
         </div>
         <div class="col-4">
             <label for="genre-select">Genre</label>
+        </div>
+        <div class="col-4 ui-widget">
+            <!--<label for="search">Search: </label>-->
+        </div>
+    </div>
+    <div class="row" style="margin-top:1em;">
+        <div class="col-4 text-center">
+            Timeline control:
+            <button type="button" class="btn btn-light" id="speedIncrease">+</button>
+            <button type="button" class="btn btn-light" id="speedDecrease">-</button>
+        </div>
+        <div class="col-4">
             <select id="genre-select" class="form-control">
                 <option selected value="all">All</option>
                 <option value="Action">Action</option>
@@ -87,10 +85,9 @@
                 <option value="Documentary">Documentary</option>
             </select>
         </div>
-        <div class="col-4 ui-widget">
-            <!--<label for="search">Search: </label>-->
+        <div class="col-4">
             <input id="search" placeholder="Movie title">
-            <button type="button" class="btn btn-light" >Search</button>
+            <button type="button" class="btn btn-light">Search</button>
         </div>
     </div>
 
@@ -101,6 +98,8 @@
                 <div id="custom-handle" class="ui-slider-handle"></div>
             </div>
         </div>
+        
+
     </div>
 
     <!--<div id="my_dataviz"></div>-->
@@ -118,7 +117,7 @@
                         <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
                     </div>
                     <div class="col-sm-8">
-                        Hover over any of the bubbles to get more information about the movie. Click to select it. 
+                        Hover over any of the bubbles to get more information about the movie. Click to select it.
                     </div>
                 </div>
                 <p></p>
@@ -283,9 +282,9 @@
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 80, left: 70 },
         width = $("#graphContainer").width() - margin.left - margin.right,
-        height = Math.max($("#movie_info").height()+margin.top+margin.bottom+170 ,Math.min($(window).height(), $("#graphContainer").width()*0.5 ))- 170 - margin.top - margin.bottom;
+        height = Math.max($("#movie_info").height() + margin.top + margin.bottom + 170, Math.min($(window).height(), $("#graphContainer").width() * 0.5)) - 170 - margin.top - margin.bottom;
 
-    console.log("height: "+height+" width: "+ width)
+    console.log("height: " + height + " width: " + width)
 
     var config = {
         opacity_data_point_hover: "0.9",
