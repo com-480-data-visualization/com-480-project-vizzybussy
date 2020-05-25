@@ -69,10 +69,9 @@
   float:right;
   display:inline-block;
   padding:2px 5px;
-  background:#ffbe76;
+  background:rgba(255, 190, 118, 0.8);
   user-select: none;
   border-radius: 10px;
-  opacity: 80%;
 }
 
 /* Network placeholder */
@@ -177,7 +176,7 @@
 #help p{    /* The tooltip */
     display: none;
     text-align: left;
-    background-color: #ffbe76;
+    background-color: rgba(255, 190, 118, 0.8);
     padding: 20px;
     width: 350px;
     position: absolute;
@@ -273,9 +272,10 @@
 .reddot {
   height: 25px;
   width: 25px;
-  background-color: #d81b60;
+  background-color: #eb4d4b;
   border-radius: 50%;
   display: inline-block;
+  opacity: 100%;
 }
 
 .bluedot {
@@ -284,6 +284,7 @@
   background-color: #686de0;
   border-radius: 50%;
   display: inline-block;
+  opacity: 100%;
 }
 
 .blackdot {
@@ -292,6 +293,7 @@
   background-color: #535c68;
   border-radius: 50%;
   display: inline-block;
+  opacity: 100%;
 }
 
 
