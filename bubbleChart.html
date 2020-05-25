@@ -112,7 +112,7 @@
             <div id="my_dataviz"></div>
         </div>
         <div class="col-md-3" id="movie_info">
-            <div id="tutorialDisplay" style="font-size: 0.6em;">
+            <div id="tutorialDisplay">
                 <div class="row">
                     <div class="col-sm-3">
                         <img src="/assets/img/haw-gestures-stroke.svg" style="width: 100%;max-width: 75px;" />
@@ -283,7 +283,9 @@
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 80, left: 70 },
         width = $("#graphContainer").width() - margin.left - margin.right,
-        height = Math.max($("#movie_info").height()+margin.top+margin.bottom+170,Math.min($(window).height(), $("#graphContainer").width()*0.5 ))- 170 - margin.top - margin.bottom;
+        height = Math.max($("#movie_info").height()+margin.top+margin.bottom+170 ,Math.min($(window).height(), $("#graphContainer").width()*0.5 ))- 170 - margin.top - margin.bottom;
+
+    console.log("height: "+height+" width: "+ width)
 
     var config = {
         opacity_data_point_hover: "0.9",
@@ -568,7 +570,7 @@
                 this.remove()
             });
 
-            $("#movie_info").css("font-size", "0.6em")
+            //$("#movie_info").css("font-size", "0.6em")
 
             $("#tutorialDisplay").show() //redisplaying the tutorial
 
