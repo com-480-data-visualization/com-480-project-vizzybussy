@@ -431,7 +431,7 @@ $(function () {
         } else {
             currentData = most_popular_movies_per_pc[key]
         }
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 4; i++) {
             var movie = currentData[i];
             populateMovieDiv(i, key, movie, color)
         }
@@ -441,7 +441,7 @@ $(function () {
 
     function setInitialMovieDisplay() {
         currentData = most_popular_movies_per_genre
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 4; i++) {
             // get random genre
             var colorKey = genreColors[Math.floor(Math.random() * genreColors.length)]
             var key = colorKey.name
@@ -458,7 +458,11 @@ $(function () {
         var currentCard = document.getElementById('movieDisplayCard' + (i + 1));
         currentCard.getElementsByClassName('card-header')[0].style.backgroundColor = color;
         currentCard.style.borderColor = color;
-        currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = key
+        if(key == "Metro-Goldwyn-Mayer (MGM)"){
+            currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = "MGM"
+        } else {
+            currentCard.getElementsByClassName('movie-timeline-key')[0].textContent = key
+        }
         currentCard.getElementsByClassName('card-title')[0].textContent = movie.original_title
         currentCard.getElementsByClassName('card-subtitle')[0].textContent = movie.tagline
         currentCard.getElementsByClassName('timeline-movie-year')[0].innerHTML = new Date(movie.release_date).getFullYear()
