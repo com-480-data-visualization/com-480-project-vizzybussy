@@ -331,7 +331,7 @@ $(function () {
                             });
 
                         }
-                        $("#movieTimelineHeading").html("Movie Timeline - " + d.key);
+                        $("#movieTimelineHeading").html(d.key);
                     }
 
                 })
@@ -556,7 +556,7 @@ $(function () {
                 loading = false
                 currentChartProperties = chartPropertiesPHFirstLevel
                 chart("data/all_data_stream.csv");
-                $("#movieTimelineHeading").html("Movie Timeline");
+                $("#movieTimelineHeading").html("");
             });
         }
         //$("#movieTimeline").html("")
@@ -573,7 +573,7 @@ $(function () {
                 loading = false
                 currentChartProperties = chartPropertiesGenreFirstLevel
                 chart("data/all_data_stream.csv");
-                $("#movieTimelineHeading").html("Movie Timeline");
+                $("#movieTimelineHeading").html("");
             });
         }
         //$("#movieTimeline").html("")
@@ -617,7 +617,7 @@ $(function () {
     var loading = false
     currentChartProperties = chartPropertiesGenreFirstLevel
     chart("data/all_data_stream.csv");
-    $("#movieTimelineHeading").html("Movie Timeline");
+    $("#movieTimelineHeading").html("");
     //setInitialMovieDisplay();
 
 });
