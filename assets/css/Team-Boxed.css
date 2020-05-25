@@ -83,6 +83,11 @@
   margin-top: 15px;
   margin-bottom: 19px;
 }
+.team-boxed .item .description-data-sources {
+  font-size: 13px;
+  margin-top: 15px;
+  margin-bottom: 40px;
+}
 
 .team-boxed .item img {
   max-width: 160px;
