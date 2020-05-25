@@ -4,9 +4,7 @@
 
 
 
-#body{
-  font-family: 'Open Sans', sans-serif;
-}
+
 
 
 #tooltip {
@@ -72,6 +70,7 @@
   background:rgba(255, 190, 118, 0.8);
   user-select: none;
   border-radius: 10px;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
 /* Network placeholder */
@@ -142,10 +141,11 @@
 }
 
 #help {
-  right:2%;
+  right: 2%;
+  bottom: 2%;
   position: absolute;
   background-color: lightgrey;
-  padding: 5px 10px;
+  padding: 5px 12px;
   border-radius: 50%;
   text-align: center;
 }
