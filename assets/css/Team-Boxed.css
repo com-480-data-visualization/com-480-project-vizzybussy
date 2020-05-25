@@ -107,3 +107,7 @@
 .text-center .h3 {
   font-size:20px !important;
 }
+
+#contact {
+  padding-bottom: 0px;
+}
