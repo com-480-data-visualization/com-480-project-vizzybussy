@@ -131,6 +131,13 @@ h1, h2, h3, h4, h5 {
     font-size: small;
 }
 
+.card-header {
+    font-size: small;
+}
+.card-title {
+    font-size: small;
+}
+
 /*
 Old card style
 .card-img-top {
