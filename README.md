@@ -85,3 +85,27 @@ Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 **80% of the final grade**
 
 Website source code : [click here](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/tree/gh-pages)
+
+
+# 🚀 Installation
+
+* Clone the repo: `git clone git@github.com:com-480-data-visualization/com-480-project-vizzybussy.git`
+* Change branches `git checkout gh-pages`
+* launch a webserver, for example: `python -m http-server`
+
+The files are layout out as follows:
+```
+.
+├── CNAME
+├── assets (all assets for the website)
+│   ├── bootstrap (Bootstrap JS and CSS)
+│   ├── css (Cascading style sheets)
+│   ├── external
+│   │   └── jquery
+│   │       └── jquery.js
+│   ├── fonts (fonts)
+│   ├── img (images)
+│   └── js (JavaScript)
+├── data (data is located here)
+└── index.html
+```
