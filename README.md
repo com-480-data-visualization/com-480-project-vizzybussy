@@ -12,6 +12,7 @@
 
 **10% of the final grade**
 
+[Milestone 1 report](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/milestone1.md)
 
 ## Milestone 2 (Friday 1st May, 5pm)
 
@@ -21,14 +22,15 @@ Milestone2 report: [MS2_VizzyBussy.pdf](https://github.com/com-480-data-visualiz
 
 Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
-
-
 ## Milestone 3 (Thursday 28th May, 5pm)
 
 **80% of the final grade**
 
-Website source code : [click here](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/tree/gh-pages)
+Website source code : [gh-pages](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/tree/gh-pages)
 
+Website: [https://movievizz.xyz/](https://movievizz.xyz/)
+
+[Process Book](https://ih0.redbubble.net/image.901251052.0103/flat,550x550,075,f.u3.jpg)
 
 # 🚀 Installation
 
