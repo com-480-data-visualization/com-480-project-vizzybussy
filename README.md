@@ -36,7 +36,8 @@ Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
 * Clone the repo: `git clone git@github.com:com-480-data-visualization/com-480-project-vizzybussy.git`
 * Change branches `git checkout gh-pages`
-* launch a webserver, for example: `python -m http-server`
+* Launch a webserver, for example: `python -m http-server`
+* View the website [localy](http://127.0.0.1:8000)
 
 The files are layout out as follows:
 ```
