@@ -1,0 +1,43 @@
+.clapper>div:nth-of-type(1) {
+    animation: open 2s;   
+    animation-name: open;
+    transform-origin: left;
+    
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+    animation-direction: alternate;
+}
+
+.clapper {
+    background-color: #111;
+    height: 80px;
+    width: 100px;
+    position: relative;
+}
+
+.clapper>div {
+    background: repeating-linear-gradient(135deg, #111 0%, #111 10%, #fff 10%, #fff 20%);
+    height: 10px;
+    width: 110px;
+    position: absolute;
+    left: -5px;
+    top: 0;
+}
+
+.clapper>div:nth-of-type(1) {
+    background: repeating-linear-gradient(-135deg, #fff 0%, #fff 10%, #111 10%, #111 20%);
+    top: -10px;
+}
+
+@keyframes open {
+    0% {
+        transform: rotate(-0deg);
+    }
+    20% {
+        transform: rotate(-50deg);
+    }
+    100% {
+        transform: rotate(-50deg);
+    }
+}
