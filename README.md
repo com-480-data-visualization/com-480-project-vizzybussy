@@ -58,3 +58,7 @@ The files are layout out as follows:
 # 🎬 Screencast
 
 [See our screencast here](https://www.youtube.com/watch?v=ROOeGPrC1Do)
+
+# 📖 Process book
+
+[Read our process book here](https://www.youtube.com/watch?v=7edeOEuXdMU)
