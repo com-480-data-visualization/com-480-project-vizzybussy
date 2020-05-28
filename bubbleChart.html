@@ -1,42 +1,16 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-<script src="https://rawgit.com/Kcnarf/d3-distanceLimitedVoronoi/d3v4/distance-limited-voronoi.js"></script>
-
-
 
 
 
 <!--Bootstrap CSS-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
 
-<!-- Brush imports js-->
-<script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
-<script src="https://d3js.org/d3-ease.v1.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-<script src="https://d3js.org/d3-timer.v1.min.js"></script>
-<script src="https://d3js.org/d3-selection.v1.min.js"></script>
-<script src="https://d3js.org/d3-transition.v1.min.js"></script>
-<script src="https://d3js.org/d3-drag.v1.min.js"></script>
-<script src="https://d3js.org/d3-brush.v1.min.js"></script>
 
-<script src="assets/external/jquery/jquery.js"></script>
+
 <link rel="stylesheet" href="./assets/css/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!--FONT-->
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
@@ -47,7 +21,7 @@
     <div class="row">
         <div class="col-4 text-center">
             Timeline control:
-            <button type="button" class="btn btn-light" id="timelineControl">Play</button>
+            <button type="button" class="btn btn-secondary" id="timelineControl">Play</button>
         </div>
         <div class="col-4">
             <label for="genre-select">Genre</label>
@@ -59,8 +33,8 @@
     <div class="row" style="margin-top:1em;">
         <div class="col-4 text-center">
             Timeline control:
-            <button type="button" class="btn btn-light" id="speedIncrease">+</button>
-            <button type="button" class="btn btn-light" id="speedDecrease">-</button>
+            <button type="button" class="btn btn-secondary" id="speedIncrease">+</button>
+            <button type="button" class="btn btn-secondary" id="speedDecrease">-</button>
         </div>
         <div class="col-4">
             <select id="genre-select" class="form-control">
@@ -85,9 +59,9 @@
                 <option value="Documentary">Documentary</option>
             </select>
         </div>
-        <div class="col-4">
-            <input id="search" placeholder="Movie title">
-            <button type="button" class="btn btn-light">Search</button>
+        <div class="col-4 input-group">
+            <input id="search" placeholder="Movie title" autocomplete="off">
+            <button type="button" class="btn btn-secondary input-group-append">Search</button>
         </div>
     </div>
 
@@ -287,4 +261,31 @@
     }
 </style>
 
+<!-- Load d3.js -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://rawgit.com/Kcnarf/d3-distanceLimitedVoronoi/d3v4/distance-limited-voronoi.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<!-- Brush imports js-->
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+<script src="https://d3js.org/d3-brush.v1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="assets/external/jquery/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="assets/js/bubbleChart.js"></script>
