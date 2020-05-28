@@ -4,7 +4,6 @@ var margin = { top: 40, right: 30, bottom: 80, left: 70 },
     width = $("#graphContainer").width() - margin.left - margin.right,
     height = Math.max($("#movie_info").height() + margin.top + margin.bottom + 170, Math.min($(window).height(), $("#graphContainer").width() * 0.5)) - 170 - margin.top - margin.bottom;
 
-console.log("height: " + height + " width: " + width)
 
 var config = {
     opacity_data_point_hover: "0.9",
@@ -443,7 +442,6 @@ d3.csv("data/bubbleData.csv", function (data) {
     d3.select('#genre-select').on('change', function () {
         var f = document.getElementById('genre-select')
         selected_genre = f.options[f.selectedIndex].value
-        console.log(selected_genre)
         renderData(data)
     })
 

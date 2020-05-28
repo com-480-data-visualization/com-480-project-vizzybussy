@@ -1,7 +1,6 @@
 //https://github.com/cavestri/themoviedb-javascript-library/wiki/Movies
 
 function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMovieDiv=null, movieInfoYoutubeLink=null, verbose=false) {
-    console.log("id : "+movieID)
     theMovieDb.movies.getById(
         {"id":movieID,
         "append_to_response": "videos,credits" },
@@ -30,12 +29,11 @@ function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMo
                     +"</a></div>"
                     )
 
-                    console.log(data.credits.cast[i].name.toString())
                 }
             }
         },
         (d) => {
-            console.log(d)})
+            })
 }
 
 function getMoviePosterPath(movieID){
@@ -50,5 +48,5 @@ function getMoviePosterPath(movieID){
             }
         },
         (d) => {
-            console.log(d)})
+            })
 }

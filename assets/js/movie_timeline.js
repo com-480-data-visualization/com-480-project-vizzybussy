@@ -481,7 +481,7 @@ $(function () {
             //console.log(genreDivHeight)
             //console.log(titleHeight + subtitleHeight, divHeight,titleHeight + subtitleHeight > divHeight)
             if( titleHeight + subtitleHeight > divHeight - genreDivHeight ) {
-                console.log("Enter")
+                //console.log("Enter")
                 elem.getElementsByClassName('card-subtitle')[0].innerHTML = ""
         }})
     }
