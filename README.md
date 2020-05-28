@@ -32,7 +32,13 @@ Website source code : [gh-pages](https://github.com/com-480-data-visualization/c
 
 Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
-[Process Book](https://ih0.redbubble.net/image.901251052.0103/flat,550x550,075,f.u3.jpg)
+#### 🎬 Screencast
+
+[See our screencast here](https://www.youtube.com/watch?v=ROOeGPrC1Do)
+
+#### 📖 Process book
+
+[Read our process book here](https://ih0.redbubble.net/image.901251052.0103/flat,550x550,075,f.u3.jpg)
 
 # 🚀 Installation
 
@@ -57,10 +63,4 @@ The files are layout out as follows:
 ├── data (data is located here)
 └── index.html
 ```
-# 🎬 Screencast
 
-[See our screencast here](https://www.youtube.com/watch?v=ROOeGPrC1Do)
-
-# 📖 Process book
-
-[Read our process book here](https://www.youtube.com/watch?v=7edeOEuXdMU)
