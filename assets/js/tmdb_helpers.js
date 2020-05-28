@@ -1,7 +1,5 @@
 //https://github.com/cavestri/themoviedb-javascript-library/wiki/Movies
 
-//import { credits } from "assets/js/themoviedb";
-
 function setMovieImage(destIDLocation, movieID, movieInfoImgLink=null , creditMovieDiv=null, movieInfoYoutubeLink=null, verbose=false) {
     console.log("id : "+movieID)
     theMovieDb.movies.getById(
