@@ -34,7 +34,7 @@ Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
 #### 🎬 Screencast
 
-[See our screencast here](https://www.youtube.com/watch?v=ROOeGPrC1Do)
+[See our screencast here](https://youtu.be/un4KROlmfZ8)
 
 #### 📖 Process book
 
