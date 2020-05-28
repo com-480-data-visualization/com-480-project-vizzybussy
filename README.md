@@ -38,14 +38,14 @@ Website: [https://movievizz.xyz/](https://movievizz.xyz/)
 
 #### 📖 Process book
 
-[Read our process book here](https://ih0.redbubble.net/image.901251052.0103/flat,550x550,075,f.u3.jpg)
+[Read our process book here](https://github.com/com-480-data-visualization/com-480-project-vizzybussy/blob/master/process_book.pdf)
 
 # 🚀 Installation
 
 * Clone the repo: `git clone git@github.com:com-480-data-visualization/com-480-project-vizzybussy.git`
 * Change branches `git checkout gh-pages`
 * Launch a webserver, for example: `python -m http-server`
-* View the website [localy](http://127.0.0.1:8000)
+* View the website [locally](http://127.0.0.1:8000)
 
 The files are layout out as follows:
 ```
